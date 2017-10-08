@@ -3,7 +3,7 @@
 
 class abstractAdd {
     public:
-        virtual int add(int, int) = 0; 
+        virtual int myAdd(int, int) = 0; 
 };
 
 #endif

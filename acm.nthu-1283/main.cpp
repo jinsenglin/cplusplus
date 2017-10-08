@@ -5,7 +5,7 @@ using namespace std;
 
 class Implement : public abstractAdd {
     public:
-        int add(int a, int b) {
+        int myAdd(int a, int b) {
             return a+b;
         }
 };
@@ -16,7 +16,7 @@ int main() {
 
     int int1, int2;
     while ( cin >> int1 >> int2 ) {
-        cout << i.add(int1, int2) << endl;
+        cout << i.myAdd(int1, int2) << endl;
     }
    
     return 0; 
