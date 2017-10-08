@@ -8,11 +8,17 @@ int main() {
     string line;
     getline(cin, line);
     cout << "You enter: " << line << endl;
-    
+
     istringstream iss(line);
     string word;
-    while ( getline( iss, word, ' ' ) ) {
-        cout << "Word: " << word.c_str() << endl;
+    while ( iss >> word ) {
+        cout << "Word: " << word << endl;
+    }
+    
+    istringstream iss2(line);
+    string word2;
+    while ( getline( iss2, word2, ' ' ) ) {
+        cout << "Word: " << word2.c_str() << endl;
     }
    
     return 0; 
