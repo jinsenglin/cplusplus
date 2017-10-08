@@ -4,4 +4,4 @@ compile:
 	g++ main.cpp -o main
 
 run:
-	./main
+	./main <data.txt

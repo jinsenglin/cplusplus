@@ -13,9 +13,11 @@ class Implement : public abstractAdd {
 int main() {
 
     Implement i;
-    cout << i.add(94, 87) << endl;
-    cout << i.add(55, 66) << endl;
-    cout << i.add(95, 27) << endl;
+
+    int int1, int2;
+    while ( cin >> int1 >> int2 ) {
+        cout << i.add(int1, int2) << endl;
+    }
    
     return 0; 
 }
