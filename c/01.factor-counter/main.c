@@ -36,51 +36,22 @@ int main()
 
 //數出每個數字的因數
 //要小心完全平方數會少算
-int count(int r)
+int count(int n)
 {
-   int min_factor = 1;
-   int ceil = 1;
-   int count = 0;
+    if (n == 1) return 1;
 
-   float s = sqrt(r);
-   for(int i=1; i<=s; i++) {
-      if(r % i == 0)
-      {
-         count++;
+    int count = 2;
 
-         if (min_factor == 1) {
-             min_factor = i;
-             ceil = r / i;
-         }
-      }
-   }
-   if (count == 0) {
-      return 2;
-   }
-   else {
-     for(int i=s; i<=ceil;i++)
-     {
-       if(r % i == 0)
-       {  
-         count++;
-       }
-     }
-   }
+    for(int i=2; i*i<=n; i+=2) {
+        if(n % i == 0) {
+            if (n == i*i) {
+                count +=1;
+            }
+            else {
+             count +=2;
+            }
+        }
+    }
 
    return count;
-}
-
-int perfect_square_check(int temp)
-{
-      int count = 1;
-      while(temp > 0 && temp != 1)
-      {
-            temp = temp - count;
-            count = count + 2;
-      }
-      if(temp == 0)
-      {
-            return 1;
-      }
-      return 0;
 }
