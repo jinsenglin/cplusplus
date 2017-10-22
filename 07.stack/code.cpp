@@ -41,25 +41,19 @@ class Implement : public Parenthesis {
 private:
     bool has_operand;
     std::string revised_expression;
-    std::string postfix_expression;
 
-    void eval_postfix() {
-        std::cout<<"DEBUG: NEED implement eval_postfix"<<std::endl;
+    void infix_to_postfix_and_eval() {
+        std::cout<<"DEBUG: NEED implement infix_to_postfix_and_eval"<<std::endl;
 
         int value = 0;
         // TODO: set value
 
         // print the evaluated value
         std::cout<<value<<std::endl;
+
     }
 
-    void infix_to_postfix() {
-        std::cout<<"DEBUG: NEED implement infix_to_postfix"<<std::endl;
-
-        // TODO: set postfix_expression
-    }
-
-    void revise(std::string s) {
+    void validate_and_revise_if_needed(std::string s) {
         bool is_valid = true;
 
         Stack *stack1 = new Stack();
@@ -209,10 +203,9 @@ public:
     void isValid(std::string s) {
         has_operand = false;
 
-        revise(s);
+        validate_and_revise_if_needed(s);
         if (has_operand) {
-            infix_to_postfix();
-            eval_postfix();
+            infix_to_postfix_and_eval();
         }
         else {
             std::cout<<"0"<<std::endl;
