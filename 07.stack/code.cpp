@@ -43,14 +43,51 @@ private:
     std::string revised_expression;
 
     void infix_to_postfix_and_eval() {
-        std::cout<<"DEBUG: NEED implement infix_to_postfix_and_eval"<<std::endl;
-
         int value = 0;
-        // TODO: set value
+
+        Stack *stack = new Stack();
+
+        char c;
+
+        // scan each character of the input line, from left to right, one chracter one time till \0
+        for (int i=0; ; i++) {
+            c = revised_expression[i];
+
+            if (c == '\0') {
+                // break for loop when the end of line \0 is scanned
+                break;
+            }
+            else {
+                // TODO update value
+                switch (c) {
+                    case '+':
+                        break;
+                    case '-':
+                        break;
+                    case '*':
+                        break;
+                    case '/':
+                        break;
+                    case '{':
+                        break;
+                    case '}':
+                        break;
+                    case '[':
+                        break;
+                    case ']':
+                        break;
+                    case '(':
+                        break;
+                    case ')':
+                        break;
+                    default:
+                        break; 
+                }
+            }
+        }
 
         // print the evaluated value
         std::cout<<value<<std::endl;
-
     }
 
     void validate_and_revise_if_needed(std::string s) {
