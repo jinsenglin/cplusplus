@@ -6,12 +6,12 @@ private:
     char stack[1024];
 public:
     Stack() {
-        //init top
+        // init top
         top = -1;
     }
 
     void push(char c) {
-        //update stack and top
+        // update stack and top
         top += 1;
         stack[top] = c;
     }
@@ -19,7 +19,7 @@ public:
     char pop() {
         char poped_value = stack[top];
 
-        //update top
+        // update top
         top -= 1;
 
         return poped_value;
@@ -47,15 +47,53 @@ private:
     void revise(std::string s) {
         Stack *stack = new Stack();
 
-        // scan character in ths string s, one chracter one time till \0
+        // scan each character of the input line, from left to right, one chracter one time till \0
         for (int i=0; ; i++) {
-            if (s[i] == '\0') {
+            char c = s[i];
+
+            if (c == '\0') {
+                // break for loop when the end of line \0 is scanned
                 break;
             }
             else {
-                // TODO: check validity before push into stack
+                // check expression validity before push character into stack
+                switch (c) {
+                    case '{':
+                        // TODO: check
+                        break;
+                    case '}':
+                        // TODO: check
+                        break;
+                    case '[':
+                        // TODO: check
+                        break;
+                    case ']':
+                        // TODO: check
+                        break;
+                    case '(':
+                        // TODO: check
+                        break;
+                    case ')':
+                        // TODO: check
+                        break;
+                    case '+':
+                        // TODO: check
+                        break;
+                    case '-':
+                        // TODO: check
+                        break;
+                    case '*':
+                        // TODO: check
+                        break;
+                    case '/':
+                        // TODO: check
+                        break;
+                    default:
+                        // TODO: check
+                        break;
+                }
 
-                stack->push(s[i]);
+                stack->push(c);
             }
         }
 
