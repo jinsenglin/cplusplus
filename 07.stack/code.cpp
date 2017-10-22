@@ -41,24 +41,26 @@ class Implement : public Parenthesis {
 private:
     bool has_operand;
     std::string revised_expression;
+    std::string postfix_expression;
 
-    void infix_to_postfix_and_eval() {
+    void eval_postfix() {
+        std::cout<<"DEBUG: eval_postfix() NOT YET IMPLEMENTED"<<std::endl;
         int value = 0;
 
         Stack *stack = new Stack();
 
         char c;
 
-        // scan each character of the input line, from left to right, one chracter one time till \0
+        // scan each character of postfix_expression, from left to right, one chracter one time till \0
         for (int i=0; ; i++) {
-            c = revised_expression[i];
+            c = postfix_expression[i];
 
             if (c == '\0') {
                 // break for loop when the end of line \0 is scanned
                 break;
             }
             else {
-                // TODO update value
+                // TODO: update value
                 switch (c) {
                     case '+':
                         break;
@@ -88,6 +90,50 @@ private:
 
         // print the evaluated value
         std::cout<<value<<std::endl;
+    }
+
+    void infix_to_postfix() {
+        std::cout<<"DEBUG: infix_to_postfix() NOT YET IMPLEMENTED"<<std::endl;
+        Stack *stack = new Stack();
+
+        char c;
+
+        // scan each character of revised_expression, from left to right, one chracter one time till \0
+        for (int i=0; ; i++) {
+            c = revised_expression[i];
+
+            if (c == '\0') {
+                // break for loop when the end of line \0 is scanned
+                break;
+            }
+            else {
+                // TODO set postfix_expression
+                switch (c) {
+                    case '+':
+                        break;
+                    case '-':
+                        break;
+                    case '*':
+                        break;
+                    case '/':
+                        break;
+                    case '{':
+                        break;
+                    case '}':
+                        break;
+                    case '[':
+                        break;
+                    case ']':
+                        break;
+                    case '(':
+                        break;
+                    case ')':
+                        break;
+                    default:
+                        break; 
+                }
+            }
+        }
     }
 
     void validate_and_revise_if_needed(std::string s) {
@@ -242,7 +288,8 @@ public:
 
         validate_and_revise_if_needed(s);
         if (has_operand) {
-            infix_to_postfix_and_eval();
+            infix_to_postfix();
+            eval_postfix();
         }
         else {
             std::cout<<"0"<<std::endl;
