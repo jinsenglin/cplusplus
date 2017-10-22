@@ -17,10 +17,17 @@ public:
     }
 
     char pop() {
-        char poped_value = stack[top];
+        char poped_value;
 
-        // update top
-        top -= 1;
+        if (top > -1) {
+            poped_value = stack[top];
+
+            // update top
+            top -= 1;
+        }
+        else {
+            poped_value = '\0';
+        }
 
         return poped_value;
     }
@@ -37,6 +44,8 @@ private:
     std::string postfix_expression;
 
     void eval_postfix() {
+        std::cout<<"DEBUG: NEED implement eval_postfix"<<std::endl;
+
         int value = 0;
         // TODO: set value
 
@@ -45,71 +54,144 @@ private:
     }
 
     void infix_to_postfix() {
+        std::cout<<"DEBUG: NEED implement infix_to_postfix"<<std::endl;
+
         // TODO: set postfix_expression
     }
 
     void revise(std::string s) {
-        Stack *stack = new Stack();
+        bool is_valid = true;
+
+        Stack *stack1 = new Stack();
+        Stack *stack2 = new Stack();
+
+        char c1;
+        char c2;
 
         // scan each character of the input line, from left to right, one chracter one time till \0
+        // set is_valid false if any correction made
+        // set has_operand true if any operand found
         for (int i=0; ; i++) {
-            char c = s[i];
+            c1 = s[i];
 
-            if (c == '\0') {
+            if (c1 == '\0') {
                 // break for loop when the end of line \0 is scanned
                 break;
             }
             else {
                 // check expression validity before push character into stack
-                switch (c) {
+                switch (c1) {
                     case '{':
-                        // TODO: check
+                        // no check, just push
+                        stack1->push(c1);
+                        stack2->push(c1);
                         break;
                     case '}':
-                        // TODO: check
+                        // check
+                        // if c2 == '{' then make no correction
+                        // if c2 == '\0' then make a correction by ignoring c1
+                        // if c2 == something else then make a correction by replacing c1
+                        c2 = stack1->pop();
+                        switch (c2) {
+                            case '{':
+                                stack2->push(c1);
+                                break;
+                            case '\0':
+                                is_valid = false;
+                                break;
+                            case '[':
+                                is_valid = false;
+                                stack2->push(']');
+                                break;
+                            case '(':
+                                is_valid = false;
+                                stack2->push(')');
+                                break;
+                        }
                         break;
                     case '[':
-                        // TODO: check
+                        // no check, just push
+                        stack1->push(c1);
+                        stack2->push(c1);
                         break;
                     case ']':
-                        // TODO: check
+                        // check
+                        // if c2 == '[' then make no correction
+                        // if c2 == '\0' then make a correction by ignoring c
+                        // if c2 == something else then make a correction by replacing c
+                        c2 = stack1->pop();
+                        switch (c2) {
+                            case '[':
+                                stack2->push(c1);
+                                break;
+                            case '\0':
+                                is_valid = false;
+                                break;
+                            case '{':
+                                is_valid = false;
+                                stack2->push('}');
+                                break;
+                            case '(':
+                                is_valid = false;
+                                stack2->push(')');
+                                break;
+                        }
                         break;
                     case '(':
-                        // TODO: check
+                        // no check, just push
+                        stack1->push(c1);
+                        stack2->push(c1);
                         break;
                     case ')':
-                        // TODO: check
-                        break;
-                    case '+':
-                        // TODO: check
-                        break;
-                    case '-':
-                        // TODO: check
-                        break;
-                    case '*':
-                        // TODO: check
-                        break;
-                    case '/':
-                        // TODO: check
+                        // check
+                        // if c2 == '(' then make no correction
+                        // if c2 == '\0' then make a correction by ignoring c
+                        // if c2 == something else then make a correction by replacing c
+                        c2 = stack1->pop();
+                        switch (c2) {
+                            case '(':
+                                stack2->push(c1);
+                                break;
+                            case '\0':
+                                is_valid = false;
+                                break;
+                            case '{':
+                                is_valid = false;
+                                stack2->push('}');
+                                break;
+                            case '[':
+                                is_valid = false;
+                                stack2->push(']');
+                                break;
+                        }
                         break;
                     default:
-                        // TODO: check
+                        // no check, just push
+                        has_operand = true;
+                        stack2->push(c1);
                         break;
                 }
-
-                stack->push(c);
             }
         }
 
-        bool is_valid = true;
-        // TODO: set is_valid false if any correction made
-        // is_valid = false;
+        // complement ')' ']' '}' if stack1 is not empty
+        while ((c2 = stack1->pop()) != '\0') {
+            is_valid = false;
+            switch (c2) {
+                case '{':
+                    stack2->push('}');
+                    break;
+                case '[':
+                    stack2->push(']');
+                    break;
+                case '(':
+                    stack2->push(')');
+                    break;
+            }
+        }
 
-        // TODO: set revised_expression
-        revised_expression = stack->to_string();
-
-        // TODO: set has_operand true if any operand found
-        // has_operand = true;
+        // set revised_expression
+        revised_expression = stack2->to_string();
 
         // print True of False
         if (is_valid) {
