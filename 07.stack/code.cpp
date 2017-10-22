@@ -24,6 +24,10 @@ public:
 
         return poped_value;
     }
+
+    std::string to_string() {
+        return std::string(stack);
+    }
 };
 
 class Implement : public Parenthesis {
@@ -99,8 +103,10 @@ private:
 
         bool is_valid = true;
         // TODO: set is_valid false if any correction made
+        // is_valid = false;
 
         // TODO: set revised_expression
+        revised_expression = stack->to_string();
 
         // TODO: set has_operand true if any operand found
         // has_operand = true;
@@ -111,10 +117,8 @@ private:
         }
         else {
             std::cout<<"False"<<std::endl;
-        }
 
-        // print the revised expression if !is_valid
-        if (!is_valid) {
+            // print the revised expression
             std::cout<<revised_expression<<std::endl;
         }
     }
