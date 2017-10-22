@@ -3,17 +3,17 @@
 class Stack {
 private:
     int top;
-    std::string stack;
+    char stack[1024];
 public:
-    void push(std::string s) {
-        //TODO: set stack and set top
+    void push(char c) {
+        //TODO: update stack and top
     }
 
-    std::string pop() {
-        std::string poped_value;
+    char pop() {
+        char poped_value = '\0';
         //TODO: set poped_value
 
-        //TODO: set stack and set top
+        //TODO: update stack and set top
 
         return poped_value;
     }
@@ -38,6 +38,17 @@ private:
     }
 
     void revise(std::string s) {
+        Stack *stack = new Stack();
+        // scan character in ths string s, one chracter one time till \0
+        for (int i=0; ; i++) {
+            if (s[i] == '\0') {
+                break;
+            }
+            else {
+                // TODO:
+            }
+        }
+
         bool is_valid = true;
         // TODO: set is_valid false if any correction made
 
