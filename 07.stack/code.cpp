@@ -70,18 +70,6 @@ private:
                         break;
                     case '/':
                         break;
-                    case '{':
-                        break;
-                    case '}':
-                        break;
-                    case '[':
-                        break;
-                    case ']':
-                        break;
-                    case '(':
-                        break;
-                    case ')':
-                        break;
                     default:
                         break; 
                 }
