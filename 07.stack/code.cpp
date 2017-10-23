@@ -1,11 +1,11 @@
 #include "function.h"
 
-class Stack {
+class CharStack {
 private:
     int top;
     char stack[1024];
 public:
-    Stack() {
+    CharStack() {
         // init top
         top = -1;
     }
@@ -133,7 +133,7 @@ private:
 
     void infix_to_postfix() {
         std::cout<<"DEBUG: infix_to_postfix() NOT YET IMPLEMENTED"<<std::endl;
-        Stack *stack = new Stack();
+        CharStack *stack = new CharStack();
 
         char c;
 
@@ -178,8 +178,8 @@ private:
     void validate_and_revise_if_needed(std::string s) {
         bool is_valid = true;
 
-        Stack *stack1 = new Stack();
-        Stack *stack2 = new Stack();
+        CharStack *stack1 = new CharStack();
+        CharStack *stack2 = new CharStack();
 
         char c1;
         char c2;
