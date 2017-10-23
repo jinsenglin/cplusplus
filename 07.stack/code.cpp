@@ -26,7 +26,7 @@ public:
             top -= 1;
         }
         else {
-            poped_value = '\0';
+            poped_value = '\0'; // TODO: refactor
         }
 
         return poped_value;
@@ -37,6 +37,40 @@ public:
     }
 };
 
+class IntStack {
+private:
+    int top;
+    int stack[1024];
+public:
+    IntStack() {
+        // init top
+        top = -1;
+    }
+
+    void push(int i) {
+        // update stack and top
+        top += 1;
+        stack[top] = i;
+    }
+
+    int pop() {
+        char poped_value;
+
+        if (top > -1) {
+            poped_value = stack[top];
+
+            // update top
+            top -= 1;
+        }
+        else {
+            poped_value = 0; // TODO: refactor
+        }
+
+        return poped_value;
+    }
+};
+
+
 class Implement : public Parenthesis {
 private:
     bool has_operand;
@@ -44,12 +78,13 @@ private:
     std::string postfix_expression;
 
     void eval_postfix() {
-        std::cout<<"DEBUG: eval_postfix() NOT YET IMPLEMENTED"<<std::endl;
         int value = 0;
 
-        Stack *stack = new Stack();
+        IntStack *stack = new IntStack();
 
         char c;
+        int left_operand;
+        int right_operand;
 
         // scan each character of postfix_expression, from left to right, one chracter one time till \0
         for (int i=0; ; i++) {
@@ -60,21 +95,37 @@ private:
                 break;
             }
             else {
-                // TODO: update value
+                // update stack
                 switch (c) {
                     case '+':
+                        right_operand = stack->pop();
+                        left_operand = stack->pop();
+                        stack->push(left_operand + right_operand);
                         break;
                     case '-':
+                        right_operand = stack->pop();
+                        left_operand = stack->pop();
+                        stack->push(left_operand - right_operand);
                         break;
                     case '*':
+                        right_operand = stack->pop();
+                        left_operand = stack->pop();
+                        stack->push(left_operand * right_operand);
                         break;
                     case '/':
+                        right_operand = stack->pop();
+                        left_operand = stack->pop();
+                        stack->push(left_operand / right_operand);
                         break;
                     default:
+                        stack->push(c - '0');
                         break; 
                 }
             }
         }
+        
+        // update value
+        value = stack->pop();
 
         // print the evaluated value
         std::cout<<value<<std::endl;
