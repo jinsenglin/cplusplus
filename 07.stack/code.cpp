@@ -137,44 +137,141 @@ private:
         CharStack *stack1 = new CharStack();
         CharStack *stack2 = new CharStack();
 
-        char c;
+        char c1;
+        char c2;
 
         // scan each character of revised_expression, from left to right, one chracter one time till \0
         for (int i=0; ; i++) {
-            c = revised_expression[i];
+            c1 = revised_expression[i];
 
-            if (c == '\0') {
+            if (c1 == '\0') {
                 // break for loop when the end of line \0 is scanned
                 break;
             }
             else {
-                // TODO set postfix_expression
-                switch (c) {
+                switch (c1) {
                     case '+':
+                        c2 = stack1->pop();
+                        switch (c2) {
+                            case '\0':
+                                stack1->push(c1);
+                                break;
+                            case '(':
+                                stack1->push(c2);
+                                stack1->push(c1);
+                                break;
+                            default:
+                                stack2->push(c2);
+                                break;
+                        }
                         break;
                     case '-':
+                        c2 = stack1->pop();
+                        switch (c2) {
+                            case '\0':
+                                stack1->push(c1);
+                                break;
+                            case '(':
+                                stack1->push(c2);
+                                stack1->push(c1);
+                                break;
+                            default:
+                                stack2->push(c2);
+                                break;
+                        }
                         break;
                     case '*':
+                        c2 = stack1->pop();
+                        switch (c2) {
+                            case '\0':
+                                stack1->push(c1);
+                                break;
+                            case '(':
+                                stack1->push(c2);
+                                stack1->push(c1);
+                                break;
+                            default:
+                                stack2->push(c2);
+                                break;
+                        }
                         break;
                     case '/':
+                        c2 = stack1->pop();
+                        switch (c2) {
+                            case '\0':
+                                stack1->push(c1);
+                                break;
+                            case '(':
+                                stack1->push(c2);
+                                stack1->push(c1);
+                                break;
+                            default:
+                                stack2->push(c2);
+                                break;
+                        }
                         break;
                     case '{':
+                        stack1->push('(');
                         break;
                     case '}':
+                        while (true) {
+                            c2 = stack1->pop();
+                            if (c2 == '(') {
+                                break;
+                            }
+                            else {
+                                stack2->push(c2);
+                            }
+                        }
                         break;
                     case '[':
+                        stack1->push('(');
                         break;
                     case ']':
+                        while (true) {
+                            c2 = stack1->pop();
+                            if (c2 == '(') {
+                                break;
+                            }
+                            else {
+                                stack2->push(c2);
+                            }
+                        }
                         break;
                     case '(':
+                        stack1->push(c1);
                         break;
                     case ')':
+                        while (true) {
+                            c2 = stack1->pop();
+                            if (c2 == '(') {
+                                break;
+                            }
+                            else {
+                                stack2->push(c2);
+                            }
+                        }
                         break;
                     default:
+                        stack2->push(c1);
                         break; 
                 }
             }
         }
+        
+        // pop until stack1 is empty
+        while (true) {
+            c2 = stack1->pop();
+            if (c2 == '\0') {
+                break;
+            }
+            else {
+                stack2->push(stack1->pop());
+            }
+        }
+ 
+        // TODO set postfix_expression
+        std::cout<<"DEBUG: "<<stack2->to_string()<<std::endl;
     }
 
     void validate_and_revise_if_needed(std::string s) {
