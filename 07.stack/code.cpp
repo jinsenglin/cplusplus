@@ -133,7 +133,9 @@ private:
 
     void infix_to_postfix() {
         std::cout<<"DEBUG: infix_to_postfix() NOT YET IMPLEMENTED"<<std::endl;
-        CharStack *stack = new CharStack();
+
+        CharStack *stack1 = new CharStack();
+        CharStack *stack2 = new CharStack();
 
         char c;
 
