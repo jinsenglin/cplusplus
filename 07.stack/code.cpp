@@ -35,6 +35,15 @@ public:
     std::string to_string() {
         return std::string(stack);
     }
+
+    char get_top_char() {
+        if (top > -1) {
+            return stack[top];
+        }
+        else {
+            return '\0';
+        }
+    }
 };
 
 class IntStack {
@@ -76,6 +85,21 @@ private:
     bool has_operand;
     std::string revised_expression;
     std::string postfix_expression;
+
+    bool c1_greater_than_c2(char c1, char c2) {
+        if (c2 == '\0') {
+            return true;
+        }
+        else if (c2 == '(') {
+            return true;
+        }
+        else if ((c1 == '*' || c1 == '/') && (c2 == '+' || c2 == '-')) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 
     void eval_postfix() {
         int value = 0;
@@ -132,8 +156,6 @@ private:
     }
 
     void infix_to_postfix() {
-        std::cout<<"DEBUG: infix_to_postfix() NOT YET IMPLEMENTED"<<std::endl;
-
         CharStack *stack1 = new CharStack();
         CharStack *stack2 = new CharStack();
 
@@ -151,64 +173,40 @@ private:
             else {
                 switch (c1) {
                     case '+':
-                        c2 = stack1->pop();
-                        switch (c2) {
-                            case '\0':
-                                stack1->push(c1);
-                                break;
-                            case '(':
-                                stack1->push(c2);
-                                stack1->push(c1);
-                                break;
-                            default:
-                                stack2->push(c2);
-                                break;
+                        c2 = stack1->get_top_char();
+                        while (! c1_greater_than_c2(c1, c2)) {
+                            c2 = stack1->pop();
+                            stack2->push(c2);
+                            c2 = stack1->get_top_char();
                         }
+                        stack1->push(c1);
                         break;
                     case '-':
-                        c2 = stack1->pop();
-                        switch (c2) {
-                            case '\0':
-                                stack1->push(c1);
-                                break;
-                            case '(':
-                                stack1->push(c2);
-                                stack1->push(c1);
-                                break;
-                            default:
-                                stack2->push(c2);
-                                break;
+                        c2 = stack1->get_top_char();
+                        while (! c1_greater_than_c2(c1, c2)) {
+                            c2 = stack1->pop();
+                            stack2->push(c2);
+                            c2 = stack1->get_top_char();
                         }
+                        stack1->push(c1);
                         break;
                     case '*':
-                        c2 = stack1->pop();
-                        switch (c2) {
-                            case '\0':
-                                stack1->push(c1);
-                                break;
-                            case '(':
-                                stack1->push(c2);
-                                stack1->push(c1);
-                                break;
-                            default:
-                                stack2->push(c2);
-                                break;
+                        c2 = stack1->get_top_char();
+                        while (! c1_greater_than_c2(c1, c2)) {
+                            c2 = stack1->pop();
+                            stack2->push(c2);
+                            c2 = stack1->get_top_char();
                         }
+                        stack1->push(c1);
                         break;
                     case '/':
-                        c2 = stack1->pop();
-                        switch (c2) {
-                            case '\0':
-                                stack1->push(c1);
-                                break;
-                            case '(':
-                                stack1->push(c2);
-                                stack1->push(c1);
-                                break;
-                            default:
-                                stack2->push(c2);
-                                break;
+                        c2 = stack1->get_top_char();
+                        while (! c1_greater_than_c2(c1, c2)) {
+                            c2 = stack1->pop();
+                            stack2->push(c2);
+                            c2 = stack1->get_top_char();
                         }
+                        stack1->push(c1);
                         break;
                     case '{':
                         stack1->push('(');
@@ -266,12 +264,13 @@ private:
                 break;
             }
             else {
-                stack2->push(stack1->pop());
+                stack2->push(c2);
             }
         }
  
-        // TODO set postfix_expression
-        std::cout<<"DEBUG: "<<stack2->to_string()<<std::endl;
+        // set postfix_expression
+        postfix_expression = stack2->to_string();
+        // std::cout<<"DEBUG: "<<stack2->to_string()<<std::endl;
     }
 
     void validate_and_revise_if_needed(std::string s) {
