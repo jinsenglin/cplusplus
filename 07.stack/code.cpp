@@ -60,10 +60,11 @@ public:
         // update stack and top
         top += 1;
         stack[top] = i;
+        //std::cout<<"DEBUG: stack[top] = "<<stack[top]<<std::endl;
     }
 
     int pop() {
-        char poped_value;
+        int poped_value;
 
         if (top > -1) {
             poped_value = stack[top];
@@ -75,6 +76,7 @@ public:
             poped_value = 0; // TODO: refactor
         }
 
+        //std::cout<<"DEBUG: poped_value = "<<poped_value<<std::endl;
         return poped_value;
     }
 };
@@ -134,24 +136,29 @@ private:
                         right_operand = stack->pop();
                         left_operand = stack->pop();
                         stack->push(left_operand + right_operand);
+                        //std::cout<<"DEBUG: "<<left_operand<<" + "<<right_operand<<" = "<<left_operand + right_operand<<std::endl;
                         break;
                     case '-':
                         right_operand = stack->pop();
                         left_operand = stack->pop();
                         stack->push(left_operand - right_operand);
+                        //std::cout<<"DEBUG: "<<left_operand<<" - "<<right_operand<<" = "<<left_operand - right_operand<<std::endl;
                         break;
                     case '*':
                         right_operand = stack->pop();
                         left_operand = stack->pop();
                         stack->push(left_operand * right_operand);
+                        //std::cout<<"DEBUG: "<<left_operand<<" * "<<right_operand<<" = "<<left_operand * right_operand<<std::endl;
                         break;
                     case '/':
                         right_operand = stack->pop();
                         left_operand = stack->pop();
                         stack->push(left_operand / right_operand);
+                        //std::cout<<"DEBUG: "<<left_operand<<" / "<<right_operand<<" = "<<left_operand / right_operand<<std::endl;
                         break;
                     default:
                         stack->push(c - '0');
+                        //std::cout<<"DEBUG: c = "<<c<<std::endl;
                         break; 
                 }
             }
@@ -293,7 +300,7 @@ private:
  
         // set postfix_expression
         postfix_expression = stack2->to_string();
-        // std::cout<<"DEBUG: "<<stack2->to_string()<<std::endl;
+        //std::cout<<"DEBUG: "<<postfix_expression<<std::endl;
     }
 
     void validate_and_revise_if_needed(std::string s) {
