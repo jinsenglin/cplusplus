@@ -50,22 +50,22 @@ public:
 class IntStack {
 private:
     long int top;
-    long int stack[1024000];
+    int stack[1024000];
 public:
     IntStack() {
         // init top
         top = -1;
     }
 
-    void push(long int i) {
+    void push(int i) {
         // update stack and top
         top += 1;
         stack[top] = i;
         //std::cout<<"DEBUG: stack[top] = "<<stack[top]<<std::endl;
     }
 
-    long int pop() {
-        long int poped_value;
+    int pop() {
+        int poped_value;
 
         if (top > -1) {
             poped_value = stack[top];
@@ -114,13 +114,13 @@ private:
             3. When the expression is ended, the number in the stack is the final answer
         */
 
-        long int value = 0;
+        int value = 0;
 
         IntStack *stack = new IntStack();
 
         char c;
-        long int left_operand;
-        long int right_operand;
+        int left_operand;
+        int right_operand;
 
         // scan each character of postfix_expression, from left to right, one chracter one time till \0
         for (long int i=0; ; i++) {
