@@ -4,7 +4,7 @@
 class CharStack {
 private:
     long int top;
-    char stack[100000];
+    char stack[1000000];
 public:
     CharStack() {
         // init top
