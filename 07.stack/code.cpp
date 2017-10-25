@@ -2,8 +2,8 @@
 
 class CharStack {
 private:
-    int top;
-    char stack[1024];
+    long int top;
+    char stack[1024000];
 public:
     CharStack() {
         // init top
@@ -48,8 +48,8 @@ public:
 
 class IntStack {
 private:
-    int top;
-    int stack[1024];
+    long int top;
+    int stack[1024000];
 public:
     IntStack() {
         // init top
