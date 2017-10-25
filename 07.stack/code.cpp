@@ -4,7 +4,7 @@
 class CharStack {
 private:
     long int top;
-    char stack[10240000];
+    char stack[100000];
 public:
     CharStack() {
         // init top
@@ -34,14 +34,15 @@ public:
     }
 
     std::string to_string() {
+        /*
         char str[top+2];
         for (long int i=top; i>-1; i--) {
             str[i] = stack[i];
         }
-        str[top+1] = '\0';
+        str[top+1] = '\0';*/
 
         //std::cout<<"DEBUG: str = "<<std::string(str)<<std::endl;
-        return std::string(str);
+        return std::string(stack);
     }
 
     char get_top_char() {
@@ -57,7 +58,7 @@ public:
 class IntStack {
 private:
     long int top;
-    int stack[10240000];
+    int stack[100000];
 public:
     IntStack() {
         // init top
