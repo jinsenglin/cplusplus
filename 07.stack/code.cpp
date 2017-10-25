@@ -34,7 +34,14 @@ public:
     }
 
     std::string to_string() {
-        return std::string(stack);
+        char str[top+2];
+        for (long int i=top; i>-1; i--) {
+            str[i] = stack[i];
+        }
+        str[top+1] = '\0';
+
+        //std::cout<<"DEBUG: str = "<<std::string(str)<<std::endl;
+        return std::string(str);
     }
 
     char get_top_char() {
