@@ -49,22 +49,22 @@ public:
 class IntStack {
 private:
     long int top;
-    int stack[1024000];
+    long int stack[1024000];
 public:
     IntStack() {
         // init top
         top = -1;
     }
 
-    void push(int i) {
+    void push(long int i) {
         // update stack and top
         top += 1;
         stack[top] = i;
         //std::cout<<"DEBUG: stack[top] = "<<stack[top]<<std::endl;
     }
 
-    int pop() {
-        int poped_value;
+    long int pop() {
+        long int poped_value;
 
         if (top > -1) {
             poped_value = stack[top];
@@ -113,16 +113,16 @@ private:
             3. When the expression is ended, the number in the stack is the final answer
         */
 
-        int value = 0;
+        long int value = 0;
 
         IntStack *stack = new IntStack();
 
         char c;
-        int left_operand;
-        int right_operand;
+        long int left_operand;
+        long int right_operand;
 
         // scan each character of postfix_expression, from left to right, one chracter one time till \0
-        for (int i=0; ; i++) {
+        for (long int i=0; ; i++) {
             c = postfix_expression[i];
 
             if (c == '\0') {
@@ -193,7 +193,7 @@ private:
         char c2;
 
         // scan each character of revised_expression, from left to right, one chracter one time till \0
-        for (int i=0; ; i++) {
+        for (long int i=0; ; i++) {
             c1 = revised_expression[i];
 
             if (c1 == '\0') {
@@ -315,7 +315,7 @@ private:
         // scan each character of the input line, from left to right, one chracter one time till \0
         // set is_valid false if any correction made
         // set has_operand true if any operand found
-        for (int i=0; ; i++) {
+        for (long int i=0; ; i++) {
             c1 = s[i];
 
             if (c1 == '\0') {
