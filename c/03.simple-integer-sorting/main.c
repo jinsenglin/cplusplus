@@ -28,7 +28,7 @@ int main()
   int T;
   scanf("%d", &T);
   int n;
-  int a[105] = {0};
+  int a[10000] = {0};
   for(int i=0;i<T;i++)
   {
     //scan two lines
@@ -59,11 +59,11 @@ int main()
       }
     }
 
-    for(int p=0;p<n;p++)
+    for(int p=0;p<n-1;p++)
     {
       printf("%d ", a[p]);
     }
-    printf("\n");
+    printf("%d\n", a[n-1]);
   }
 
   return 0;
