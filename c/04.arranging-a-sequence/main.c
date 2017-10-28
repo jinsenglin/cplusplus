@@ -8,6 +8,7 @@
 int n;
 int m;
 int a[200000];
+int b[200000];
 int r;
 void swap(int *a, int *b)
 {
@@ -23,6 +24,7 @@ int main()
   for(int i=0;i<=n-1;i++)
   {
     a[i] = i+1;
+    b[i] = -1;
     //printf("%d", a[i]);
   }
   
@@ -31,6 +33,10 @@ int main()
   {
     // – The last input will be the first output number
     scanf("%d", &r);
+
+    a[r-1] = -1; //make a mark for the 1st array
+    b[n-i-1] = r; //save r in the 2nd array
+/*
     for(int j=0;j<=n-1;j++)
     {
       
@@ -48,13 +54,21 @@ int main()
         //The last input will be the first output number
         a[0] = r;
       }
-
     }
+*/
   }
   //print to check the result
+    for(int j=n-1;j>-1;j--)
+    {
+      if (b[j] != -1) {
+        printf("%d\n", b[j]);
+      }
+    }
     for(int j=0;j<=n-1;j++)
     {
-      printf("%d\n", a[j]);
+      if (a[j] != -1) {
+        printf("%d\n", a[j]);
+      }
     }
 
   return 0;
