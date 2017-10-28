@@ -71,7 +71,7 @@ int main()
 */
   }
   //print to check the result
-    for(int j=n-1;j>-1;j--)
+    for(int j=m-1;j>-1;j--)
     {
       if (b[j] != -1) {
         printf("%d\n", b[j]);
