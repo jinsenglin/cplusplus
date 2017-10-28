@@ -34,8 +34,21 @@ int main()
     // – The last input will be the first output number
     scanf("%d", &r);
 
+    if (a[r-1] == -1) {
+      for(int j=0; ;j++) {
+        if (b[j] == r) {
+          for(int k=j; k<i; k++) {
+            b[k] = b[k+1];
+          }
+          b[i-1] = r;
+          break;
+        }
+      }
+    }
+    else {
+      b[i] = r; //save r in the 2nd array
+    }
     a[r-1] = -1; //make a mark for the 1st array
-    b[i] = r; //save r in the 2nd array
 /*
     for(int j=0;j<=n-1;j++)
     {
