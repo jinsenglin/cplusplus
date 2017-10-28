@@ -25,11 +25,11 @@
 
 #include <stdio.h>
 
-int first[100001][100001], second[100001][100001], multiply[100001][100001];
+long int first[1001][1001], second[1001][1001], multiply[1001][1001];
 
 int main()
 {
-  int m, p, q, c, d, k, sum = 0;
+  long int m, p, q, c, d, k, sum = 0;
   //n=p
   //printf("Enter the number of rows and columns of first matrix\n");
 while(scanf("%d%d%d", &m, &p, &q)!=EOF)
