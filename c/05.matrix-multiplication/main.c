@@ -25,7 +25,8 @@
 
 #include <stdio.h>
 
-int first[101][101], second[101][101], multiply[101][101];
+int first[101][101], second[101][101];
+long int multiply[101][101];
 
 int main()
 {
