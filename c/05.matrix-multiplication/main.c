@@ -69,10 +69,11 @@ while(scanf("%d%d%d", &m, &p, &q) != EOF)
 
   for (c = 0; c < m; c++) 
   {
-    for (d = 0; d < q; d++)
+    for (d = 0; d < q-1; d++) {
       printf("%d ", multiply[c][d]);
-
-    printf("\n");
+    }
+    printf("%d\n", multiply[c][d]);
+    //printf("\n");
   }
 }
  
