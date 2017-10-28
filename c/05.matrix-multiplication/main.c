@@ -29,7 +29,8 @@ int first[101][101], second[101][101], multiply[101][101];
 
 int main()
 {
-  long int m, p, q, c, d, k, sum = 0;
+  int m, p, q, c, d, k;
+  long int sum = 0;
   //n=p
   //printf("Enter the number of rows and columns of first matrix\n");
 while(scanf("%d%d%d", &m, &p, &q)!=EOF)
