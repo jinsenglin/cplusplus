@@ -24,14 +24,15 @@
 
 
 #include <stdio.h>
- 
+
+int first[100001][100001], second[100001][100001], multiply[100001][100001];
+
 int main()
 {
   int m, p, q, c, d, k, sum = 0;
-  int first[10][10], second[10][10], multiply[10][10];
   //n=p
   //printf("Enter the number of rows and columns of first matrix\n");
-while(scanf("%d%d%d", &m, &p, &q) != EOF)
+while(scanf("%d%d%d", &m, &p, &q)!=EOF)
 {
   //scanf("%d%d%d", &m, &p, &q);
    
@@ -69,12 +70,15 @@ while(scanf("%d%d%d", &m, &p, &q) != EOF)
 
   for (c = 0; c < m; c++) 
   {
-    for (d = 0; d < q-1; d++) {
+    for (d = 0; d < q-1; d++)
+    {
+      //printf("c=%d d=%d\n", c, d);
       printf("%d ", multiply[c][d]);
     }
     printf("%d\n", multiply[c][d]);
-    //printf("\n");
   }
+  //printf("%d\n", multiply[m-1][q-2]);
+  printf("\n");
 }
  
   return 0;
