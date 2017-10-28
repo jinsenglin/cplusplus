@@ -35,7 +35,7 @@ int main()
     scanf("%d", &r);
 
     a[r-1] = -1; //make a mark for the 1st array
-    b[n-i-1] = r; //save r in the 2nd array
+    b[i] = r; //save r in the 2nd array
 /*
     for(int j=0;j<=n-1;j++)
     {
