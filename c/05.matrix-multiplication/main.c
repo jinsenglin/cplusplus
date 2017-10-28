@@ -25,7 +25,7 @@
 
 #include <stdio.h>
 
-int first[100][100], second[100][100], multiply[100][100];
+int first[101][101], second[101][101], multiply[101][101];
 
 int main()
 {
@@ -34,6 +34,7 @@ int main()
   //printf("Enter the number of rows and columns of first matrix\n");
 while(scanf("%d%d%d", &m, &p, &q)!=EOF)
 {
+
   //scanf("%d%d%d", &m, &p, &q);
    
   //printf("Enter the number of columns of second matrix\n");
