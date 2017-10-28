@@ -34,21 +34,17 @@ int main()
     // – The last input will be the first output number
     scanf("%d", &r);
 
-    if (a[r-1] == -1) {
-      for(int j=0; ;j++) {
-        if (b[j] == r) {
-          for(int k=j; k<i; k++) {
-            b[k] = b[k+1];
-          }
-          b[i-1] = r;
-          break;
-        }
-      }
+    b[i] = r; //save r in the 2nd array
+    a[r-1] = -1; //make a mark for the 1st array
+/*
+    if (a[r-1] > 0) {
+      a[r-1] = -1; //make a mark for the 1st array
     }
     else {
-      b[i] = r; //save r in the 2nd array
+      a[r-1] -= 1; //make a mark for the 1st array
     }
-    a[r-1] = -1; //make a mark for the 1st array
+*/
+
 /*
     for(int j=0;j<=n-1;j++)
     {
@@ -73,13 +69,14 @@ int main()
   //print to check the result
     for(int j=m-1;j>-1;j--)
     {
-      if (b[j] != -1) {
+      if (a[b[j] - 1] == -1) {
         printf("%d\n", b[j]);
+        a[b[j] - 1] = 0; // make a mark for the 1st array
       }
     }
     for(int j=0;j<=n-1;j++)
     {
-      if (a[j] != -1) {
+      if (a[j] >0 ) {
         printf("%d\n", a[j]);
       }
     }
