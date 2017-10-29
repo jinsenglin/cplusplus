@@ -32,7 +32,7 @@ int main(){
   
       for(j=i+1;j<n;j++)
       {
-        //if (z[j] == 1) continue;
+        if (z[j] == 1) continue;
   
         //find dots on the same vector between dots[i] and dots[j]
         for(k=0;k<n;k++)
