@@ -3,70 +3,62 @@
 
 /*
 Input
-There are multiple lines in each testcase. Each line contains a string si that HT wrote on the paper.
+First 5 lines describe the card. Each line contains 5 integers between 1 and 25.
 
-The input file is ended by 'EOF'.
+( We guarantee that all 25 numbers are distinct. )
 
-It is guaranteed that :
+Next line contains an integer T ( 1 <= T <= 100 ), number of testcases.
 
-At most 10 lines in each testcase.
-testcase #1 ~ #4 : 1 ≤ | s | ≤ 200
-testcase #5 Bonus: 1 ≤ | s | ≤ 2000
+Following are T testcases, and each of them contains 2 lines.
+
+The first line of each testcase contains an integer N ( 1 <= N <= 25 ), number of selected numbers.
+
+The second line contains N distinct selected numbers, from 1-st to N-th.
+
+Output
+For each testcase, print out an integer x, telling eccioa he can get the reward at x-th number, with x as small as possible. If he couldn't, tell him that he did not get the reward yet.
+
+See Sample Output for more information about output format.
 */
 
-int isPalindrome(char *str, int l, int r) {
-    if ( l == r ) return 1;
-    else {
-        /*
-        int even_or_odd;
-        if ( ( r - l + 1 ) % 2 == 0 ) {
-            // even
-            even_or_odd = 0;
-        }
-        else {
-            // odd
-            even_or_odd = 1;
-        }*/
+void run_testcase(int board[5][5], int Tth, int N, int Nth[]) {
+    char *result = "Not yet \\(^o^)/";
 
-        int loops = (r - l + 1) / 2;
-        //printf("DEBUG: loops = %d\n", loops);
+    // TODO
 
-        for (int i=0; i < loops; i++) {
-            if (str[l+i] != str[r-i]) return 0;
-        }
-    }
-
-    return 1;
+    printf("Case #%d: %s\n", Tth, result); 
 }
 
-void run_testcase(char *str) {
-    unsigned long len = strlen(str);
-    //printf("DEBUG: len = %lu\n", len);
-
-    int number_of_exquisite_substrings = 0;
-    for (int i = 0; i < len; i++) {
-        for (int j = i+1; j < len; j++) {
-            if ( isPalindrome(str, i, j) ) {
-                number_of_exquisite_substrings++;
-                //printf("DEBUG: number of exquisite substrings ++\n");
-            }
-        }
+void load_testdata(int board[5][5]) {
+    for (int i=0; i<5; i++) {
+        scanf("%d %d %d %d %d", &board[i][0], &board[i][1], &board[i][2], &board[i][3], &board[i][4]);
+        //printf("DEBUG: %d %d %d %d %d\n", board[i][0], board[i][1], board[i][2], board[i][3], board[i][4]);
     }
+   
+    int T;
+    scanf("%d", &T);
 
-    printf("%d\n", number_of_exquisite_substrings);
-}
+    for (int i=0; i<T; i++) {
+        int N;
+        scanf("%d", &N);
 
-void load_testdata(char *str) {
-    while (scanf("%s", str) != EOF) {
-        //printf("DEBUG: str = %s\n", str);
-        //printf("DEBUG: len(str) = %lu\n", strlen(str));
-        run_testcase(str);
+        int Nth[N];
+        for (int j=0; j<N; j++) {
+            int n;
+            scanf("%d", &n);
+            //printf("DEBUG: n = %d\n", n);
+
+            Nth[j] = n;
+            //printf("DEBUG: j = %d, Nth[j] = %d\n", j, Nth[j]);
+        }
+
+        run_testcase(board, i+1, N, Nth);
     }
 }
 
 int main(){
-    char str[2001];
-    load_testdata(str);
+    int board[5][5];
+    load_testdata(board);
 
     return 0;  
 }
