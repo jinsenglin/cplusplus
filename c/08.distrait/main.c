@@ -34,12 +34,43 @@ int is_bingo(int board[5][5]) {
 }
 
 void run_testcase(int board[5][5], int Tth, int N, int numbers[]) {
+    /*
+    printf("DEBUG: board[5][5] = \n");
+    for (int i=0; i<5; i++) {
+        printf("DEBUG: %d %d %d %d %d\n", board[i][0], board[i][1], board[i][2], board[i][3], board[i][4]);
+    }
+    printf("DEBUG: Tth = %d\n", Tth);
+    printf("DEBUG: N = %d\n", N);
+    printf("DEBUG: numbers = ");
+    for (int i=0; i<N; i++) {
+        printf("%d ", numbers[i]);
+    }
+    printf("\n");*/
+
     int _board[5][5] = {0};
 
     for (int i=0; i<N; i++) {
         int Nth = i+1;
+        //printf("DEBUG: Nth = %d\n", Nth);
 
-        // TODO: update _board
+        int n = numbers[i];
+        //printf("DEBUG: n = %d\n", n);
+
+        // update _board
+        int found = 0;
+        int j, k = 0;
+        for (j=0; j<5; j++) {
+            for (k=0; k<5; k++) {
+                //printf("DEBUG: board[j][k] = %d when j = %d k = %d\n", board[j][k], j, k);
+                if (board[j][k] == n) {
+                    //printf("DEBUG: found n when j = %d k = %d\n", j, k);
+                    found = 1;
+                    break;
+                }
+            }
+            if ( found ) break;
+        }
+        _board[j][k] = 1;
 
         if ( is_bingo(_board) ) {
             printf("Case #%d: %d\n", Tth, Nth);
