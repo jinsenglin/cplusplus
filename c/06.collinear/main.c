@@ -32,7 +32,7 @@ int main(){
   
       for(j=i+1;j<n;j++)
       {
-        if (z[j] == 1) continue;
+        //if (z[j] == 1) continue;
   
         //find dots on the same vector between dots[i] and dots[j]
         for(k=0;k<n;k++)
@@ -43,13 +43,16 @@ int main(){
           // (a.x - b.x) * (a.y - b.y) == (c.x - b.x) * (c.y - b.y)
           else if((x[i]-x[j])*(y[k]-y[j])==(x[k]-x[j])*(y[i]-y[j]))
           {
-            if (z[i] == 0 || z[j] == 0) count++;
+            if (z[i] == 0 || z[j] == 0) {
+              count++;
+              //printf("DEBUG: count+=1 when i=%d, j=%d, k=%d\n", i, j, k);
+            }
   
             z[i] = 1;
             z[j] = 1;
             z[k] = 1;
   
-            //printf("DEBUG: count++ i=%d, j=%d, k=%d\n", i, j, k);
+            //printf("DEBUG: count+=0 when i=%d, j=%d, k=%d\n", i, j, k);
           }       
         }
       } 
