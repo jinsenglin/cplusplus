@@ -21,10 +21,21 @@ For each testcase, print out an integer x, telling eccioa he can get the reward 
 See Sample Output for more information about output format.
 */
 
+int is_bingo(int board[5][5]) {
+    // TODO
+    return 0;
+}
+
 void run_testcase(int board[5][5], int Tth, int N, int Nth[]) {
+    int _board[5][5] = {0};
     char *result = "Not yet \\(^o^)/";
 
-    // TODO
+    // TODO: update _board
+
+    if ( is_bingo(_board) ) {
+        // TODO: update result
+        result = "?";
+    }
 
     printf("Case #%d: %s\n", Tth, result); 
 }
