@@ -11,8 +11,13 @@
 
 
 int main(){
+  //scan T test cases
+  int T;
+  scanf("%d", &T);
+  for(int t=0;t<T;t++) {
+
   int i,j,k,n,count=0;
-  int x[10],y[10],z[10];
+  int x[101],y[101],z[101];
   scanf("%d",&n);
   for(i=0;i<n;i++){
       scanf("%d",&x[i]);
@@ -51,7 +56,7 @@ int main(){
   }
   
   printf("%d\n",count);
-  return 0;
-  
-  
+  }
+
+  return 0;  
 }
