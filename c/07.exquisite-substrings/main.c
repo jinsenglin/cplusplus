@@ -15,7 +15,28 @@ testcase #5 Bonus: 1 ≤ | s | ≤ 2000
 */
 
 int isPalindrome(char *str, int l, int r) {
-    return str[l] == str[r];
+    if ( l == r ) return 1;
+    else {
+        /*
+        int even_or_odd;
+        if ( ( r - l + 1 ) % 2 == 0 ) {
+            // even
+            even_or_odd = 0;
+        }
+        else {
+            // odd
+            even_or_odd = 1;
+        }*/
+
+        int loops = (r - l + 1) / 2;
+        //printf("DEBUG: loops = %d\n", loops);
+
+        for (int i=0; i < loops; i++) {
+            if (str[l+i] != str[r-i]) return 0;
+        }
+    }
+
+    return 1;
 }
 
 void run_testcase(char *str) {
