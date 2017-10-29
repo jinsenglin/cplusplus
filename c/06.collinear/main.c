@@ -24,20 +24,26 @@ int main(){
   {
     for(j=i+1;j<n;j++)
     {
+      if (j == k) continue;
+
       //find dots on the same vector between dots[i] and dots[j]
       for(k=0;k<n;k++)
       {
+        printf("DEBUG: i=%d, j=%d, k=%d\n", i, j, k);
+
         if(k==i||k==j) continue;
         // (a.x - b.x) * (a.y - b.y) == (c.x - b.x) * (c.y - b.y)
         else if((x[i]-x[j])*(y[k]-y[j])==(x[k]-x[j])*(y[i]-y[j]))
         {
           count++;
+          printf("DEBUG: count++ i=%d, j=%d, k=%d\n", i, j, k);
           break;
         }       
       }
     } 
   }
-    printf("%d",count);
+  
+  printf("%d\n",count);
   return 0;
   
   
