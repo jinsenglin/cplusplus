@@ -26,18 +26,21 @@ int is_bingo(int board[5][5]) {
     return 0;
 }
 
-void run_testcase(int board[5][5], int Tth, int N, int Nth[]) {
+void run_testcase(int board[5][5], int Tth, int N, int numbers[]) {
     int _board[5][5] = {0};
-    char *result = "Not yet \\(^o^)/";
 
-    // TODO: update _board
+    for (int i=0; i<N; i++) {
+        int Nth = i+1;
 
-    if ( is_bingo(_board) ) {
-        // TODO: update result
-        result = "?";
+        // TODO: update _board
+
+        if ( is_bingo(_board) ) {
+            printf("Case #%d: %d\n", Tth, Nth);
+            return;
+        }
     }
 
-    printf("Case #%d: %s\n", Tth, result); 
+    printf("Case #%d: Not yet \\(^o^)/\n", Tth); 
 }
 
 void load_testdata(int board[5][5]) {
@@ -53,17 +56,17 @@ void load_testdata(int board[5][5]) {
         int N;
         scanf("%d", &N);
 
-        int Nth[N];
+        int numbers[N];
         for (int j=0; j<N; j++) {
             int n;
             scanf("%d", &n);
             //printf("DEBUG: n = %d\n", n);
 
-            Nth[j] = n;
-            //printf("DEBUG: j = %d, Nth[j] = %d\n", j, Nth[j]);
+            numbers[j] = n;
+            //printf("DEBUG: j = %d, numbers[j] = %d\n", j, numbers[j]);
         }
 
-        run_testcase(board, i+1, N, Nth);
+        run_testcase(board, i+1, N, numbers);
     }
 }
 
