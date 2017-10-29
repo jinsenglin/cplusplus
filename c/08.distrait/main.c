@@ -22,7 +22,14 @@ See Sample Output for more information about output format.
 */
 
 int is_bingo(int board[5][5]) {
-    // TODO
+    if (board[0][0] == 1 && board[1][1] == 1 && board[2][2] == 1 && board[3][3] == 1 && board[4][4] == 1 ) return 1;
+    else if (board[0][4] == 1 && board[1][3] == 1 && board[2][2] == 1 && board[3][1] == 1 && board[4][0] == 1 ) return 1;
+    else {
+        for (int i=0; i<5; i++) {
+            if (board[i][0] == 1 && board[i][1] == 1 && board[i][2] == 1 && board[i][3] == 1 && board[i][4] == 1 ) return 1;
+            else if (board[0][i] == 1 && board[1][i] == 1 && board[2][i] == 1 && board[3][i] == 1 && board[4][i] == 1 ) return 1;
+        }
+    }
     return 0;
 }
 
