@@ -12,32 +12,39 @@
 
 int main(){
   int i,j,k,n,count=0;
-  int x[10],y[10];
+  int x[10],y[10],z[10];
   scanf("%d",&n);
   for(i=0;i<n;i++){
       scanf("%d",&x[i]);
       scanf("%d",&y[i]);
+      z[i] = 0;
   }
   
   //3 finite loops to compare any 2 points with the rest points
   for(i=0;i<n;i++)
   {
+    if (z[i] == 1) continue;
+
     for(j=i+1;j<n;j++)
     {
-      if (j == k) continue; //TODO scan the array K, if j == K[?] then continue;
+      if (z[j] == 1) continue;
 
       //find dots on the same vector between dots[i] and dots[j]
       for(k=0;k<n;k++)
       {
-        printf("DEBUG: i=%d, j=%d, k=%d\n", i, j, k);
+        //printf("DEBUG: i=%d, j=%d, k=%d\n", i, j, k);
 
         if(k==i||k==j) continue;
         // (a.x - b.x) * (a.y - b.y) == (c.x - b.x) * (c.y - b.y)
         else if((x[i]-x[j])*(y[k]-y[j])==(x[k]-x[j])*(y[i]-y[j]))
         {
-          count++;
-          printf("DEBUG: count++ i=%d, j=%d, k=%d\n", i, j, k);
-          break; //TODO don't break, instead keep it in an array K
+          if (z[i] == 0 || z[j] == 0) count++;
+
+          z[i] = 1;
+          z[j] = 1;
+          z[k] = 1;
+
+          //printf("DEBUG: count++ i=%d, j=%d, k=%d\n", i, j, k);
         }       
       }
     } 
