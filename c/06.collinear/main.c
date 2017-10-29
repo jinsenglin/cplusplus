@@ -24,7 +24,7 @@ int main(){
   {
     for(j=i+1;j<n;j++)
     {
-      if (j == k) continue;
+      if (j == k) continue; //TODO scan the array K, if j == K[?] then continue;
 
       //find dots on the same vector between dots[i] and dots[j]
       for(k=0;k<n;k++)
@@ -37,7 +37,7 @@ int main(){
         {
           count++;
           printf("DEBUG: count++ i=%d, j=%d, k=%d\n", i, j, k);
-          break;
+          break; //TODO don't break, instead keep it in an array K
         }       
       }
     } 
