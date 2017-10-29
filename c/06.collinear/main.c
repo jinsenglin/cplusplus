@@ -33,8 +33,6 @@ int main(){
     //3 finite loops to compare any 2 points with the rest points
     for(i=0;i<n;i++)
     {
-      if (z[i] == 1) continue;
-
       for(j=i+1;j<n;j++)
       {
         count=2;
@@ -53,14 +51,16 @@ int main(){
           }       
         }
 
-        z[count] += 1;
-        //printf("DEBUG: count=%d, z[count]=%d\n", count, z[count]);
+        if (count > 2) {
+            z[count-3] += 1;
+            //printf("DEBUG: count=%d, z[count-3]=%d\n", count, z[count-3]);
+        }
       } 
     }
 
-    for(i=3;i<=n;i++) {
+    for(i=0;i<n;i++) {
         //printf("DEBUG: i=%d, z[i]=%d\n", i, z[i]);
-        if (z[i] > 0) total += z[i] / cn2(i);
+        if (z[i] > 0) total += z[i] / cn2(i+3);
     }
     
     printf("%d\n",total);
