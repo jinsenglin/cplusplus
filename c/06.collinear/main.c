@@ -9,6 +9,11 @@
 
 #include<stdio.h>
 
+int cn2(int n) {
+    int _cn2 = n * (n - 1) / 2;
+    //printf("DEBUG: n=%d, _cn2=%d\n", n, _cn2);
+    return _cn2;
+}
 
 int main(){
   //scan T test cases
@@ -16,7 +21,7 @@ int main(){
   scanf("%d", &T);
   for(int t=0;t<T;t++) {
   
-    int i,j,k,n,count=0;
+    int i,j,k,n,count,total=0;
     int x[101],y[101],z[101];
     scanf("%d",&n);
     for(i=0;i<n;i++){
@@ -28,12 +33,12 @@ int main(){
     //3 finite loops to compare any 2 points with the rest points
     for(i=0;i<n;i++)
     {
-      //if (z[i] == 1) continue;
-  
+      if (z[i] == 1) continue;
+
       for(j=i+1;j<n;j++)
       {
-        //if (z[j] == 1) continue;
-  
+        count=2;
+
         //find dots on the same vector between dots[i] and dots[j]
         for(k=0;k<n;k++)
         {
@@ -43,22 +48,22 @@ int main(){
           // (a.x - b.x) * (a.y - b.y) == (c.x - b.x) * (c.y - b.y)
           else if((x[i]-x[j])*(y[k]-y[j])==(x[k]-x[j])*(y[i]-y[j]))
           {
-            if (z[i] == 0 && z[j] == 0) {
-              count++;
-              //printf("DEBUG: count+=1 when i=%d, j=%d, k=%d\n", i, j, k);
-            }
-  
-            z[i] = 1;
-            z[j] = 1;
-            z[k] = 1;
-  
-            //printf("DEBUG: count+=0 when i=%d, j=%d, k=%d\n", i, j, k);
+            count++;
+            //printf("DEBUG: count++ when i=%d, j=%d, k=%d\n", i, j, k);
           }       
         }
+
+        z[count] += 1;
+        //printf("DEBUG: count=%d, z[count]=%d\n", count, z[count]);
       } 
     }
+
+    for(i=3;i<=n;i++) {
+        //printf("DEBUG: i=%d, z[i]=%d\n", i, z[i]);
+        if (z[i] > 0) total += z[i] / cn2(i);
+    }
     
-    printf("%d\n",count);
+    printf("%d\n",total);
   }
 
   return 0;  
