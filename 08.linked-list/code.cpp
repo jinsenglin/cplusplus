@@ -51,15 +51,17 @@ void Implement::InsertFront(int data)
 
 void Implement::InsertAfter(int data1, int data2)
 {
-    Delete(data2);
+    // Approach 1
+    // delete duplicated item
+    //Delete(data2);
 
+    // Approach 2
     // if duplicate, do nothing
-    /*
     Node *n = head;
     while (n !=0) {
         if (n->data == data2) return;
         n = n->next;
-    }*/
+    }
 
     Node *current = head;
     Node *newNode = new Node(data2);

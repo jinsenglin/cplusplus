@@ -1,0 +1,4 @@
+InsertFront 1
+InsertFront 2
+Delete 1
+End
