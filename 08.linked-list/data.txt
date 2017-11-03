@@ -1,3 +1,10 @@
-InsertBack 1
-InsertBack 2
+InsertFront 1
+InsertBack 3
+InsertAfter 1 2
+Reverse
+DeleteFront
+InsertBack 5
+DeleteBack
+Delete 3
+Reverse
 End
