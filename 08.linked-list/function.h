@@ -3,7 +3,6 @@
 
 #include <string>
 
-
 using namespace std;
 
 //The data structure that present a node.
