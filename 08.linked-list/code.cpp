@@ -7,6 +7,13 @@ using namespace std;
 
 void Implement::InsertBack(int data)
 {
+    // if duplicate, do nothing
+    Node *n = head;
+    while (n !=0) {
+        if (n->data == data) return;
+        n = n->next;
+    }
+
     // 配置新的記憶體
     Node *newNode = new Node(data);
     // 若list沒有node, 令newNode為head
@@ -14,6 +21,7 @@ void Implement::InsertBack(int data)
         head = newNode;
         return;
     }
+
     Node *current = head;
     // Traversal
     while (current->next != 0) {
@@ -26,6 +34,13 @@ void Implement::InsertBack(int data)
 
 void Implement::InsertFront(int data)
 {
+    // if duplicate, do nothing
+    Node *n = head;
+    while (n !=0) {
+        if (n->data == data) return;
+        n = n->next;
+    }
+
     // 配置新的記憶體
     Node *newNode = new Node(data);
     // 先把head 的node接在newNode後面
@@ -36,6 +51,13 @@ void Implement::InsertFront(int data)
 
 void Implement::InsertAfter(int data1, int data2)
 {
+    // if duplicate, do nothing
+    Node *n = head;
+    while (n !=0) {
+        if (n->data == data2) return;
+        n = n->next;
+    }
+
     Node *current = head;
     Node *newNode = new Node(data2);
     // Traversal
