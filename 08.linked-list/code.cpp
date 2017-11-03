@@ -103,18 +103,15 @@ void Implement::DeleteBack()
 void Implement::Reverse()
 {
     Node *prev = 0;
-    Node *current = head;
-    Node *preceding = head->next;
+    Node *current = head; //prev trails current
     
-    while (preceding != 0) {
-        current->next = prev; // 把current->next轉向
+    while (current) {
+        Node *r = prev;
         //把三個指標「按照順序」往前移動，然後進行下一個node之pointer調整
-        prev = current;       // previous往後挪
-        current = preceding;  // current往後挪
-        preceding = preceding->next; // preceding往後挪
+        prev = current;       // r trails prev
+        current = current->next;  // current往後挪
+        prev->next = r; // link prev to preceding node
     }
-    
-    // 此時current位於最後一個node, 將current->next轉向
-    current->next = prev;
-    head = current;
+
+    head = prev;
 }
