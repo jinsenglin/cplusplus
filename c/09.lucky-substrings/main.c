@@ -40,7 +40,7 @@ void run_testcase(char *str) {
     // TODO list all substrings
     //
     // for a string of length N
-    // it has 1 substring of length N
+    // it has 1 substring of length N-0
     // it has 2 substring of length N-1
     // it has 3 substring of length N-2
     // ...
@@ -57,7 +57,16 @@ void run_testcase(char *str) {
     // 1, n-1-1
     // the first and last characters of the 3rd substring of length N-2 are
     // 2, n-1-0
-   
+    for (int i=0; i<len; i++) {
+        int first = 0;
+        int last = len-1-i;
+
+        for (int j=0; j<len-i; j++) {
+            // TODO shift first, last
+            // TODO print after shift
+        }
+    }
+ 
     // TODO given a substring and a sorted array of [0, 5, 9] which means s[0] == s[5] == s[9] == '9'
     // determine if the given substring has '9' character
     // check first <= 0 <= end, if true return true else check next
