@@ -21,7 +21,7 @@ Output
 For each string si, please output a line contains one integer representing the number of "lucky substrings" in si.
 */
 
-void run_testcase(char *str) {
+void run_testcase(char *str, int *idx9) {
     //printf("DEBUG: str = %s\n", str);
 
     unsigned long len = strlen(str);
@@ -67,7 +67,7 @@ void run_testcase(char *str) {
         int eol;
 
         // shift first and last
-        printf("DEBUG: substring of length %D\n", i+1);
+        //printf("DEBUG: substring of length %D\n", i+1);
         for (int j=0; j<N-i; j++) {
             first = j;
             eol = j+(i+1);
@@ -91,15 +91,16 @@ void run_testcase(char *str) {
 
 }
 
-void load_testdata(char *str) {
+void load_testdata(char *str, int *idx9) {
     while (scanf("%s", str) != EOF) {
         //printf("DEBUG: str = %s\n", str);
-        run_testcase(str);
+        run_testcase(str, idx9);
     }
 }
 
 int main(){
     char str[200001];
-    load_testdata(str);
+    int idx9[200001];
+    load_testdata(str, idx9);
     return 0;  
 }
