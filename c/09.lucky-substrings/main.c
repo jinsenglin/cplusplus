@@ -23,17 +23,20 @@ For each string si, please output a line contains one integer representing the n
 
 void run_testcase(char *str, int *idx9) {
     //printf("DEBUG: str = %s\n", str);
+    int num_lucky_substring = 0;
 
     unsigned long len = strlen(str);
     //printf("DEBUG: len(str) = %lu\n", len);
 
-    // TODO prepare an array to store all indeices of '9' character
+    // prepare an array to store all indeices of '9' character
+    int num_of_9s = 0;
     for (int i=0; i<len; i++) {
         char c = str[i];
         //printf("DEBUG: c = %c\n", c);
 
         if (c == '9') {
-            // TODO
+            idx9[num_of_9s] = i;
+            num_of_9s++;
         }
     }
 
@@ -72,23 +75,28 @@ void run_testcase(char *str, int *idx9) {
             first = j;
             eol = j+(i+1);
 
-            /*
-            printf("DEBUG: substring = ");
+            /*printf("DEBUG: substring = ");
             for (int k=first; k<eol; k++) {
                 printf("%c", str[k]);
             }
             printf("\n");*/
 
-            // TODO given a substring and a sorted array of [0, 5, 9] which means s[0] == s[5] == s[9] == '9'
+            // given a substring and a sorted array of [0, 5, 9] which means s[0] == s[5] == s[9] == '9'
             // determine if the given substring has '9' character
-            // check first <= 0 <= end, if true return true else check next
-            // check first <= 5 <= end, if true return true else check next
-            // check first <= 9 <= end, if true return true else check next
+            // check first <= 0 < eol, if true return true else check next
+            // check first <= 5 < eol, if true return true else check next
+            // check first <= 9 < eol, if true return true else check next
             // return false
+            for (int k=0; k<num_of_9s; k++) {
+                if (first <= idx9[k] && idx9[k] < eol) {
+                    num_lucky_substring++;
+                    break;
+                }
+            }
         }
     }
  
-
+    printf("%d\n", num_lucky_substring);
 }
 
 void load_testdata(char *str, int *idx9) {
