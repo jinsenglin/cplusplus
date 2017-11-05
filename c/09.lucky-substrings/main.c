@@ -27,6 +27,7 @@ void run_testcase(char *str) {
     unsigned long len = strlen(str);
     printf("DEBUG: len(str) = %lu\n", len);
 
+    // TODO prepare an array to store all indeices of '9' character
     for (int i=0; i<len; i++) {
         char c = str[i];
         printf("DEBUG: c = %c\n", c);
@@ -35,6 +36,35 @@ void run_testcase(char *str) {
             // TODO
         }
     }
+
+    // TODO list all substrings
+    //
+    // for a string of length N
+    // it has 1 substring of length N
+    // it has 2 substring of length N-1
+    // it has 3 substring of length N-2
+    // ...
+    // it has N substring of length 1
+    //
+    // the first and last characters of the 1st substring of length N-1 are
+    // 0, n-1-1
+    // the first and last characters of the 2nd substring of length N-1 are
+    // 1, n-1-0
+    //
+    // the first and last characters of the 1st substring of length N-2 are
+    // 0, n-1-2
+    // the first and last characters of the 2nd substring of length N-2 are
+    // 1, n-1-1
+    // the first and last characters of the 3rd substring of length N-2 are
+    // 2, n-1-0
+   
+    // TODO given a substring and a sorted array of [0, 5, 9] which means s[0] == s[5] == s[9] == '9'
+    // determine if the given substring has '9' character
+    // check first <= 0 <= end, if true return true else check next
+    // check first <= 5 <= end, if true return true else check next
+    // check first <= 9 <= end, if true return true else check next
+    // return false
+
 }
 
 void load_testdata(char *str) {
