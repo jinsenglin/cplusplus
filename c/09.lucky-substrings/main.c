@@ -87,10 +87,12 @@ void run_testcase(char *str, int *idx9) {
             // check first <= 5 < eol, if true return true else check next
             // check first <= 9 < eol, if true return true else check next
             // return false
-            for (int k=0; k<num_of_9s; k++) {
-                if (first <= idx9[k] && idx9[k] < eol) {
-                    num_lucky_substring++;
-                    break;
+            if (num_of_9s > 0 && idx9[0] < eol && idx9[num_of_9s-1] >= first) {
+                for (int k=0; k<num_of_9s; k++) {
+                    if (first <= idx9[k] && idx9[k] < eol) {
+                        num_lucky_substring++;
+                        break;
+                    }
                 }
             }
         }
