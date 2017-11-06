@@ -23,16 +23,43 @@ Output
 For each testcase, please output a line contains one integer represents the length of the triangle with the maximum possible perimeter. If the sticks can't form a triangle, please output -1.
 */
 
+void dump_sticks(int *n, int *sticks) {
+    for (int i=0; i<*n; i++) {
+        printf("%d ", sticks[i]);
+    }
+    printf("\n");
+}
+
 void run_testcase(int *n, int *sticks) {
     //printf("DEBUG: n = %d\n", *n);
 
     int result = -1;
 
-    // TODO: sort sticks
+    // sort sticks
+    for (int i=0; i<*n; i++) {
+        for (int j=0; j<*n-1; j++) {
+            if (sticks[j] < sticks[j+1]) {
+                int temp = sticks[j];
+                sticks[j] = sticks[j+1];
+                sticks[j+1] = temp;
+            }
+        }
+    }
+    //dump_sticks(n, sticks);
 
-    // TODO: start from picking the top 3 longest sticks
+    // start from picking the top 3 longest sticks
     // if n1 < n2 + n3 set result
     // else check n2, n3, n4
+    for (int i=0; i<*n-2; i++) {
+        int n1 = sticks[i];
+        int n2 = sticks[i+1];
+        int n3 = sticks[i+2];
+
+        if (n1 < n2 + n3) {
+            result = n1 + n2 + n3;
+            break;
+        }
+    }
 
     printf("%d\n", result);
 }
