@@ -28,7 +28,11 @@ void run_testcase(int *n, int *sticks) {
 
     int result = -1;
 
-    // TODO
+    // TODO: sort stick
+
+    // TODO: start from picking the top 3 longest sticks
+    // if n1 < n2 + n3 set result
+    // else check n2, n3, n4
 
     printf("%d\n", result);
 }
