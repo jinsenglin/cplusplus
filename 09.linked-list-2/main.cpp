@@ -320,7 +320,7 @@ void load_data() {
     getline(cin, ADD);
     cout << "DEBUG: ADD = " << ADD << endl;
 
-    // TODO: use the first and second linked list objects to make the third linked list object
+    // use the first and second linked list objects to make the third linked list object
     list3 = list1 + list2;
 
     // load K
