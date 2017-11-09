@@ -126,39 +126,124 @@ public:
 
 
 
-// TODO: implement virtual methods of class Chain
+// Implement virtual methods of class Chain
 
-void Chain::InsertBack(int data) {
+void Implement::InsertBack(int data) {
+    Node *n = head;
+    while (n !=0) {
+        if (n->data == data) return;
+        n = n->next;
+    }
+
+    Node *newNode = new Node(data);
+    if (head == 0) {
+        head = newNode;
+        return;
+    }
+
+    Node *current = head;
+    while (current->next != 0) {
+        current = current->next;
+    }
+
+    current->next = newNode;
+    newNode->next = NULL;
 };
 
 
 
-void Chain::InsertFront(int data) {
+void Implement::InsertFront(int data) {
+    Node *n = head;
+    while (n !=0) {
+        if (n->data == data) return;
+        n = n->next;
+    }
+
+    Node *newNode = new Node(data);
+    newNode->next = head;
+    head = newNode;
 };
 
 
 
-void Chain::InsertAfter(int data1, int data2) {
+void Implement::InsertAfter(int data1, int data2) {
+    Node *n = head;
+    while (n !=0) {
+        if (n->data == data2) return;
+        n = n->next;
+    }
+
+    Node *current = head;
+    Node *newNode = new Node(data2);
+    while ((current != NULL) && (data1 != current->data))
+    {
+        current = current->next;
+    }
+    if(current != NULL) {
+        newNode->next = current->next;
+        current->next = newNode;
+    }
 };
 
 
 
-void Chain::Delete(int data) {
+void Implement::Delete(int data) {
+    Node *current = head;
+    Node *prev = head;
+    Node *newNode = new Node(data);
+    while ((current != NULL) && (data != current->data))
+    {
+        prev = current;
+        current = current->next;
+    }
+    if(current != NULL) {
+        prev->next = current->next;
+        delete current;
+        current = NULL;
+    }
 };
 
 
 
-void Chain::DeleteFront() {
+void Implement::DeleteFront() {
+    Node *current = head;
+    if(current != NULL)
+    {
+        head = head->next;
+        delete current;
+        current = NULL;
+    }
 };
 
 
 
-void Chain::DeleteBack() {
+void Implement::DeleteBack() {
+    Node *current = head;
+    Node *prev = head;
+    if(current != NULL)
+    {
+        while (current->next != NULL) {
+            prev = current;
+            current = current->next;
+        }
+        prev->next = NULL;
+        delete current;
+        current = NULL;
+    }
 };
 
 
 
-void Chain::Reverse() {
+void Implement::Reverse() {
+    Node *prev = 0;
+    Node *current = head;
+    while (current) {
+        Node *r = prev;
+        prev = current;
+        current = current->next;
+        prev->next = r;
+    }
+    head = prev;
 };
 
 
@@ -183,7 +268,10 @@ Output
 */
 
 void load_data() {
-    // TODO: declare three linked list objects
+    // declare three linked list objects
+    Implement list1;
+    Implement list2;
+    Implement list3;
 
     // load M
     string M;
@@ -197,6 +285,7 @@ void load_data() {
         cout << "DEBUG: instruction = " << instruction << endl;
 
         // TODO: use the first linked list object
+        list1.InsertBack(i);
     }
 
     // load N
@@ -211,6 +300,7 @@ void load_data() {
         cout << "DEBUG: instruction = " << instruction << endl;
 
         // TODO: use the second linked list object
+        list2.InsertBack(i);
     }
 
     // load ADD
@@ -234,7 +324,8 @@ void load_data() {
         // TODO: use the third linked list object
     }
 
-    // TODO: print the third linked list object 
+    // TODO: print the third linked list object
+    cout << list3.toString() << endl;
 }
 
 int main() {
