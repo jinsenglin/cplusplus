@@ -114,6 +114,7 @@ public:
 class Implement: public Chain
 {
 public:
+    Implement& operator+(Implement right);
     void InsertBack(int data);
     void InsertFront(int data);
     void InsertAfter(int data1, int data2);
@@ -127,6 +128,17 @@ public:
 
 
 // Implement virtual methods of class Chain
+
+Implement& Implement::operator+(Implement right) {
+    // TODO
+    cout << "DEBUG: +" << endl;
+    cout << "DEBUG: this->head->data = " << this->head->data << endl;
+    cout << "DEBUG: right.head->data = " << right.head->data << endl;
+
+    return *this;
+}
+
+
 
 void Implement::InsertBack(int data) {
     Node *n = head;
@@ -309,6 +321,7 @@ void load_data() {
     cout << "DEBUG: ADD = " << ADD << endl;
 
     // TODO: use the first and second linked list objects to make the third linked list object
+    list3 = list1 + list2;
 
     // load K
     string K;
@@ -324,7 +337,7 @@ void load_data() {
         // TODO: use the third linked list object
     }
 
-    // TODO: print the third linked list object
+    // print the third linked list object
     cout << list3.toString() << endl;
 }
 
