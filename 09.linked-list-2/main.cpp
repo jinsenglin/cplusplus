@@ -2,6 +2,8 @@
 
 using namespace std; 
 
+// TODO: define a linked list class
+
 /*
 Input
 
@@ -21,6 +23,8 @@ Output
 1->2->4->5
 */
 void load_data() {
+    // TODO: declare three linked list objects
+
     // load M
     string M;
     getline(cin, M);
@@ -32,7 +36,7 @@ void load_data() {
         getline(cin, instruction);
         cout << "DEBUG: instruction = " << instruction << endl;
 
-        // TODO
+        // TODO: use the first linked list object
     }
 
     // load N
@@ -46,13 +50,15 @@ void load_data() {
         getline(cin, instruction);
         cout << "DEBUG: instruction = " << instruction << endl;
 
-        // TODO
+        // TODO: use the second linked list object
     }
 
     // load ADD
     string ADD;
     getline(cin, ADD);
     cout << "DEBUG: ADD = " << ADD << endl;
+
+    // TODO: use the first and second linked list objects to make the third linked list object
 
     // load K
     string K;
@@ -65,8 +71,10 @@ void load_data() {
         getline(cin, instruction);
         cout << "DEBUG: instruction = " << instruction << endl;
 
-        // TODO
-    } 
+        // TODO: use the third linked list object
+    }
+
+    // TODO: print the third linked list object 
 }
 
 int main() {
