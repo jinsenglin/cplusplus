@@ -15,14 +15,20 @@ public:
 
   ~Pet(){}
 
-  Pet getThis() {
+  Pet& getThis() {
     return *this;
   }
 
   /* what is the difference between Pet and Pet&?
-  // https://stackoverflow.com/questions/13077158/overloading-assignment-operator-if-we-return-this-which-is-a-value-at-a-poi
+  // https://stackoverflow.com/questions/5729336/function-returning-this-pointer-in-c
+  Pet getThis() {
+    return *this;
+  }
   Pet& getThis() {
     return *this;
+  }
+  Pet* getThis() {
+    return this;
   }*/ 
 
   string name;
