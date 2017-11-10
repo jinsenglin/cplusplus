@@ -130,44 +130,41 @@ public:
 // Implement virtual methods of class Chain
 
 Implement& Implement::operator+(Implement right) {
-    cout << "DEBUG: +" << endl;
-    cout << "DEBUG: this->head->data = " << this->head->data << endl;
-    cout << "DEBUG: right.head->data = " << right.head->data << endl;
+    //cout << "DEBUG: +" << endl;
+    //cout << "DEBUG: this->head->data = " << this->head->data << endl;
+    //cout << "DEBUG: right.head->data = " << right.head->data << endl;
 
     Node *current1 = this->head;
     Node *current2 = right.head;
 
-    if (current1 != 0 && current2 != 0) {
-        cout << "DEBUG: current1->data + current2->data" << endl;
-        current1->data += current2->data;
-    }
-    else if (current1 != 0 && current2 == 0) {
+    if (current1 != 0 && current2 == 0) {
         cout << "DEBUG: do nothing" << endl;
-        return *this;
     }
     else if (current1 == 0 && current2 != 0) {
         cout << "DEBUG: current1 = current2" << endl;
         this->head = right.head;
-        return *this;
     }
-
-    while (current1 != 0 || current2 != 0) {
-        if (current1 != 0 && current2 != 0) {
+    else if (current1->next == 0 && current2->next == 0) {
+        this->head->data += right.head->data;
+    }
+    else {
+        while (current1->next != 0 || current2->next != 0) {
             cout << "DEBUG: current1->data + current2->data" << endl;
-
             current1->data += current2->data;
-
-            current1 = current1->next;
-            current2 = current2->next;
-        }
-        else if (current1 != 0 && current2 == 0) {
-            cout << "DEBUG: do nothing" << endl;
-            break;
-        }
-        else if (current1 == 0 && current2 != 0) {
-            cout << "DEBUG: current1 = current2" << endl;
-            current1 = current2; // TODO need modify this chain
-            break;
+    
+            if (current1->next != 0 && current2->next != 0) {
+                current1 = current1->next;
+                current2 = current2->next;
+            }
+            else if (current1->next != 0 && current2->next == 0) {
+                cout << "DEBUG: do nothing" << endl;
+                break;
+            }
+            else if (current1->next == 0 && current2->next != 0) {
+                cout << "DEBUG: current1->next = current2->next" << endl;
+                current1->next = current2->next;
+                break;
+            }
         }
     }
     return *this;
