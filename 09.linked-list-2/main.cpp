@@ -130,10 +130,29 @@ public:
 // Implement virtual methods of class Chain
 
 Implement& Implement::operator+(Implement right) {
-    // TODO
     cout << "DEBUG: +" << endl;
     cout << "DEBUG: this->head->data = " << this->head->data << endl;
     cout << "DEBUG: right.head->data = " << right.head->data << endl;
+
+    Node *current1 = this->head;
+    Node *current2 = right.head;
+
+    while (current1 != 0 || current2 != 0) {
+        // TODO add
+        // if current1 == 0 then add node
+        // else update current1->data
+        current1->data += 1;
+
+        cout << "DEBUG: next" << endl;
+        if (current1 != 0) {
+            cout << "DEBUG: move current1 to next" << endl;
+            current1 = current1->next;
+        }
+        if (current2 != 0) {
+            cout << "DEBUG: move current2 to next" << endl;
+            current2 = current2->next;
+        }
+    }
 
     return *this;
 }
