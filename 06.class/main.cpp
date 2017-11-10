@@ -12,7 +12,17 @@ public:
   Pet(string n){
     name = n;
   }
+
   ~Pet(){}
+
+  Pet getThis() {
+    return *this;
+  }
+
+  /* what is the difference between Pet and Pet&?
+  Pet& getThis() {
+    return *this;
+  }*/ 
 
   string name;
 };
@@ -122,4 +132,9 @@ int main()
   Person2 **p10 = &p4;
   (*p10)->printName(); //p4
   (*(*p10)).printName(); //p4
+
+  //
+  Pet this_pet ("this-pet");
+  Pet that_pet = this_pet.getThis();
+  cout<<that_pet.name<<endl;
 }
