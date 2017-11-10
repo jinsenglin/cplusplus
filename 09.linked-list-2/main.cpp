@@ -152,6 +152,7 @@ Implement& Implement::operator+(Implement right) {
         }
         else if (current1 == 0 && current2 != 0) {
             cout << "DEBUG: current1 = current2" << endl;
+            current1 = current2; // TODO need modify this chain
             break;
         }
     }
