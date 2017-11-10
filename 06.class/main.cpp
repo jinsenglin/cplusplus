@@ -92,4 +92,34 @@ int main()
 
   //print the name of p3's pet
   cout<<p3.pet->name<<endl;
+
+  //declare a pointer variable to store the address of object of type Person2
+  Person2 *p4 = new Person2(170, "p4");
+  p4->printName(); //p4
+  (*p4).printName(); //p4
+
+  //delcare a variable to store object of type Person2
+  Person2 p5 (170, "p5");
+  p5.printName(); //p5
+
+  //declare a variable to store object of type Person2
+  Person2 p6 = p5;
+  p6.printName(); //p5
+
+  //declare a pointer variable to store the address of object of type Person2
+  Person2 *p7 = &p6;
+  p7->printName(); //p5
+
+  //declare a pointer variable to store the address of object of type Person2
+  Person2 *p8 = &p5;
+  p8->printName(); //p5
+
+  //declare a pointer variable to store the address of object of type Person2
+  Person2 *p9 = &(*p4);
+  p9->printName(); //p4
+
+  //declare a pointer variable to store the address of object of pointer type Person2
+  Person2 **p10 = &p4;
+  (*p10)->printName(); //p4
+  (*(*p10)).printName(); //p4
 }
