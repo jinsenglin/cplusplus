@@ -138,19 +138,21 @@ Implement& Implement::operator+(Implement right) {
     Node *current2 = right.head;
 
     while (current1 != 0 || current2 != 0) {
-        // TODO add
-        // if current1 == 0 then add node
-        // else update current1->data
-        current1->data += 1;
+        if (current1 != 0 && current2 != 0) {
+            cout << "DEBUG: current1->data + current2->data" << endl;
 
-        cout << "DEBUG: next" << endl;
-        if (current1 != 0) {
-            cout << "DEBUG: move current1 to next" << endl;
+            current1->data += current2->data;
+
             current1 = current1->next;
-        }
-        if (current2 != 0) {
-            cout << "DEBUG: move current2 to next" << endl;
             current2 = current2->next;
+        }
+        else if (current1 != 0 && current2 == 0) {
+            cout << "DEBUG: do nothing" << endl;
+            break;
+        }
+        else if (current1 == 0 && current2 != 0) {
+            cout << "DEBUG: current1 = current2" << endl;
+            break;
         }
     }
 
@@ -316,7 +318,7 @@ void load_data() {
         cout << "DEBUG: instruction = " << instruction << endl;
 
         // TODO: use the first linked list object
-        list1.InsertBack(i);
+        list1.InsertBack(i+1);
     }
 
     // load N
@@ -331,7 +333,7 @@ void load_data() {
         cout << "DEBUG: instruction = " << instruction << endl;
 
         // TODO: use the second linked list object
-        list2.InsertBack(i);
+        list2.InsertBack(i+1);
     }
 
     // load ADD
