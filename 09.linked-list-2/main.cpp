@@ -137,6 +137,20 @@ Implement& Implement::operator+(Implement right) {
     Node *current1 = this->head;
     Node *current2 = right.head;
 
+    if (current1 != 0 && current2 != 0) {
+        cout << "DEBUG: current1->data + current2->data" << endl;
+        current1->data += current2->data;
+    }
+    else if (current1 != 0 && current2 == 0) {
+        cout << "DEBUG: do nothing" << endl;
+        return *this;
+    }
+    else if (current1 == 0 && current2 != 0) {
+        cout << "DEBUG: current1 = current2" << endl;
+        this->head = right.head;
+        return *this;
+    }
+
     while (current1 != 0 || current2 != 0) {
         if (current1 != 0 && current2 != 0) {
             cout << "DEBUG: current1->data + current2->data" << endl;
@@ -156,7 +170,6 @@ Implement& Implement::operator+(Implement right) {
             break;
         }
     }
-
     return *this;
 }
 
