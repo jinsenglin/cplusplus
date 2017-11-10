@@ -20,6 +20,7 @@ public:
   }
 
   /* what is the difference between Pet and Pet&?
+  // https://stackoverflow.com/questions/13077158/overloading-assignment-operator-if-we-return-this-which-is-a-value-at-a-poi
   Pet& getThis() {
     return *this;
   }*/ 
