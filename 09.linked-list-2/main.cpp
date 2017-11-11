@@ -296,7 +296,7 @@ void load_instruction(Implement *inst) {
     // load M
     int M;
     cin >> M;
-    cout << "DEBUG: M = " << M << endl;
+    //cout << "DEBUG: M = " << M << endl;
 
     char op[15];
     char result[2000];
@@ -364,12 +364,15 @@ void load_data() {
     Implement list3;
 
     load_instruction(&list1);
+    cout << "DEBUG: list1 = " << list1.toString() << endl;
+
     load_instruction(&list2);
+    cout << "DEBUG: list2 = " << list2.toString() << endl;
 
     // load ADD
     string ADD;
     cin >> ADD;
-    cout << "DEBUG: ADD = " << ADD << endl;
+    //cout << "DEBUG: ADD = " << ADD << endl;
 
     // use the first and second linked list objects to make the third linked list object
     list3 = list1 + list2;

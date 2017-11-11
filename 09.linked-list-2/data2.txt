@@ -1,0 +1,10 @@
+3
+InsertBack 1
+InsertAfter 1 2
+Reverse 
+2
+InsertBack 2
+InsertBack 4
+ADD
+1
+Reverse
