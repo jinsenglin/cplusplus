@@ -138,16 +138,24 @@ Implement& Implement::operator+(Implement right) {
     Node *current2 = right.head;
 
     if (current1 != 0 && current2 == 0) {
+        // list1 has at least one node
+        // list2 is an empty chain
         cout << "DEBUG: do nothing" << endl;
     }
     else if (current1 == 0 && current2 != 0) {
+        // list1 is an empty chain
+        // list2 has at least one node
         cout << "DEBUG: current1 = current2" << endl;
         this->head = right.head;
     }
     else if (current1->next == 0 && current2->next == 0) {
+        // list1 has only one node
+        // list2 has only one node
         this->head->data += right.head->data;
     }
     else {
+        // TODO: fix bug
+        // failed test case: when list1 and list2 have 2 nodes.
         while (current1->next != 0 || current2->next != 0) {
             cout << "DEBUG: current1->data + current2->data" << endl;
             current1->data += current2->data;
