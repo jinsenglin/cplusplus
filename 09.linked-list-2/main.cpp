@@ -294,8 +294,8 @@ void Implement::Reverse() {
 
 void load_instruction(Implement *inst) {
     // load M
-    string M;
-    getline(cin, M);
+    int M;
+    cin >> M;
     cout << "DEBUG: M = " << M << endl;
 
     char op[15];
@@ -304,23 +304,23 @@ void load_instruction(Implement *inst) {
     bool isPass = false;
 
     // load M instructions
-    for (int i=0; i<atoi(M.c_str()); i++) {
+    for (int i=0; i<M; i++) {
         cin >> op;
 
         if(strcmp("InsertBack", op) == 0){
-            std::cin >> value1;
+            cin >> value1;
             inst->InsertBack(value1);
         }
 		else if(strcmp("InsertFront", op) == 0){
-            std::cin >> value1;
+            cin >> value1;
             inst->InsertFront(value1);
         }
         else if(strcmp("InsertAfter", op) == 0){
-            std::cin >> value1 >> value2;
+            cin >> value1 >> value2;
             inst->InsertAfter(value1, value2);
         }
         else if(strcmp("Delete", op) == 0){ 
-            std::cin >> value1;
+            cin >> value1;
             inst->Delete(value1);
         }
 		else if(strcmp("DeleteFront", op) == 0){ 
@@ -368,7 +368,7 @@ void load_data() {
 
     // load ADD
     string ADD;
-    getline(cin, ADD);
+    cin >> ADD;
     cout << "DEBUG: ADD = " << ADD << endl;
 
     // use the first and second linked list objects to make the third linked list object
