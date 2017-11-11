@@ -186,12 +186,6 @@ Implement& Implement::operator+(Implement right) {
 
 
 void Implement::InsertBack(int data) {
-    Node *n = head;
-    while (n !=0) {
-        if (n->data == data) return;
-        n = n->next;
-    }
-
     Node *newNode = new Node(data);
     if (head == 0) {
         head = newNode;
@@ -200,9 +194,15 @@ void Implement::InsertBack(int data) {
 
     Node *current = head;
     while (current->next != 0) {
+        if(current->data == data)
+        {
+            return;
+        }
         current = current->next;
     }
 
+    if(current->data == data) return;
+    
     current->next = newNode;
     newNode->next = NULL;
 };
@@ -210,13 +210,24 @@ void Implement::InsertBack(int data) {
 
 
 void Implement::InsertFront(int data) {
-    Node *n = head;
-    while (n !=0) {
-        if (n->data == data) return;
-        n = n->next;
+    Node *newNode = new Node(data);
+    if (head == 0) {
+        head = newNode;
+        return;
     }
 
-    Node *newNode = new Node(data);
+    Node *current = head;
+    while (current->next != 0) {
+        
+        if(current->data == data)
+        {
+            return;
+        }
+        current = current->next;
+    }
+
+    if(current->data == data) return;
+    
     newNode->next = head;
     head = newNode;
 };
@@ -224,18 +235,14 @@ void Implement::InsertFront(int data) {
 
 
 void Implement::InsertAfter(int data1, int data2) {
-    Node *n = head;
-    while (n !=0) {
-        if (n->data == data2) return;
-        n = n->next;
-    }
-
     Node *current = head;
     Node *newNode = new Node(data2);
+
     while ((current != NULL) && (data1 != current->data))
     {
         current = current->next;
     }
+
     if(current != NULL) {
         newNode->next = current->next;
         current->next = newNode;
@@ -245,18 +252,26 @@ void Implement::InsertAfter(int data1, int data2) {
 
 
 void Implement::Delete(int data) {
-    Node *current = head;
-    Node *prev = head;
-    Node *newNode = new Node(data);
-    while ((current != NULL) && (data != current->data))
-    {
-        prev = current;
+    Node *current = head, *previous = 0;
+    while (current != 0 && current->data != data) {
+        previous = current;
         current = current->next;
     }
-    if(current != NULL) {
-        prev->next = current->next;
+    
+    if (current == 0) {
+        return;
+    }
+    else if (current == head) {
+        head = current->next;
         delete current;
-        current = NULL;
+        current = 0;
+        return;
+    }
+    else {
+        previous->next = current->next;
+        delete current;
+        current = 0;
+        return;
     }
 };
 
@@ -294,12 +309,14 @@ void Implement::DeleteBack() {
 void Implement::Reverse() {
     Node *prev = 0;
     Node *current = head;
+    
     while (current) {
         Node *r = prev;
         prev = current;
         current = current->next;
         prev->next = r;
     }
+    
     head = prev;
 };
 
