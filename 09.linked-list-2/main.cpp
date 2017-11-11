@@ -140,42 +140,39 @@ Implement& Implement::operator+(Implement right) {
     if (current1 != 0 && current2 == 0) {
         // list1 has at least one node
         // list2 is an empty chain
-        cout << "DEBUG: do nothing" << endl;
+        //cout << "DEBUG: do nothing" << endl;
     }
     else if (current1 == 0 && current2 != 0) {
         // list1 is an empty chain
         // list2 has at least one node
-        cout << "DEBUG: current1 = current2" << endl;
+        //cout << "DEBUG: current1 = current2" << endl;
         this->head = right.head;
     }
     else {
-        // TODO: fix bug
-        // failed test case: when list1 and list2 have 2 nodes.
-        //
         // current is not null, next is null
         // current is not null, next is not null
         //
         // 2 x 2 = 4 cases
         while (true) {
             if (current1->next == 0 && current2->next == 0) {
-                cout << "DEBUG: current1->data + current2->data then break" << endl;
+                //cout << "DEBUG: current1->data + current2->data then break" << endl;
                 current1->data += current2->data;
                 break;
             }
             else if (current1->next == 0 && current2->next != 0) {
-                cout << "DEBUG: current1->data + current2->data then current1->next = current2->next then break" << endl;
+                //cout << "DEBUG: current1->data + current2->data then current1->next = current2->next then break" << endl;
                 current1->data += current2->data;
                 current1->next = current2->next;
                 break;
             }
             else if (current1->next != 0 && current2->next == 0) {
-                cout << "DEBUG: current1->data + current2->data then break" << endl;
+                //cout << "DEBUG: current1->data + current2->data then break" << endl;
                 current1->data += current2->data;
                 break;
             }
             else {
                 // which means current1->next != 0 && current2->next != 0
-                cout << "DEBUG: current1->data + current2->data then next" << endl;
+                //cout << "DEBUG: current1->data + current2->data then next" << endl;
                 current1->data += current2->data;
                 current1 = current1->next;
                 current2 = current2->next;
@@ -379,10 +376,10 @@ void load_data() {
     Implement list3;
 
     load_instruction(&list1);
-    cout << "DEBUG: list1 = " << list1.toString() << endl;
+    //cout << "DEBUG: list1 = " << list1.toString() << endl;
 
     load_instruction(&list2);
-    cout << "DEBUG: list2 = " << list2.toString() << endl;
+    //cout << "DEBUG: list2 = " << list2.toString() << endl;
 
     // load ADD
     string ADD;
@@ -391,6 +388,7 @@ void load_data() {
 
     // use the first and second linked list objects to make the third linked list object
     list3 = list1 + list2;
+    //cout << "DEBUG: list3 = " << list3.toString() << endl;
 
     load_instruction(&list3);
 
