@@ -1,13 +1,8 @@
-4
-InsertBack 1
-InsertAfter 1 4
-Delete 4
-InsertAfter 6 3
-3
-InsertBack 3
-InsertBack 1
-Reverse
-ADD
 2
+InsertBack 1
+InsertBack 2
+1
+InsertBack 1
+ADD
+1
 Reverse
-InsertBack 6

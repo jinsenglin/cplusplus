@@ -1,7 +1,7 @@
 1
 InsertBack 1
 1
-InsertBack 2
+InsertBack 1
 ADD
 1
 Reverse
