@@ -19,6 +19,10 @@ public:
     return *this;
   }
 
+  Pet newPet() {
+    return Pet ("new_pet");
+  }
+
   /* what is the difference between Pet and Pet&?
   // https://stackoverflow.com/questions/5729336/function-returning-this-pointer-in-c
   Pet getThis() {
@@ -144,4 +148,5 @@ int main()
   Pet this_pet ("this-pet");
   Pet that_pet = this_pet.getThis();
   cout<<that_pet.name<<endl;
+  cout<<that_pet.newPet().name<<endl;
 }
