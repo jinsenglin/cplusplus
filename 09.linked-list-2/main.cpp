@@ -292,6 +292,52 @@ void Implement::Reverse() {
 
 
 
+void load_instruction(Implement *inst) {
+    // load M
+    string M;
+    getline(cin, M);
+    cout << "DEBUG: M = " << M << endl;
+
+    char op[15];
+    char result[2000];
+    int value1, value2;
+    bool isPass = false;
+
+    // load M instructions
+    for (int i=0; i<atoi(M.c_str()); i++) {
+        cin >> op;
+
+        if(strcmp("InsertBack", op) == 0){
+            std::cin >> value1;
+            inst->InsertBack(value1);
+        }
+		else if(strcmp("InsertFront", op) == 0){
+            std::cin >> value1;
+            inst->InsertFront(value1);
+        }
+        else if(strcmp("InsertAfter", op) == 0){
+            std::cin >> value1 >> value2;
+            inst->InsertAfter(value1, value2);
+        }
+        else if(strcmp("Delete", op) == 0){ 
+            std::cin >> value1;
+            inst->Delete(value1);
+        }
+		else if(strcmp("DeleteFront", op) == 0){ 
+            inst->DeleteFront();
+        }
+		else if(strcmp("DeleteBack", op) == 0){ 
+            inst->DeleteBack();
+        }
+        else if(strcmp("Reverse", op) == 0) {
+            inst->Reverse();
+        }
+
+    } // end of for
+}
+
+
+
 /*
 Input
 
@@ -317,35 +363,8 @@ void load_data() {
     Implement list2;
     Implement list3;
 
-    // load M
-    string M;
-    getline(cin, M);
-    cout << "DEBUG: M = " << M << endl;
-
-    // load M instructions
-    for (int i=0; i<atoi(M.c_str()); i++) {
-        string instruction;
-        getline(cin, instruction);
-        cout << "DEBUG: instruction = " << instruction << endl;
-
-        // TODO: use the first linked list object
-        list1.InsertBack(i+1);
-    }
-
-    // load N
-    string N;
-    getline(cin, N);
-    cout << "DEBUG: N = " << N << endl;
-
-    // load N instructions
-    for (int i=0; i<atoi(N.c_str()); i++) {
-        string instruction;
-        getline(cin, instruction);
-        cout << "DEBUG: instruction = " << instruction << endl;
-
-        // TODO: use the second linked list object
-        list2.InsertBack(i+1);
-    }
+    load_instruction(&list1);
+    load_instruction(&list2);
 
     // load ADD
     string ADD;
@@ -355,19 +374,7 @@ void load_data() {
     // use the first and second linked list objects to make the third linked list object
     list3 = list1 + list2;
 
-    // load K
-    string K;
-    getline(cin, K);
-    cout << "DEBUG: K = " << K << endl;
-
-    // load K instructions
-    for (int i=0; i<atoi(K.c_str()); i++) {
-        string instruction;
-        getline(cin, instruction);
-        cout << "DEBUG: instruction = " << instruction << endl;
-
-        // TODO: use the third linked list object
-    }
+    load_instruction(&list3);
 
     // print the third linked list object
     cout << list3.toString() << endl;
