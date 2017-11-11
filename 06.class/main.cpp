@@ -20,7 +20,10 @@ public:
   }
 
   Pet newPet() {
-    return Pet ("new_pet");
+    Pet new_pet ("new_pet");
+    return new_pet;
+
+    // or return Pet ("new_pet");
   }
 
   /* what is the difference between Pet and Pet&?
