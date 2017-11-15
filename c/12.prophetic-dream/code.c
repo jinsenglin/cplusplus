@@ -23,5 +23,9 @@ int maxElement(int arr[], int n)
 {
 
     // Write your code here
-
+    if (n == 1) return arr[0];
+    else {
+        if ( arr[n-1] > arr[n-2] ) arr[n-2] = arr[n-1];
+        return maxElement(arr, n-1);
+    }
 }
