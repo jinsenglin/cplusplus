@@ -29,7 +29,26 @@ Sample Output
 void run_testcase(int *n, int *problems) {
     //printf("DEBUG: n = %d\n", *n);
 
-    int result = -1;
+    int result = 1;
+
+    // sort problems
+    for (int i=0; i<*n; i++) {
+        for (int j=0; j<*n-1; j++) {
+            if (problems[j] < problems[j+1]) {
+                int temp = problems[j];
+                problems[j] = problems[j+1];
+                problems[j+1] = temp;
+            }
+        }
+    }
+
+    int tmp = problems[0];
+    for (int i=1; i<*n; i++) {
+        if (problems[i] != tmp) {
+            tmp = problems[i];
+            result++;
+        }
+    }
 
     printf("%d\n", result);
 }
