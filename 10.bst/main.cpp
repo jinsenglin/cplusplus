@@ -17,7 +17,7 @@ class Pair {
 
 class TreeNode {
     public:
-        TreeNode() {
+        TreeNode(int key, int element) {
             // TODO
         }
         ~TreeNode() {}
