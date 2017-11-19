@@ -123,7 +123,10 @@ void pick_the_coins()
     for (j = center_x - 1; j <= center_x + 1; j++){
         for (k = center_y - 1; k <= center_y + 1; k++){
             /// determine whether there are coins under the tank
-            // TODO
+            if (map[j][k] == '$') {
+                coin_amount++;
+                map[j][k] == '=';
+            }
         }
     }
 }
