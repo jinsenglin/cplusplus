@@ -88,7 +88,18 @@ bool check_if_hit_hill_if_move_forward(int direction, int steps) {
 }
 
 void move(int direction, int steps) {
-    // TODO
+    if (dir_now == NORTH) {
+        center_x -= steps;
+    }
+    else if (dir_now == EAST) {
+        center_y += steps;
+    }
+    else if (dir_now == SOUTH) {
+        center_x += steps;
+    }
+    else if (dir_now == WEST) {
+        center_y -= steps;
+    }
 }
 
 void take_two_steps()
