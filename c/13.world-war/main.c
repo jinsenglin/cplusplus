@@ -56,7 +56,25 @@ void decide_initial_direction()
     /// Decide tank's initial direction
     /// Using init_dir
     /// To determine dir_now
-    // TODO
+
+    // 
+    // XOX
+    // OCO
+    // XOX
+    //
+    
+    if (init_dir == 'N') {
+        dir_now = NORTH;
+    }
+    else if (init_dir == 'E') {
+        dir_now = EAST;
+    }
+    else if (init_dir == 'S') {
+        dir_now = SOUTH;
+    }
+    else if (init_dir == 'W') {
+        dir_now = WEST;
+    }
 }
 
 bool check_if_hit_wall_if_move_forward() {
