@@ -1,0 +1,42 @@
+#include<iostream>
+#include<string>
+
+using namespace std;
+
+class Pair {
+    public:
+        Pair(int key, int element) {
+            first = key;
+            second = element;            
+        }
+        ~Pair() {}
+    private:
+        int first;
+        int second;
+};
+
+class TreeNode {
+    public:
+        TreeNode() {}
+        ~TreeNode() {}
+    private:
+        Pair* data;
+};
+
+class BST {
+    public:
+        BST() {}
+        ~BST() {}
+        Pair* Get(int k) {
+            return 0;
+        }
+        Pair* Get(TreeNode* p, int k) {
+            return 0;
+        }
+    private:
+        TreeNode* root;       
+};
+
+int main() {
+    return 0;
+}
