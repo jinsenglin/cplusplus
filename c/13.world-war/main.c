@@ -78,27 +78,90 @@ void decide_initial_direction()
 }
 
 bool check_if_hit_wall_if_move_forward(int direction, int steps) {
-    // TODO
+    if (dir_now == NORTH) {
+        for (int i=1; i<=steps; i++) {
+            if (map[center_x-i][center_y-1] == '#' || map[center_x-i][center_y] == '#' || map[center_x-i][center_y+1] == '#') return true;
+        }
+    }
+    else if (dir_now == EAST) {
+        for (int i=1; i<=steps; i++) {
+            if (map[center_x-1][center_y+i] == '#' || map[center_x][center_y+i] == '#' || map[center_x+1][center_y+i] == '#') return true;
+        }
+    }
+    else if (dir_now == SOUTH) {
+        for (int i=1; i<=steps; i++) {
+            if (map[center_x+i][center_y-1] == '#' || map[center_x+i][center_y] == '#' || map[center_x+i][center_y+1] == '#') return true;
+        }
+    }
+    else if (dir_now == WEST) {
+        for (int i=1; i<=steps; i++) {
+            if (map[center_x-1][center_y-i] == '#' || map[center_x][center_y-i] == '#' || map[center_x+1][center_y-i] == '#') return true;
+        }
+    }
     return false;
 }
 
 bool check_if_hit_hill_if_move_forward(int direction, int steps) {
-    // TODO
+    if (dir_now == NORTH) {
+        for (int i=1; i<=steps; i++) {
+            if (map[center_x-i][center_y-1] == '^' || map[center_x-i][center_y] == '^' || map[center_x-i][center_y+1] == '^') return true;
+        }
+    }
+    else if (dir_now == EAST) {
+        for (int i=1; i<=steps; i++) {
+            if (map[center_x-1][center_y+i] == '^' || map[center_x][center_y+i] == '^' || map[center_x+1][center_y+i] == '^') return true;
+        }
+    }
+    else if (dir_now == SOUTH) {
+        for (int i=1; i<=steps; i++) {
+            if (map[center_x+i][center_y-1] == '^' || map[center_x+i][center_y] == '^' || map[center_x+i][center_y+1] == '^') return true;
+        }
+    }
+    else if (dir_now == WEST) {
+        for (int i=1; i<=steps; i++) {
+            if (map[center_x-1][center_y-i] == '^' || map[center_x][center_y-i] == '^' || map[center_x+1][center_y-i] == '^') return true;
+        }
+    }
     return false;
 }
 
 void move(int direction, int steps) {
     if (dir_now == NORTH) {
         center_x -= steps;
+
+        /*
+        // Update map
+        // ...
+        // ...
+        */
     }
     else if (dir_now == EAST) {
         center_y += steps;
+
+        /*
+        // Update map
+        // ...
+        // ...
+        */
+
     }
     else if (dir_now == SOUTH) {
         center_x += steps;
+
+        /*
+        // Update map
+        // ...
+        // ...
+        */
     }
     else if (dir_now == WEST) {
         center_y -= steps;
+
+        /*
+        // Update map
+        // ...
+        // ...
+        */
     }
 }
 
