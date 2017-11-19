@@ -114,6 +114,8 @@ bool check_if_hit_wall_if_move_forward(int direction, int steps) {
             }
         }
     }
+
+    printf("DEBUG: no wall in front, safe to move\n");
     return false;
 }
 
@@ -150,6 +152,8 @@ bool check_if_hit_hill_if_move_forward(int direction, int steps) {
             }
         }
     }
+
+    printf("DEBUG: no hill in front, safe to move\n");
     return false;
 }
 
@@ -197,11 +201,11 @@ void take_two_steps()
 {
     if (check_if_hit_wall_if_move_forward(dir_now, 2)) {
         // Do nothing
-        printf("DEBUG: do nothing\n");
+        printf("DEBUG: will not move 2 steps\n");
     }
     else if (check_if_hit_hill_if_move_forward(dir_now, 2)) {
         // Do nothing
-        printf("DEBUG: do nothing\n");
+        printf("DEBUG: will not move 2 steps\n");
     }
     else {
         move(dir_now, 2);
@@ -213,11 +217,11 @@ void take_a_step()
 {
     if (check_if_hit_wall_if_move_forward(dir_now, 1)) {
         // Do nothing
-        printf("DEBUG: do nothing\n");
+        printf("DEBUG: will not move 1 step\n");
     }
     else if (check_if_hit_hill_if_move_forward(dir_now, 1)) {
         // Do nothing
-        printf("DEBUG: do nothing\n");
+        printf("DEBUG: will not move 1 step\n");
     }
     else {
         move(dir_now, 1);
@@ -420,19 +424,23 @@ int main()
 
     for (i = 0; i < actions_number; i++){
         if (actions[i] == 'F'){
+            printf("DEBUG: action F\n");
             take_a_step();
             pick_the_coins();
         }
         else if (actions[i] == 'J'){
            /* Implement the instruction "J" here */
+            printf("DEBUG: action J\n");
             take_two_steps();
             pick_the_coins();
        }         
         else{
             if (actions[i] == 'R'){
+                printf("DEBUG: action R\n");
                 turn_right();
             }
             if (actions[i] == 'L'){
+                printf("DEBUG: action L\n");
                 turn_left();
             }
         }
