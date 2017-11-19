@@ -27,11 +27,28 @@ class BST {
     public:
         BST() {}
         ~BST() {}
+
+        // Recursive Search Codes
         Pair* Get(int k) {
             return 0;
         }
         Pair* Get(TreeNode* p, int k) {
             return 0;
+        }
+
+        /* Iterative Search Codes
+        Pair* Get(int k) {
+            return 0;
+        }*/
+
+        Pair* RankGet(int r) {
+            return 0;
+        }
+
+        void Insert(const Pair& thePair) {
+        }
+
+        void Delete(int k) {
         }
     private:
         TreeNode* root;       
