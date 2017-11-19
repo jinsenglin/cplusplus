@@ -65,37 +65,53 @@ void decide_initial_direction()
     
     if (init_dir == 'N') {
         dir_now = NORTH;
+        printf("DEBUG: init_dir = N, dir_now = NORTH\n");
     }
     else if (init_dir == 'E') {
         dir_now = EAST;
+        printf("DEBUG: init_dir = E, dir_now = EAST\n");
     }
     else if (init_dir == 'S') {
         dir_now = SOUTH;
+        printf("DEBUG: init_dir = S, dir_now = SOUTH\n");
     }
     else if (init_dir == 'W') {
         dir_now = WEST;
+        printf("DEBUG: init_dir = W, dir_now = WEST\n");
     }
 }
 
 bool check_if_hit_wall_if_move_forward(int direction, int steps) {
     if (dir_now == NORTH) {
         for (int i=1; i<=steps; i++) {
-            if (map[center_x-i][center_y-1] == '#' || map[center_x-i][center_y] == '#' || map[center_x-i][center_y+1] == '#') return true;
+            if (map[center_x-i][center_y-1] == '#' || map[center_x-i][center_y] == '#' || map[center_x-i][center_y+1] == '#') {
+                printf("DEBUG: dir_now == NORTH, hit wall\n");
+                return true;
+            }
         }
     }
     else if (dir_now == EAST) {
         for (int i=1; i<=steps; i++) {
-            if (map[center_x-1][center_y+i] == '#' || map[center_x][center_y+i] == '#' || map[center_x+1][center_y+i] == '#') return true;
+            if (map[center_x-1][center_y+i] == '#' || map[center_x][center_y+i] == '#' || map[center_x+1][center_y+i] == '#') {
+                printf("DEBUG: dir_now == EAST, hit wall\n");
+                return true;
+            }
         }
     }
     else if (dir_now == SOUTH) {
         for (int i=1; i<=steps; i++) {
-            if (map[center_x+i][center_y-1] == '#' || map[center_x+i][center_y] == '#' || map[center_x+i][center_y+1] == '#') return true;
+            if (map[center_x+i][center_y-1] == '#' || map[center_x+i][center_y] == '#' || map[center_x+i][center_y+1] == '#') {
+                printf("DEBUG: dir_now == SOUTH, hit wall\n");
+                return true;
+            }
         }
     }
     else if (dir_now == WEST) {
         for (int i=1; i<=steps; i++) {
-            if (map[center_x-1][center_y-i] == '#' || map[center_x][center_y-i] == '#' || map[center_x+1][center_y-i] == '#') return true;
+            if (map[center_x-1][center_y-i] == '#' || map[center_x][center_y-i] == '#' || map[center_x+1][center_y-i] == '#') {
+                printf("DEBUG: dir_now == WEST, hit wall\n");
+                return true;
+            }
         }
     }
     return false;
@@ -104,22 +120,34 @@ bool check_if_hit_wall_if_move_forward(int direction, int steps) {
 bool check_if_hit_hill_if_move_forward(int direction, int steps) {
     if (dir_now == NORTH) {
         for (int i=1; i<=steps; i++) {
-            if (map[center_x-i][center_y-1] == '^' || map[center_x-i][center_y] == '^' || map[center_x-i][center_y+1] == '^') return true;
+            if (map[center_x-i][center_y-1] == '^' || map[center_x-i][center_y] == '^' || map[center_x-i][center_y+1] == '^') {
+                printf("DEBUG: dir_now == NORTH, hit hill\n");
+                return true;
+            }
         }
     }
     else if (dir_now == EAST) {
         for (int i=1; i<=steps; i++) {
-            if (map[center_x-1][center_y+i] == '^' || map[center_x][center_y+i] == '^' || map[center_x+1][center_y+i] == '^') return true;
+            if (map[center_x-1][center_y+i] == '^' || map[center_x][center_y+i] == '^' || map[center_x+1][center_y+i] == '^') {
+                printf("DEBUG: dir_now == EAST, hit hill\n");
+                return true;
+            }
         }
     }
     else if (dir_now == SOUTH) {
         for (int i=1; i<=steps; i++) {
-            if (map[center_x+i][center_y-1] == '^' || map[center_x+i][center_y] == '^' || map[center_x+i][center_y+1] == '^') return true;
+            if (map[center_x+i][center_y-1] == '^' || map[center_x+i][center_y] == '^' || map[center_x+i][center_y+1] == '^') {
+                printf("DEBUG: dir_now == SOUTH, hit hill\n");
+                return true;
+            }
         }
     }
     else if (dir_now == WEST) {
         for (int i=1; i<=steps; i++) {
-            if (map[center_x-1][center_y-i] == '^' || map[center_x][center_y-i] == '^' || map[center_x+1][center_y-i] == '^') return true;
+            if (map[center_x-1][center_y-i] == '^' || map[center_x][center_y-i] == '^' || map[center_x+1][center_y-i] == '^') {
+                printf("DEBUG: dir_now == WEST, hit hill\n");
+                return true;
+            }
         }
     }
     return false;
@@ -169,12 +197,15 @@ void take_two_steps()
 {
     if (check_if_hit_wall_if_move_forward(dir_now, 2)) {
         // Do nothing
+        printf("DEBUG: do nothing\n");
     }
     else if (check_if_hit_hill_if_move_forward(dir_now, 2)) {
         // Do nothing
+        printf("DEBUG: do nothing\n");
     }
     else {
         move(dir_now, 2);
+        printf("DEBUG: moved 2 steps\n");
     }
 }
 
@@ -182,12 +213,15 @@ void take_a_step()
 {
     if (check_if_hit_wall_if_move_forward(dir_now, 1)) {
         // Do nothing
+        printf("DEBUG: do nothing\n");
     }
     else if (check_if_hit_hill_if_move_forward(dir_now, 1)) {
         // Do nothing
+        printf("DEBUG: do nothing\n");
     }
     else {
         move(dir_now, 1);
+        printf("DEBUG: moved 1 step\n");
     }
 }
 
@@ -198,9 +232,10 @@ void pick_the_coins()
         for (k = center_y - 1; k <= center_y + 1; k++){
             /// determine whether there are coins under the tank
             if (map[j][k] == '$') {
+                printf("DEBUG: got $ at map[%d][%d]\n", j, k);
                 coin_amount++;
                 // Update map
-                map[j][k] ='=';
+                map[j][k] = '=';
             }
         }
     }
