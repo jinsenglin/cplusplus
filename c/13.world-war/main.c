@@ -81,7 +81,7 @@ void decide_initial_direction()
     }
 }
 
-bool check_if_hit_wall_if_move_forward(int direction, int steps) {
+bool check_if_hit_wall_if_move_forward(int steps) {
     if (dir_now == NORTH) {
         for (int i=1; i<=steps; i++) {
             if (map[center_x-i][center_y-1] == '#' || map[center_x-i][center_y] == '#' || map[center_x-i][center_y+1] == '#') {
@@ -115,11 +115,11 @@ bool check_if_hit_wall_if_move_forward(int direction, int steps) {
         }
     }
 
-    printf("DEBUG: no wall in front, safe to move\n");
+    printf("DEBUG: dir_now = %d, no wall in front, safe to move\n", dir_now);
     return false;
 }
 
-bool check_if_hit_hill_if_move_forward(int direction, int steps) {
+bool check_if_hit_hill_if_move_forward(int steps) {
     if (dir_now == NORTH) {
         for (int i=1; i<=steps; i++) {
             if (map[center_x-i][center_y-1] == '^' || map[center_x-i][center_y] == '^' || map[center_x-i][center_y+1] == '^') {
@@ -153,11 +153,11 @@ bool check_if_hit_hill_if_move_forward(int direction, int steps) {
         }
     }
 
-    printf("DEBUG: no hill in front, safe to move\n");
+    printf("DEBUG: dir_now = %d, no hill in front, safe to move\n", dir_now);
     return false;
 }
 
-void move(int direction, int steps) {
+void move(int steps) {
     if (dir_now == NORTH) {
         center_x -= steps;
 
@@ -199,32 +199,32 @@ void move(int direction, int steps) {
 
 void take_two_steps()
 {
-    if (check_if_hit_wall_if_move_forward(dir_now, 2)) {
+    if (check_if_hit_wall_if_move_forward(2)) {
         // Do nothing
         printf("DEBUG: will not move 2 steps\n");
     }
-    else if (check_if_hit_hill_if_move_forward(dir_now, 2)) {
+    else if (check_if_hit_hill_if_move_forward(2)) {
         // Do nothing
         printf("DEBUG: will not move 2 steps\n");
     }
     else {
-        move(dir_now, 2);
+        move(2);
         printf("DEBUG: moved 2 steps\n");
     }
 }
 
 void take_a_step()
 {
-    if (check_if_hit_wall_if_move_forward(dir_now, 1)) {
+    if (check_if_hit_wall_if_move_forward(1)) {
         // Do nothing
         printf("DEBUG: will not move 1 step\n");
     }
-    else if (check_if_hit_hill_if_move_forward(dir_now, 1)) {
+    else if (check_if_hit_hill_if_move_forward(1)) {
         // Do nothing
         printf("DEBUG: will not move 1 step\n");
     }
     else {
-        move(dir_now, 1);
+        move(1);
         printf("DEBUG: moved 1 step\n");
     }
 }
