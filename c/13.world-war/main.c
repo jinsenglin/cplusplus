@@ -131,7 +131,61 @@ void pick_the_coins()
 void turn_right()
 {
     /// Change direction depending on dir_now
-    // TODO
+
+    //
+    // XOX    OOX    OOO    XOO    XOX
+    // OOO -> OOO -> OOO -> OOO -> OOO
+    // OOO    OOX    XOX    XOO    OOO
+    //
+
+    if (dir_now == NORTH) {
+        // Change direction from NORTH to EAST
+        dir_now = EAST;
+
+        map[center_x-1][center_y+1] = 'X';
+        map[center_x][center_y+1]   = 'O';
+        map[center_x+1][center_y+1] = 'X';
+
+        map[center_x-1][center_y-1] = 'O';
+        map[center_x-1][center_y]   = 'O';
+        map[center_x-1][center_y+1] = 'O';
+    }
+    else if (dir_now == EAST) {
+        // Change direction from EAST to SOUTH
+        dir_now = SOUTH;
+
+        map[center_x+1][center_y-1] = 'X';
+        map[center_x+1][center_y]   = 'O';
+        map[center_x+1][center_y+1] = 'X';
+
+        map[center_x-1][center_y+1] = 'O';
+        map[center_x][center_y+1]   = 'O';
+        map[center_x+1][center_y+1] = 'O';
+    }
+    else if (dir_now == SOUTH) {
+        // Change direction from SOUTH to WEST
+        dir_now = WEST;
+
+        map[center_x-1][center_y-1] = 'X';
+        map[center_x][center_y-1]   = 'O';
+        map[center_x+1][center_y-1] = 'X';
+
+        map[center_x+1][center_y-1] = 'O';
+        map[center_x+1][center_y]   = 'O';
+        map[center_x+1][center_y+1] = 'O';
+    }
+    else if (dir_now == WEST) {
+        // Change direction from WEST to NORTH
+        dir_now = NORTH;
+
+        map[center_x-1][center_y-1] = 'X';
+        map[center_x-1][center_y]   = 'O';
+        map[center_x-1][center_y+1] = 'X';
+
+        map[center_x-1][center_y-1] = 'O';
+        map[center_x][center_y-1]   = 'O';
+        map[center_x+1][center_y-1] = 'O';
+    }
 }
 
  
@@ -139,7 +193,61 @@ void turn_right()
 void turn_left()
 {
     /// Change direction depending on dir_now
-    // TODO
+
+    //
+    // XOX    OOX    OOO    XOO    XOX
+    // OOO <- OOO <- OOO <- OOO <- OOO
+    // OOO    OOX    XOX    XOO    OOO
+    //
+
+    if (dir_now == NORTH) {
+        // Change direction from NORTH to WEST
+        dir_now = WEST;
+
+        map[center_x-1][center_y-1] = 'X';
+        map[center_x][center_y-1]   = 'O';
+        map[center_x+1][center_y-1] = 'X';
+
+        map[center_x-1][center_y-1] = 'O';
+        map[center_x-1][center_y]   = 'O';
+        map[center_x-1][center_y+1] = 'O';
+    }
+    else if (dir_now == EAST) {
+        // Change direction from EAST to NORTH
+        dir_now = NORTH;
+
+        map[center_x-1][center_y-1] = 'X';
+        map[center_x-1][center_y]   = 'O';
+        map[center_x-1][center_y+1] = 'X';
+
+        map[center_x-1][center_y+1] = 'O';
+        map[center_x][center_y+1]   = 'O';
+        map[center_x+1][center_y+1] = 'O';
+    }
+    else if (dir_now == SOUTH) {
+        // Change direction from SOUTH to EAST
+        dir_now = EAST;
+
+        map[center_x-1][center_y+1] = 'X';
+        map[center_x][center_y+1]   = 'O';
+        map[center_x+1][center_y+1] = 'X';
+
+        map[center_x+1][center_y-1] = 'O';
+        map[center_x+1][center_y]   = 'O';
+        map[center_x+1][center_y+1] = 'O';
+    }
+    else if (dir_now == WEST) {
+        // Change direction from WEST to SOUTH
+        dir_now = SOUTH;
+
+        map[center_x+1][center_y-1] = 'X';
+        map[center_x+1][center_y]   = 'O';
+        map[center_x+1][center_y+1] = 'X';
+
+        map[center_x-1][center_y-1] = 'O';
+        map[center_x][center_y-1]   = 'O';
+        map[center_x+1][center_y-1] = 'O';
+    }
 }
 
 int main()
