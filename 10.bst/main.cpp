@@ -17,10 +17,14 @@ class Pair {
 
 class TreeNode {
     public:
-        TreeNode() {}
+        TreeNode() {
+            // TODO
+        }
         ~TreeNode() {}
     private:
         Pair* data;
+        TreeNode* leftChild;
+        TreeNode* rightChild;
 };
 
 class BST {
@@ -30,25 +34,31 @@ class BST {
 
         // Recursive Search Codes
         Pair* Get(int k) {
+            // TODO
             return 0;
         }
         Pair* Get(TreeNode* p, int k) {
+            // TODO
             return 0;
         }
 
         /* Iterative Search Codes
         Pair* Get(int k) {
+            // TODO
             return 0;
         }*/
 
         Pair* RankGet(int r) {
+            // TODO
             return 0;
         }
 
         void Insert(const Pair& thePair) {
+            // TODO
         }
 
         void Delete(int k) {
+            // TODO
         }
     private:
         TreeNode* root;       
