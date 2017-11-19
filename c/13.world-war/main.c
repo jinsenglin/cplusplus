@@ -77,42 +77,43 @@ void decide_initial_direction()
     }
 }
 
-bool check_if_hit_wall_if_move_forward() {
+bool check_if_hit_wall_if_move_forward(int direction, int steps) {
     // TODO
     return false;
 }
 
-bool check_if_hit_hill_if_move_forward() {
+bool check_if_hit_hill_if_move_forward(int direction, int steps) {
     // TODO
     return false;
+}
+
+void move(int direction, int steps) {
+    // TODO
+}
+
+void take_two_steps()
+{
+    if (check_if_hit_wall_if_move_forward(dir_now, 2)) {
+        // Do nothing
+    }
+    else if (check_if_hit_hill_if_move_forward(dir_now, 2)) {
+        // Do nothing
+    }
+    else {
+        move(dir_now, 2);
+    }
 }
 
 void take_a_step()
 {
-    if (dir_now == NORTH){
-        /// Detect wall first
-        if ( check_if_hit_wall_if_move_forward() ){
-            // Do nothing
-            return;
-        }
-        /// And then detect hill
-        else if ( check_if_hit_hill_if_move_forward() ) {
-            // Do nothing
-            return;
-        }
-        /// If there is no obstacle, take a step
-        else {
-            // TODO
-        }
+    if (check_if_hit_wall_if_move_forward(dir_now, 1)) {
+        // Do nothing
     }
-    else if (dir_now == SOUTH){
-        // TODO
+    else if (check_if_hit_hill_if_move_forward(dir_now, 1)) {
+        // Do nothing
     }
-    else if (dir_now == EAST){
-        // TODO
-    }
-    else if (dir_now == WEST){
-        // TODO
+    else {
+        move(dir_now, 1);
     }
 }
 
@@ -177,13 +178,10 @@ int main()
             take_a_step();
             pick_the_coins();
         }
-
         else if (actions[i] == 'J'){
-
-           /* TODO : Implement the instruction "J" here */
-            printf("DEBUG: TODO - either take 2 F steps or do nothing.");
-            
-
+           /* Implement the instruction "J" here */
+            take_two_steps();
+            pick_the_coins();
        }         
         else{
             if (actions[i] == 'R'){
