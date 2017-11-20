@@ -6,10 +6,16 @@ using namespace std;
 
 void Implement::Insert(int value) {
     // TODO
+    size++;
+    heap[size] = value;   
 }
 
 void Implement::DeleteMax() {
     // TODO
+    if ( size > 0 ) {
+        heap[0] = 0;
+        size--;
+    }
 }
 
 int Implement::MaxPathWeight(int index) {
