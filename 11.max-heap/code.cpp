@@ -61,8 +61,29 @@ string Implement::InorderTraversal(int index) {
 }
 
 string Implement::PreorderTraversal(int index) {
-    // TODO
-    return "";
+    string result = "";
+
+    if (index <= size) {
+        int leftNode = index*2;
+        int rightNode = index*2+1;
+
+        //cout << "DEBUG: " << to_string(heap[index]) << endl;
+        result.append(to_string(heap[index]));
+
+        string leftResult = PreorderTraversal(leftNode);
+        if (leftResult != "") {
+            //cout << "DEBUG: leftResult = '" << leftResult << "'" << endl;
+            result.append(" " + leftResult);
+        }
+
+        string rightResult = PreorderTraversal(rightNode);
+        if (rightResult != "") {
+            //cout << "DEBUG: rightResult = '" << rightResult << "'" << endl;
+            result.append(" " + rightResult);
+        }
+    }
+
+    return result;
 }
 
 string Implement::PostorderTraversal(int index) {
