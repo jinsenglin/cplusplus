@@ -25,8 +25,24 @@ void Implement::DeleteMax() {
 }
 
 int Implement::MaxPathWeight(int index) {
-    // TODO
-    return 0;
+    int result = 0;
+
+    if (index <= size) {
+        int leftNode = index*2;
+        int rightNode = index*2+1;
+
+        int leftWeight = MaxPathWeight(leftNode);
+        int rightWeight = MaxPathWeight(rightNode);
+
+        if (leftWeight > rightWeight) {
+            result = leftWeight + heap[index];
+        }
+        else {
+            result = rightWeight + heap[index];
+        }
+    }
+
+    return result;
 }
 
 string Implement::InorderTraversal(int index) {
