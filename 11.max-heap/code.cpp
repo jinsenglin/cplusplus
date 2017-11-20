@@ -5,9 +5,15 @@
 using namespace std;
 
 void Implement::Insert(int value) {
-    // TODO
-    size++;
-    heap[size] = value;   
+    int currentNode = ++size;
+
+    while(currentNode !=1 && heap[currentNode/2] < value) {
+        // Swap with parent node
+        heap[currentNode]=heap[currentNode/2];
+        currentNode /= 2; // currentNode now points to parent
+    }
+
+    heap[currentNode] = value;
 }
 
 void Implement::DeleteMax() {
