@@ -1,0 +1,10 @@
+Insert 1
+Insert 3
+Insert 4
+Insert 2
+MaxPathWeight
+InorderTraversal
+PreorderTraversal
+PostorderTraversal
+DeleteMax
+End
