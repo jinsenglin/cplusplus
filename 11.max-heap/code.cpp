@@ -17,10 +17,25 @@ void Implement::Insert(int value) {
 }
 
 void Implement::DeleteMax() {
-    // TODO
     if ( size > 0 ) {
-        heap[0] = 0;
-        size--;
+        int lastE = heap[size--];
+
+        // trickle down
+        int currentNode = 1; // root
+        int child = 2; // A child of currentNode
+        while(child <= size) {
+            // Set child to larger child of currentNode
+            if (child < size && heap[child] < heap[child+1]) child++;
+            
+            // Can we put lastE in currentNode?
+            if (lastE >= heap[child]) break; // Yes!
+
+            // No!
+            heap[currentNode] = heap[child]; // Move child up
+            currentNode = child; child *=2; // Move down a level
+        }
+
+        heap[currentNode] = lastE;
     }
 }
 
