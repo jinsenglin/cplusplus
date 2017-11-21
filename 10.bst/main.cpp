@@ -32,6 +32,7 @@ class TreeNode {
             this->data = new Pair(pair);
             this->leftChild = NULL;
             this->rightChild = NULL;
+            this->leftSize = 0;
         }
 
         TreeNode(const Pair & pair, const TreeNode & left, const TreeNode & right) {
@@ -50,10 +51,15 @@ class TreeNode {
             this->rightChild = new TreeNode(n);
         }
 
+        void SetLeftSize(int s) {
+            this->leftSize = s;
+        }
+
     private:
         Pair* data;
         TreeNode* leftChild;
         TreeNode* rightChild;
+        int leftSize;
 };
 
 class Tree {
@@ -121,7 +127,21 @@ class BST {
         BST() {
             root = NULL;
         }
+
         ~BST() {}
+
+        void SetNodeLeftSize(int k, int s) {
+             TreeNode* currentNode = root;
+
+            while (currentNode) {
+                if (k < currentNode->data->first) currentNode = currentNode->leftChild;
+                else if (k > currentNode->data->first) currentNode = currentNode->rightChild;
+                else {
+                    currentNode->leftSize = s;
+                    return;
+                }
+            }
+        }
 
         // Recursive Search Codes
         /*
@@ -148,7 +168,17 @@ class BST {
         }
 
         Pair* RankGet(int r) {
-            // TODO
+            TreeNode* currentNode = root;
+
+            while (currentNode) {
+                if (r < currentNode->leftSize) currentNode = currentNode->leftChild;
+                else if (r > currentNode->leftSize) {
+                    r -= currentNode->leftSize;
+                    currentNode = currentNode->rightChild;
+                }
+                else return currentNode->data;
+            }
+
             return 0;
         }
 
@@ -231,14 +261,43 @@ int main() {
 //  Demo 3
 
     BST t;
-    Pair p1 (30, 3);
-    Pair p2 (20, 2);
+    Pair p1 (30, 30);
+    Pair p2 (5, 5);
+    Pair p3 (40, 40);
+    Pair p4 (2, 2);
+    Pair p5 (35, 35);
+    Pair p6 (80, 80);
+    Pair p7 (1, 1);
+    Pair p8 (3, 3);
     t.Insert(p1);
     t.Insert(p2);
+    t.Insert(p3);
+    t.Insert(p4);
+    t.Insert(p5);
+    t.Insert(p6);
+    t.Insert(p7);
+    t.Insert(p8);
     t.InorderVisit();
 
-    Pair* p = t.Get(40);
-    if (p) cout << "DEBUG: " << p->ToString() << endl;
+    t.SetNodeLeftSize(30, 5);
+    t.SetNodeLeftSize(5, 4);
+    t.SetNodeLeftSize(40, 2);
+    t.SetNodeLeftSize(2, 2);
+    t.SetNodeLeftSize(35, 1);
+    t.SetNodeLeftSize(80, 1);
+    t.SetNodeLeftSize(1, 1);
+    t.SetNodeLeftSize(3, 1);
+    Pair* r3 = t.RankGet(3);
+    if (r3) cout << "DEBUG: " << r3->ToString() << endl;
+    Pair* r7 = t.RankGet(7);
+    if (r7) cout << "DEBUG: " << r7->ToString() << endl;
+    Pair* r6 = t.RankGet(6);
+    if (r6) cout << "DEBUG: " << r6->ToString() << endl;
+
+    Pair* p40 = t.Get(40);
+    if (p40) cout << "DEBUG: " << p40->ToString() << endl;
+
+
 
     return 0;
 }
