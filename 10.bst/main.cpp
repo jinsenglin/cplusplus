@@ -29,7 +29,23 @@ class TreeNode {
             this->leftChild = NULL;
             this->rightChild = NULL;
         }
+
+        TreeNode(Pair pair, TreeNode left, TreeNode right) {
+            this->data = &pair;
+            this->leftChild = &left;
+            this->rightChild = &right;
+        }
+
         ~TreeNode() {}
+
+        void SetLeft(TreeNode n) {
+            this->leftChild = &n;
+        }
+
+        void SetRight(TreeNode n) {
+            this->rightChild = &n;
+        }
+
     private:
         Pair* data;
         TreeNode* leftChild;
@@ -43,6 +59,40 @@ class Tree {
         }
 
         ~Tree() {}
+
+        void InorderVisit() {
+            this->Inorder(root);
+        }
+
+        void PreorderVisit() {
+            this->Preorder(root);
+        }
+
+        void PostorderVisit() {
+            this->Postorder(root);
+        }
+
+        void LevelorderVisit() {
+            // TODO
+        }
+
+        void SetRoot(TreeNode n) {
+            this->root = &n;
+        }
+
+        /*
+        void Insert(Pair pair) {
+
+            if (this->root) {
+                // TODO
+            }
+            else {
+                this->root = new TreeNode(pair);
+            }
+        }*/
+
+    private:
+        TreeNode* root;
 
         void Visit(TreeNode* currentNode) {
             cout << currentNode->data->ToString() << endl;
@@ -71,35 +121,6 @@ class Tree {
                 Visit(currentNode); // e.g., printout information
             }
         }
-
-        void InorderVisit() {
-            this->Inorder(root);
-        }
-
-        void PreorderVisit() {
-            this->Preorder(root);
-        }
-
-        void PostorderVisit() {
-            this->Postorder(root);
-        }
-
-        void Levelorder() {
-            // TODO
-        }
-
-        void Insert(Pair pair) {
-
-            if (this->root) {
-                // TODO
-            }
-            else {
-                this->root = new TreeNode(pair);;
-            }
-        }
-
-    private:
-        TreeNode* root;
 };
 
 class BST {
@@ -142,10 +163,22 @@ class BST {
 };
 
 int main() {
+/*
     Pair p (1, 1);
     TreeNode n (p);
     Tree t;
-    t.Insert(p);
+    // t.Insert(p);
+    t.SetRoot(n);
+    t.InorderVisit();
+    t.PreorderVisit();
+    t.PostorderVisit();
+*/
+
+    TreeNode n15 (*(new Pair(15, 15)));
+    TreeNode n25 (*(new Pair(25, 25)));
+    TreeNode root (*(new Pair(20, 20)), n15, n25);
+    Tree t;
+    t.SetRoot(root);
     t.InorderVisit();
     t.PreorderVisit();
     t.PostorderVisit();
