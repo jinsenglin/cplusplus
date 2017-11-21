@@ -77,11 +77,11 @@ class Tree {
         }
 
         void PreorderVisit() {
-            //this->Preorder(root);
+            this->Preorder(root);
         }
 
         void PostorderVisit() {
-            //this->Postorder(root);
+            this->Postorder(root);
         }
 
         void Levelorder() {
@@ -89,14 +89,12 @@ class Tree {
         }
 
         void Insert(Pair pair) {
-            TreeNode n (pair);
 
             if (this->root) {
                 // TODO
             }
             else {
-                this->root = &n;
-                this->InorderVisit();   //TODO DEBUG
+                this->root = new TreeNode(pair);;
             }
         }
 
@@ -148,9 +146,9 @@ int main() {
     TreeNode n (p);
     Tree t;
     t.Insert(p);
-    //t.InorderVisit();     // TODO DEBUG
-    //t.PreorderVisit();
-    //t.PostorderVisit();
+    t.InorderVisit();
+    t.PreorderVisit();
+    t.PostorderVisit();
     
     return 0;
 }
