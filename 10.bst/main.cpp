@@ -144,16 +144,17 @@ class BST {
         }
 
         // Recursive Search Codes
-        /*
         Pair* Get(int k) {
-            // TODO
-            return 0;
+            return this->Get(root, k);
         }
         Pair* Get(TreeNode* p, int k) {
-            // TODO
-            return 0;
-        }*/
+            if (!p) return 0;
+            if (k < p->data->first) return this->Get(p->leftChild, k);
+            if (k > p->data->first) return this->Get(p->rightChild, k);
+            return p->data;
+        }
 
+        /*
         // Iterative Search Codes
         Pair* Get(int k) {
             TreeNode* currentNode = root;
@@ -166,6 +167,7 @@ class BST {
 
             return NULL;
         }
+        */
 
         Pair* RankGet(int r) {
             TreeNode* currentNode = root;
