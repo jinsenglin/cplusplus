@@ -6,6 +6,7 @@ using namespace std;
 class Pair {
     friend class Tree;
     friend class BST;
+
     public:
         Pair(int key, int element) {
             first = key;
@@ -123,25 +124,29 @@ class BST {
         ~BST() {}
 
         // Recursive Search Codes
+        /*
         Pair* Get(int k) {
-            if (root) {
-                // TODO
-                return root->data;
-            }
-            else {
-                return 0;
-            }
+            // TODO
+            return 0;
         }
         Pair* Get(TreeNode* p, int k) {
             // TODO
             return 0;
-        }
+        }*/
 
-        /* Iterative Search Codes
+        // Iterative Search Codes
         Pair* Get(int k) {
             // TODO
-            return 0;
-        }*/
+            TreeNode* currentNode = root;
+
+            while (currentNode) {
+                if (k < currentNode->data->first) currentNode = currentNode->leftChild;
+                else if (k > currentNode->data->first) currentNode = currentNode->rightChild;
+                else return currentNode->data;
+            }
+
+            return NULL;
+        }
 
         Pair* RankGet(int r) {
             // TODO
@@ -218,11 +223,14 @@ int main() {
 */
 
     BST t;
-    Pair p (30, 30);
-    Pair p2 (20, 20);
-    t.Insert(p);
+    Pair p1 (30, 3);
+    Pair p2 (20, 2);
+    t.Insert(p1);
     t.Insert(p2);
     t.InorderVisit();
+
+    Pair* p = t.Get(40);
+    if (p) cout << "DEBUG: " << p->ToString() << endl;
 
     return 0;
 }
