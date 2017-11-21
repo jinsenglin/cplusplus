@@ -22,9 +22,12 @@ class Pair {
 class TreeNode {
     friend class Tree;
     friend class BST;
+
     public:
         TreeNode(Pair pair) {
-            data = &pair;
+            this->data = &pair;
+            this->leftChild = NULL;
+            this->rightChild = NULL;
         }
         ~TreeNode() {}
     private:
@@ -38,7 +41,65 @@ class Tree {
         Tree() {
             root = NULL;
         }
+
         ~Tree() {}
+
+        void Visit(TreeNode* currentNode) {
+            cout << currentNode->data->ToString() << endl;
+        }
+
+        void Inorder(TreeNode* currentNode) {
+            if (currentNode) {
+                Inorder(currentNode->leftChild);
+                Visit(currentNode); // e.g., printout information
+                Inorder(currentNode->rightChild);
+            }
+        }
+
+        void Preorder(TreeNode* currentNode) {
+            if (currentNode) {
+                Visit(currentNode); // e.g., printout information
+                Preorder(currentNode->leftChild);
+                Preorder(currentNode->rightChild);
+            }
+        }
+
+        void Postorder(TreeNode* currentNode) {
+            if (currentNode) {
+                Postorder(currentNode->leftChild);
+                Postorder(currentNode->rightChild);
+                Visit(currentNode); // e.g., printout information
+            }
+        }
+
+        void InorderVisit() {
+            this->Inorder(root);
+        }
+
+        void PreorderVisit() {
+            //this->Preorder(root);
+        }
+
+        void PostorderVisit() {
+            //this->Postorder(root);
+        }
+
+        void Levelorder() {
+            // TODO
+        }
+
+        void Insert(Pair pair) {
+            TreeNode n (pair);
+
+            if (this->root) {
+                // TODO
+            }
+            else {
+                this->root = &n;
+                this->InorderVisit();   //TODO DEBUG
+            }
+        }
+
     private:
         TreeNode* root;
 };
@@ -84,10 +145,12 @@ class BST {
 
 int main() {
     Pair p (1, 1);
-    cout << "DEBUG: " << p.ToString() << endl;
     TreeNode n (p);
-    cout << "DEBUG: " << p.ToString() << endl;
     Tree t;
+    t.Insert(p);
+    //t.InorderVisit();     // TODO DEBUG
+    //t.PreorderVisit();
+    //t.PostorderVisit();
     
     return 0;
 }
