@@ -1,5 +1,5 @@
 #include<iostream>
-#include<string>
+#include<cstring>
 
 using namespace std;
 
@@ -10,15 +10,21 @@ class Pair {
             second = element;            
         }
         ~Pair() {}
+
+        string ToString() {
+            return to_string(this->first) + " : " + to_string(this->second);
+        }
     private:
         int first;
         int second;
 };
 
 class TreeNode {
+    friend class Tree;
+    friend class BST;
     public:
-        TreeNode(int key, int element) {
-            // TODO
+        TreeNode(Pair pair) {
+            data = &pair;
         }
         ~TreeNode() {}
     private:
@@ -27,9 +33,21 @@ class TreeNode {
         TreeNode* rightChild;
 };
 
+class Tree {
+    public:
+        Tree() {
+            root = NULL;
+        }
+        ~Tree() {}
+    private:
+        TreeNode* root;
+};
+
 class BST {
     public:
-        BST() {}
+        BST() {
+            root = NULL;
+        }
         ~BST() {}
 
         // Recursive Search Codes
@@ -65,5 +83,11 @@ class BST {
 };
 
 int main() {
+    Pair p (1, 1);
+    cout << "DEBUG: " << p.ToString() << endl;
+    TreeNode n (p);
+    cout << "DEBUG: " << p.ToString() << endl;
+    Tree t;
+    
     return 0;
 }
