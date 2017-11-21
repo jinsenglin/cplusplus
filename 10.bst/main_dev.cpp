@@ -200,22 +200,17 @@ class BST {
 
 int main() {
 /*
-//  Demo 1
-
     Pair p (1, 1);
     TreeNode n (p);
     Tree t;
+    // t.Insert(p);
     t.SetRoot(n);
     t.InorderVisit();
     t.PreorderVisit();
     t.PostorderVisit();
 */
 
-
-
 /*
-//  Demo 2
-
     TreeNode n15 (*(new Pair(15, 15)));
     TreeNode n25 (*(new Pair(25, 25)));
     TreeNode root (*(new Pair(20, 20)), n15, n25);
@@ -225,10 +220,6 @@ int main() {
     t.PreorderVisit();
     t.PostorderVisit();
 */
-
-
-
-//  Demo 3
 
     BST t;
     Pair p1 (30, 3);
