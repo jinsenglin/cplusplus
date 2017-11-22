@@ -1,3 +1,4 @@
+//https://acm.cs.nthu.edu.tw/problem/11684/
 #include<iostream>
 #include<cstring>
 
@@ -10,16 +11,14 @@ friend class BST;
 
 public:
     TreeNode(int value) {
-        int data = value; // BUG !!!!
-        // 1. this->data = value;
-        // 2. data = value;
+        data = value;
         this->leftChild = NULL;
         this->rightChild = NULL;
         //this->leftSize = 0;
     }
 
     TreeNode(int value, const TreeNode & left, const TreeNode & right) {
-        int data = value;
+        data = value;
         this->leftChild = new TreeNode(left);
         this->rightChild = new TreeNode(right);
     }
@@ -86,6 +85,38 @@ public:
 
     void Delete(int k) {
         // TODO
+        // Delete x if x is in the binary search tree.
+        // Please use the smallest element in right subtree to replace x.
+        // If x is not in the binary search tree, you don’t need to do anything.
+    }
+
+    void Clear(){
+      root = NULL;
+    }
+
+    int GetHight() {
+      return Height(root);
+    }
+    /*
+        15
+    10     20
+         16
+
+    n = 15
+
+
+    */
+    int Height(TreeNode* n){
+      if (n) {
+        int heightLeft = Height(n->leftChild);
+        int heightRight = Height(n->rightChild);
+
+        if (heightLeft > heightRight) return heightLeft+1;
+        else return heightRight+1;
+      }
+      else {
+        return 0;
+      }
     }
 
     void InorderVisit() {
@@ -129,6 +160,15 @@ void tryTestCase(Implement &inst)
           cout<<op<<" "<<value<<": Yes"<<endl;
         }
     }
+    else if(strcmp("Clear", op) == 0) {
+        inst.Clear();
+    }
+
+    else if(strcmp("Height", op) == 0) {
+        int h = inst.GetHight();
+        cout<<h<<endl;
+        }
+
     else if(strcmp("End", op) == 0) {
       // string urResultStr = inst.toString();
       //       std::cout << urResultStr << endl;
@@ -143,7 +183,7 @@ int main()
 {
   Implement inst = *(new Implement());
   tryTestCase(inst);
-  inst.InorderVisit();
+  //inst.InorderVisit();
 
   return 0;
 }
