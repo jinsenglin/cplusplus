@@ -10,17 +10,28 @@ friend class BST;
 
 public:
     TreeNode(int value) {
-        this->data = value;
+        //int data;
         this->leftChild = NULL;
         this->rightChild = NULL;
+        //this->leftSize = 0;
+    }
+
+    TreeNode(int value, const TreeNode & left, const TreeNode & right) {
+      //int data;
+        this->leftChild = new TreeNode(left);
+        this->rightChild = new TreeNode(right);
     }
 
     ~TreeNode() {}
+
 
 private:
     int data;
     TreeNode* leftChild;
     TreeNode* rightChild;
+    TreeNode* parent;
+    //string element;
+    
 };
 
 class BST {
@@ -48,8 +59,9 @@ public:
 
     void Insert(int value) {
         // Search for key “thePair.first”, pp is the parent of p
-
+        //If the search is unsuccessful, then the element is inserted at the point the search terminates
         TreeNode* p = root, *pp = 0;
+        TreeNode *insert_node = new TreeNode(value);
         while (p) {
             pp = p;
             if (value < p->data) p = p->leftChild;
@@ -62,13 +74,16 @@ public:
         }
 
         // Perform the insertion
-        p = new TreeNode(value);
-        if (root){
-            // tree is not empty
-            if (value < pp->data) pp->leftChild = p;
-            else pp->rightChild = p;
+        insert_node->parent = pp;
+        if (pp == NULL){                     // 下面一組if-else, 把insert_node接上BST
+          this->root = insert_node;
         }
-        else root = p;
+        else if (insert_node->data < pp->data){
+            pp->leftChild = insert_node;
+        }
+        else{
+            pp->rightChild = insert_node;
+        }
     }
 
     void Delete(int k) {
