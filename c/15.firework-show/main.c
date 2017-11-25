@@ -67,6 +67,7 @@ void combinationUtil(int arr[], int data[], int start, int end, int index, int r
     // Current combination is ready to be printed, print it
     if (index == r)
     {
+        printf("DEBUG: ");
         for (int j=0; j<r; j++)
             printf("%d ", data[j]);
         printf("\n");
