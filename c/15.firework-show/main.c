@@ -44,17 +44,17 @@ Sample Output
 // ===============================================
 // Source: https://ide.geeksforgeeks.org/index.php
 
-void combinationUtil(int arr[], int data[], int start, int end, int index, int r, int m, int* result);
+void combinationUtil(int arr[], int data[], int start, int end, int index, int r, int m, int* result, int all_combinations[][20]);
 
 // The main function that prints all combinations of size r
 // in arr[] of size n. This function mainly uses combinationUtil()
-void printCombination(int arr[], int n, int r, int m, int* result)
+void printCombination(int arr[], int n, int r, int m, int* result, int all_combinations[][20])
 {
     // A temporary array to store all combination one by one
     int data[r];
 
     // Print all combination using temprary array 'data[]'
-    combinationUtil(arr, data, 0, n-1, 0, r, m, result);
+    combinationUtil(arr, data, 0, n-1, 0, r, m, result, all_combinations);
 }
 
 /* arr[] ---> Input Array
@@ -62,26 +62,26 @@ data[] ---> Temporary array to store current combination
 start & end ---> Staring and Ending indexes in arr[]
 index ---> Current index in data[]
 r ---> Size of a combination to be printed */
-void combinationUtil(int arr[], int data[], int start, int end, int index, int r, int m, int* result)
+void combinationUtil(int arr[], int data[], int start, int end, int index, int r, int m, int* result, int all_combinations[][20])
 {
     // Current combination is ready to be printed, print it
     if (index == r)
     {
         int sum =0;
 
-        printf("DEBUG: ");
+        //printf("DEBUG: ");
         for (int j=0; j<r; j++) {
             sum += data[j];
-            printf("%d ", data[j]);
+            //printf("%d ", data[j]);
         }
 
-        printf("\n");
+        //printf("\n");
         //printf("DEBUG: sum = %d\n", sum);
 
         if ( sum == m ) {
-            printf("DEBUG: matched\n");
-            *result = *result + 1;
-            printf("DEBUG: new result = %d\n", *result);
+            //printf("DEBUG: matched\n");
+            *result = *result + 1; // TODO
+            //printf("DEBUG: new result = %d\n", *result);
         }
         return;
     }
@@ -93,7 +93,7 @@ void combinationUtil(int arr[], int data[], int start, int end, int index, int r
     for (int i=start; i<=end && end-i+1 >= r-index; i++)
     {
         data[index] = arr[i];
-        combinationUtil(arr, data, i+1, end, index+1, r, m, result);
+        combinationUtil(arr, data, i+1, end, index+1, r, m, result, all_combinations);
     }
 }
 
@@ -105,7 +105,9 @@ void run_testcase(int n, int m, int data[]) {
     int result = 0;
 
     for (int r=1; r<=n; r++) {
-        printCombination(data, n, r, m, &result);
+        int cnr = n; // TODO
+        int all_combinations[cnr][r];
+        printCombination(data, n, r, m, &result, all_combinations);
     }
 
     printf("%d\n", result);
