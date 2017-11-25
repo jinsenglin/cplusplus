@@ -86,14 +86,15 @@ void combinationUtil(int arr[], int data[], int start, int end, int index, int r
 
 // ===============================================
 
-void run_testcase(int *m, int *data) {
+void run_testcase(int n, int m, int data[]) {
     //printf("DEBUG: m = %d\n", *m);
 
     int result = -1;
 
-    
+    int r = 2;
+    printCombination(data, n, r);
 
-    printf("%d\n", result);
+    //printf("%d\n", result);
 }
 
 void load_testdata(int *T, int *n, int *m, int data[]) {
@@ -114,7 +115,7 @@ void load_testdata(int *T, int *n, int *m, int data[]) {
             //printf("DEBUG: i = %d, a[i] = %d\n", i, data[i]);
         }
 
-        run_testcase(m, data);
+        run_testcase(*n, *m, data);
     }
 }
 
