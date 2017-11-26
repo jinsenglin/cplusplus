@@ -62,34 +62,47 @@ void sort(int data[], int size) {
 }
 
 int update_all_combinations(int data[], int size, int total) {
-    int updated = 0;
+    int updated;
 
     sort(data, size);
 
     if (total == 0) {
-        updated = 1;
         all_combinations[0][0] = size;
         for (int k=0; k<size; k++) all_combinations[0][k+1] = data[k];
+        updated = 1;
         return updated;
     }
     else {
         for (int i=0; i<total; i++) {
-            int found = 0;
             if (all_combinations[i][0] == size) {
+                int duplicate = 1;
                 for (int j=0; j<size; j++) {
                     if (all_combinations[i][j+1] == data[j]) continue;
-                    else {
-                        printf("DEBUG: found a new combination\n");
-                        updated = 1;
-                        for (int k=0; k<size; k++) all_combinations[total][k+1] = data[k];
-                        return updated;
-                    }
+                    else duplicate = 0;
+                }
+
+                if (duplicate) {
+                    updated = 0;
+                    return updated;
+                }
+                else {
+                    // DO NOTHING
                 }
             }
             else {
-                // TODO
+                // DO NOTHING
             }
         }
+
+        // found new combination
+        //printf("DEBUG: found new combination\n");
+        //dump(data, size);
+        all_combinations[total][0] = size;
+        for (int j=0; j<size; j++) {
+            all_combinations[total][j+1] = data[j];
+        }
+        updated = 1;
+        return updated;
     }
 
     return updated;
