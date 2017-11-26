@@ -41,6 +41,33 @@ Sample Output
 3
 */
 
+void dump(int data[], int size) {
+    printf("DEBUG: ");
+    for (int i=0; i<size; i++) printf("%d ", data[i]);
+    printf("\n");
+}
+
+void sort(int data[], int size) {
+    for (int i=0; i<size-1; i++) {
+        for (int j=0; j<size-1; j++) {
+            if (data[j] > data[j+1]) {
+                int tmp = data[j+1];
+                data[j+1] = data[j];
+                data[j] = tmp;
+            }
+        }
+    }
+}
+
+int update_all_combinations(int data[], int size, int all_combinations[][20], int total) {
+    int duplicate = 0;
+
+    sort(data, size);
+    
+
+    return duplicate;
+}
+
 // ===============================================
 // Source: https://ide.geeksforgeeks.org/index.php
 
@@ -80,7 +107,9 @@ void combinationUtil(int arr[], int data[], int start, int end, int index, int r
 
         if ( sum == m ) {
             //printf("DEBUG: matched\n");
-            *result = *result + 1; // TODO
+            if (update_all_combinations(data, r, all_combinations, *result)) {
+                *result = *result + 1;
+            }
             //printf("DEBUG: new result = %d\n", *result);
         }
         return;
@@ -99,14 +128,26 @@ void combinationUtil(int arr[], int data[], int start, int end, int index, int r
 
 // ===============================================
 
+int fab(int n) {
+    if (n == 0) return 1;
+    else if (n == 1) return 1;
+    else return n*fab(n-1);
+}
+
+int c_n_r(int n, int r) {
+    int c = fab(n)/(fab(n-r)*fab(r));
+    //printf("DEBUG: c = %d, n = %d, r = %d\n", c, n ,r);
+    return c;
+}
+
 void run_testcase(int n, int m, int data[]) {
     //printf("DEBUG: m = %d\n", *m);
 
     int result = 0;
 
     for (int r=1; r<=n; r++) {
-        int cnr = n; // TODO
-        int all_combinations[cnr][r];
+        int c = c_n_r(n, r);
+        int all_combinations[c][r];
         printCombination(data, n, r, m, &result, all_combinations);
     }
 
