@@ -60,10 +60,19 @@ void sort(int data[], int size) {
 }
 
 int update_all_combinations(int data[], int size, int all_combinations[][20], int total) {
-    int duplicate = 0;
+    int duplicate = 1;
 
     sort(data, size);
-    
+    for (int i=0; i<total; i++) {
+        for (int j=0; j<size; j++) {
+            if (all_combinations[i][j] == data[j]) continue;
+            else {
+                duplicate = 0;
+                for (int k=0; k<size; k++) all_combinations[total][k] = data[k];
+                return duplicate;
+            }
+        }
+    }
 
     return duplicate;
 }
