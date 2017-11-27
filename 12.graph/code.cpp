@@ -244,6 +244,8 @@ bool Implement::isExistPath(const int label_1, const int label_2) {
 }
 
 void Implement::deleteGraph() {
+    this->VertexArr.clear();
+
     // this->VertexArr; // its type is std::list<Vertex>
     // this->VertexArr.front() // its type is Vertex
     // this->VertexArr.front().label // its type is int
@@ -285,8 +287,6 @@ void Implement::deleteGraph() {
         cout << l.back() << endl;
         l.pop_back();
     }*/
-
-    // TODO
 }
 
 int Implement::number_of_component() {
