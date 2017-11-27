@@ -10,36 +10,66 @@ using namespace std;
 
 void Implement::addEdge(const int label_1, const int label_2 , const int weight) {
     // add one vertex of lable == label_1 if it does not exist
-    bool existed = false;
+    bool vertex_existed = false;
+    bool neighbor_existed = false;
     for (list<Vertex>::iterator it=this->VertexArr.begin(); it != this->VertexArr.end(); ++it) {
         if ( (*it).label == label_1 ) {
-            cout << "DEBUG: " << label_1 << " found" << endl;
-            existed = true;
+            cout << "DEBUG: vertex " << label_1 << " found" << endl;
+            vertex_existed = true;
+
+            // update or add its neighbor
+            for (list<Neighbor>::iterator it2=(*it).neighbors.begin(); it2 != (*it).neighbors.end(); ++it2) {
+                if ( (*it2).label == label_2 ) {
+                    cout << "DEBUG: neightbor " << label_2 << " found" << endl;
+                    neighbor_existed = true;
+                    // TODO update the neighbor
+                    break;
+                }
+            }
+            if (!neighbor_existed) {
+                // TODO add one neighbor
+            }
+
             break;
         }
     }
-    if (!existed) {
+    if (!vertex_existed) {
         Vertex v1 (label_1); 
         this->VertexArr.push_back(v1);
-        cout << "DEBUG: " << label_1 << " added" << endl;
+        // TODO add one neighbor
+        cout << "DEBUG: vertex " << label_1 << " added" << endl;
     }
 
     // add one vertex of lable == label_2 if it does not existe
-    existed = false;
+    vertex_existed = false;
+    neighbor_existed = false;
     for (list<Vertex>::iterator it=this->VertexArr.begin(); it != this->VertexArr.end(); ++it) {
         if ( (*it).label == label_2 ) {
-            cout << "DEBUG: " << label_2 << " found" << endl;
-            existed = true;
+            cout << "DEBUG: vertex " << label_2 << " found" << endl;
+            vertex_existed = true;
+
+            // update or add its neighbor
+            for (list<Neighbor>::iterator it2=(*it).neighbors.begin(); it2 != (*it).neighbors.end(); ++it2) {
+                if ( (*it2).label == label_1 ) {
+                    cout << "DEBUG: neightbor " << label_1 << " found" << endl;
+                    neighbor_existed = true;
+                    // TODO update the neighbor
+                    break;
+                }
+            }
+            if (!neighbor_existed) {
+                // TODO add one neighbor
+            }
+
             break;
         }
     }
-    if (!existed) {
+    if (!vertex_existed) {
         Vertex v2 (label_2); 
         this->VertexArr.push_back(v2);
-        cout << "DEBUG: " << label_2 << " added" << endl;
+        // TODO add one neighbor
+        cout << "DEBUG: vertex " << label_2 << " added" << endl;
     }
-
-    // TODO
 }
 
 void Implement::deleteEdge(const int label_1, const int label_2) {
