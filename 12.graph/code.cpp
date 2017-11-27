@@ -239,7 +239,58 @@ int Implement::degree(const int label) {
 }
 
 bool Implement::isExistPath(const int label_1, const int label_2) {
-    // TODO
+    // Mark all the vertices as not visited
+    int n = this->VertexArr.size();
+    bool *visited = new bool[n];
+    for(int i=0; i<n; i++) visited[i] = false;
+    
+    // Create a queue for BFS
+    list<Vertex> queue;
+
+    // Mark the current node as visited and enqueue it
+    int index = -1;
+    bool vertex_existed = false;
+    for (list<Vertex>::iterator it=this->VertexArr.begin(); it != this->VertexArr.end(); ++it) {
+        index++;
+        if ( (*it).label == label_1 ) {
+            cout << "DEBUG: vertex " << label_1 << " found" << endl;
+            vertex_existed = true;
+
+            visited[index] = true;
+            queue.push_back(*it);
+
+            break;
+        }
+    }
+    if (vertex_existed) {
+
+        while(!queue.empty()) {
+            Vertex v = queue.front();
+            queue.pop_front();
+            cout << "DEBUG: BFS output " << v.label << endl;
+
+            if (v.label == label_2) return true;
+    
+            for (list<Neighbor>::iterator it=v.neighbors.begin(); it != v.neighbors.end(); ++it) {
+                index = -1;
+                for (list<Vertex>::iterator it2=this->VertexArr.begin(); it2 != this->VertexArr.end(); ++it2) {
+                    index++;
+                    if ( (*it2).label == (*it).label ) {
+                        cout << "DEBUG: vertex found" << endl;
+
+                        if(!visited[index]){
+                            queue.push_back(*it2);
+                            visited[index] = true;
+                        }
+
+                        break;
+                    }
+                }
+            }
+        }
+    
+    }
+
     return false;
 }
 
