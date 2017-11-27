@@ -59,6 +59,10 @@ void Implement::deleteGraph() {
         q.pop();
     }
 
+    // begin: Return iterator to beginning
+    // end: Return iterator to end
+    // erase/remove: Delete elements
+    // push_back: Add element at the end
     cout << "DEBUG: list" << endl;
     list<int> l;
     l.push_back(10);
