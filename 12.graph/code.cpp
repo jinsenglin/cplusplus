@@ -9,6 +9,36 @@
 using namespace std;
 
 void Implement::addEdge(const int label_1, const int label_2 , const int weight) {
+    // add one vertex of lable == label_1 if it does not exist
+    bool existed = false;
+    for (list<Vertex>::iterator it=this->VertexArr.begin(); it != this->VertexArr.end(); ++it) {
+        if ( (*it).label == label_1 ) {
+            cout << "DEBUG: " << label_1 << " found" << endl;
+            existed = true;
+            break;
+        }
+    }
+    if (!existed) {
+        Vertex v1 (label_1); 
+        this->VertexArr.push_back(v1);
+        cout << "DEBUG: " << label_1 << " added" << endl;
+    }
+
+    // add one vertex of lable == label_2 if it does not existe
+    existed = false;
+    for (list<Vertex>::iterator it=this->VertexArr.begin(); it != this->VertexArr.end(); ++it) {
+        if ( (*it).label == label_2 ) {
+            cout << "DEBUG: " << label_2 << " found" << endl;
+            existed = true;
+            break;
+        }
+    }
+    if (!existed) {
+        Vertex v2 (label_2); 
+        this->VertexArr.push_back(v2);
+        cout << "DEBUG: " << label_2 << " added" << endl;
+    }
+
     // TODO
 }
 
