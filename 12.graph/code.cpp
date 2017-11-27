@@ -149,7 +149,44 @@ void Implement::deleteEdge(const int label_1, const int label_2) {
 }
 
 void Implement::deleteVertex(const int label) {
-    // TODO
+    // search for vertex of lable == label
+    bool vertex_existed = false;
+    bool neighbor_existed = false;
+    for (list<Vertex>::iterator it=this->VertexArr.begin(); it != this->VertexArr.end(); ++it) {
+        if ( (*it).label == label ) {
+            cout << "DEBUG: vertex " << label << " found" << endl;
+            vertex_existed = true;
+
+            // remove the vertex
+            this->VertexArr.erase(it);
+
+            break;
+        }
+    }
+    if (!vertex_existed) {
+        // do nothing
+    }
+
+    // search for neightbor of lable == label
+    vertex_existed = false;
+    neighbor_existed = false;
+    for (list<Vertex>::iterator it=this->VertexArr.begin(); it != this->VertexArr.end(); ++it) {
+            // update or add its neighbor
+            for (list<Neighbor>::iterator it2=(*it).neighbors.begin(); it2 != (*it).neighbors.end(); ++it2) {
+                if ( (*it2).label == label ) {
+                    cout << "DEBUG: neightbor " << label << " found" << endl;
+                    neighbor_existed = true;
+
+                    // remove the neighbor
+                    (*it).neighbors.erase(it2);
+
+                    break;
+                }
+            }
+            if (!neighbor_existed) {
+                // do nothing
+            }
+    }
 }
 
 int Implement::degree(const int label) {
