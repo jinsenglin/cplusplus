@@ -89,7 +89,63 @@ void Implement::addEdge(const int label_1, const int label_2 , const int weight)
 }
 
 void Implement::deleteEdge(const int label_1, const int label_2) {
-    // TODO
+    // search for vertex of lable == label_1
+    bool vertex_existed = false;
+    bool neighbor_existed = false;
+    for (list<Vertex>::iterator it=this->VertexArr.begin(); it != this->VertexArr.end(); ++it) {
+        if ( (*it).label == label_1 ) {
+            cout << "DEBUG: vertex " << label_1 << " found" << endl;
+            vertex_existed = true;
+
+            // remove its neighbor
+            for (list<Neighbor>::iterator it2=(*it).neighbors.begin(); it2 != (*it).neighbors.end(); ++it2) {
+                if ( (*it2).label == label_2 ) {
+                    cout << "DEBUG: neightbor " << label_2 << " found" << endl;
+                    neighbor_existed = true;
+                    // remove the neighbor
+                    (*it).neighbors.erase(it2);
+                    break;
+                }
+            }
+            if (!neighbor_existed) {
+                // do nothing
+            }
+
+            break;
+        }
+    }
+    if (!vertex_existed) {
+        // do nothing
+    }
+
+    // search for vertex of lable == label_2
+    vertex_existed = false;
+    neighbor_existed = false;
+    for (list<Vertex>::iterator it=this->VertexArr.begin(); it != this->VertexArr.end(); ++it) {
+        if ( (*it).label == label_2 ) {
+            cout << "DEBUG: vertex " << label_2 << " found" << endl;
+            vertex_existed = true;
+
+            // update or add its neighbor
+            for (list<Neighbor>::iterator it2=(*it).neighbors.begin(); it2 != (*it).neighbors.end(); ++it2) {
+                if ( (*it2).label == label_1 ) {
+                    cout << "DEBUG: neightbor " << label_1 << " found" << endl;
+                    neighbor_existed = true;
+                    // remove the neighbor
+                    (*it).neighbors.erase(it2);
+                    break;
+                }
+            }
+            if (!neighbor_existed) {
+                // do nothing
+            }
+
+            break;
+        }
+    }
+    if (!vertex_existed) {
+        // do nothing
+    }
 }
 
 void Implement::deleteVertex(const int label) {
