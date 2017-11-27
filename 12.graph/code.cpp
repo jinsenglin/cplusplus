@@ -31,7 +31,16 @@ bool Implement::isExistPath(const int label_1, const int label_2) {
 }
 
 void Implement::deleteGraph() {
-    cout << "DEBUG: stack" << endl;
+    // this->VertexArr; // its type is std::list<Vertex>
+    // this->VertexArr.front() // its type is Vertex
+    // this->VertexArr.front().label // its type is int
+    // this->VertexArr.front().v_degree // its type is int
+    // this->VertexArr.front().neighbors // its type is std::list<Neighbor>
+    // this->VertexArr.front().neighbors.front() // its type is Neighbor
+    // this->VertexArr.front().neighbors.front().label // its type is int
+    // this->VertexArr.front().neighbors.front().weight // its type is int
+
+    /*cout << "DEBUG: stack" << endl;
     stack<int> s;
     s.push(10);
     s.push(20);
@@ -58,7 +67,7 @@ void Implement::deleteGraph() {
         cout << l.front() << endl;
         cout << l.back() << endl;
         l.pop_back();
-    }
+    }*/
 
     // TODO
 }
