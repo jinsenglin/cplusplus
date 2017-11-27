@@ -120,6 +120,8 @@ public:
     void deleteGraph();
 	int number_of_component();
 	bool isExistCycle();
+    void DFS(int label);
+    void BFS(int label);
 };
 
 #endif

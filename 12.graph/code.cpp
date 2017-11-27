@@ -245,6 +245,25 @@ bool Implement::isExistPath(const int label_1, const int label_2) {
 
 void Implement::deleteGraph() {
     this->VertexArr.clear();
+}
+
+int Implement::number_of_component() {
+    // TODO
+    return 0;
+}
+
+bool Implement::isExistCycle() {
+    // TODO
+    return false;
+}
+
+void Implement::DFS(int label) {
+    // TODO
+}
+
+void Implement::BFS(int label) {
+    // TODO
+}
 
     // this->VertexArr; // its type is std::list<Vertex>
     // this->VertexArr.front() // its type is Vertex
@@ -287,14 +306,3 @@ void Implement::deleteGraph() {
         cout << l.back() << endl;
         l.pop_back();
     }*/
-}
-
-int Implement::number_of_component() {
-    // TODO
-    return 0;
-}
-
-bool Implement::isExistCycle() {
-    // TODO
-    return false;
-}
