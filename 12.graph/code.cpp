@@ -22,21 +22,29 @@ void Implement::addEdge(const int label_1, const int label_2 , const int weight)
                 if ( (*it2).label == label_2 ) {
                     cout << "DEBUG: neightbor " << label_2 << " found" << endl;
                     neighbor_existed = true;
-                    // TODO update the neighbor
+                    // update the neighbor
+                    (*it2).weight = weight;
                     break;
                 }
             }
             if (!neighbor_existed) {
-                // TODO add one neighbor
+                // add one neighbor
+                Neighbor n (label_2, weight);
+                (*it).neighbors.push_back(n);
+                cout << "DEBUG: neightbor " << label_2 << " added" << endl;
             }
 
             break;
         }
     }
     if (!vertex_existed) {
-        Vertex v1 (label_1); 
+        Vertex v1 (label_1);
+
+        // add one neighbor
+        Neighbor n (label_2, weight);
+        v1.neighbors.push_back(n);
+
         this->VertexArr.push_back(v1);
-        // TODO add one neighbor
         cout << "DEBUG: vertex " << label_1 << " added" << endl;
     }
 
@@ -53,21 +61,29 @@ void Implement::addEdge(const int label_1, const int label_2 , const int weight)
                 if ( (*it2).label == label_1 ) {
                     cout << "DEBUG: neightbor " << label_1 << " found" << endl;
                     neighbor_existed = true;
-                    // TODO update the neighbor
+                    // update the neighbor
+                    (*it2).weight = weight;
                     break;
                 }
             }
             if (!neighbor_existed) {
-                // TODO add one neighbor
+                // add one neighbor
+                Neighbor n (label_1, weight);
+                (*it).neighbors.push_back(n);
+                cout << "DEBUG: neightbor " << label_1 << " added" << endl;
             }
 
             break;
         }
     }
     if (!vertex_existed) {
-        Vertex v2 (label_2); 
+        Vertex v2 (label_2);
+
+        // add one neighbor
+        Neighbor n (label_1, weight);
+        v2.neighbors.push_back(n);
+
         this->VertexArr.push_back(v2);
-        // TODO add one neighbor
         cout << "DEBUG: vertex " << label_2 << " added" << endl;
     }
 }
