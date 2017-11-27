@@ -32,6 +32,8 @@ void Implement::addEdge(const int label_1, const int label_2 , const int weight)
                 Neighbor n (label_2, weight);
                 (*it).neighbors.push_back(n);
                 cout << "DEBUG: neightbor " << label_2 << " added" << endl;
+
+                // TODO update degree
             }
 
             break;
@@ -46,6 +48,8 @@ void Implement::addEdge(const int label_1, const int label_2 , const int weight)
 
         this->VertexArr.push_back(v1);
         cout << "DEBUG: vertex " << label_1 << " added" << endl;
+
+        // TODO update degree
     }
 
     // add one vertex of lable == label_2 if it does not existe
@@ -71,6 +75,8 @@ void Implement::addEdge(const int label_1, const int label_2 , const int weight)
                 Neighbor n (label_1, weight);
                 (*it).neighbors.push_back(n);
                 cout << "DEBUG: neightbor " << label_1 << " added" << endl;
+
+                // TODO update degree
             }
 
             break;
@@ -85,6 +91,8 @@ void Implement::addEdge(const int label_1, const int label_2 , const int weight)
 
         this->VertexArr.push_back(v2);
         cout << "DEBUG: vertex " << label_2 << " added" << endl;
+
+        // TODO update degree
     }
 }
 
@@ -102,8 +110,12 @@ void Implement::deleteEdge(const int label_1, const int label_2) {
                 if ( (*it2).label == label_2 ) {
                     cout << "DEBUG: neightbor " << label_2 << " found" << endl;
                     neighbor_existed = true;
+
                     // remove the neighbor
                     (*it).neighbors.erase(it2);
+                    
+                    // TODO update degree
+
                     break;
                 }
             }
@@ -131,8 +143,12 @@ void Implement::deleteEdge(const int label_1, const int label_2) {
                 if ( (*it2).label == label_1 ) {
                     cout << "DEBUG: neightbor " << label_1 << " found" << endl;
                     neighbor_existed = true;
+
                     // remove the neighbor
                     (*it).neighbors.erase(it2);
+
+                    // TODO update degree
+
                     break;
                 }
             }
@@ -180,6 +196,8 @@ void Implement::deleteVertex(const int label) {
                     // remove the neighbor
                     (*it).neighbors.erase(it2);
 
+                    // TODO update degree
+
                     break;
                 }
             }
@@ -190,8 +208,27 @@ void Implement::deleteVertex(const int label) {
 }
 
 int Implement::degree(const int label) {
-    // TODO
-    return 0;
+    int degree = 0;
+
+    // search for vertex of lable == label
+    bool vertex_existed = false;
+    bool neighbor_existed = false;
+    for (list<Vertex>::iterator it=this->VertexArr.begin(); it != this->VertexArr.end(); ++it) {
+        if ( (*it).label == label ) {
+            cout << "DEBUG: vertex " << label << " found" << endl;
+            vertex_existed = true;
+
+            // return the degree
+            degree = (*it).v_degree;
+
+            break;
+        }
+    }
+    if (!vertex_existed) {
+        degree = 0;
+    }
+
+    return degree;
 }
 
 bool Implement::isExistPath(const int label_1, const int label_2) {
