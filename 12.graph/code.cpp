@@ -33,7 +33,8 @@ void Implement::addEdge(const int label_1, const int label_2 , const int weight)
                 (*it).neighbors.push_back(n);
                 cout << "DEBUG: neightbor " << label_2 << " added" << endl;
 
-                // TODO update degree
+                // update degree
+                (*it).v_degree++;
             }
 
             break;
@@ -46,10 +47,11 @@ void Implement::addEdge(const int label_1, const int label_2 , const int weight)
         Neighbor n (label_2, weight);
         v1.neighbors.push_back(n);
 
+        // update degree
+        v1.v_degree++;
+
         this->VertexArr.push_back(v1);
         cout << "DEBUG: vertex " << label_1 << " added" << endl;
-
-        // TODO update degree
     }
 
     // add one vertex of lable == label_2 if it does not existe
@@ -76,7 +78,8 @@ void Implement::addEdge(const int label_1, const int label_2 , const int weight)
                 (*it).neighbors.push_back(n);
                 cout << "DEBUG: neightbor " << label_1 << " added" << endl;
 
-                // TODO update degree
+                // update degree
+                (*it).v_degree++;
             }
 
             break;
@@ -89,10 +92,11 @@ void Implement::addEdge(const int label_1, const int label_2 , const int weight)
         Neighbor n (label_1, weight);
         v2.neighbors.push_back(n);
 
+        // update degree
+        v2.v_degree++;
+
         this->VertexArr.push_back(v2);
         cout << "DEBUG: vertex " << label_2 << " added" << endl;
-
-        // TODO update degree
     }
 }
 
@@ -114,7 +118,8 @@ void Implement::deleteEdge(const int label_1, const int label_2) {
                     // remove the neighbor
                     (*it).neighbors.erase(it2);
                     
-                    // TODO update degree
+                    // update degree
+                    (*it).v_degree--;
 
                     break;
                 }
@@ -147,7 +152,8 @@ void Implement::deleteEdge(const int label_1, const int label_2) {
                     // remove the neighbor
                     (*it).neighbors.erase(it2);
 
-                    // TODO update degree
+                    // update degree
+                    (*it).v_degree--;
 
                     break;
                 }
@@ -196,7 +202,8 @@ void Implement::deleteVertex(const int label) {
                     // remove the neighbor
                     (*it).neighbors.erase(it2);
 
-                    // TODO update degree
+                    // update degree
+                    (*it).v_degree--;
 
                     break;
                 }
