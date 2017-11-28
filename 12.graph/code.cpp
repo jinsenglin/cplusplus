@@ -14,13 +14,13 @@ void Implement::addEdge(const int label_1, const int label_2 , const int weight)
     bool neighbor_existed = false;
     for (list<Vertex>::iterator it=this->VertexArr.begin(); it != this->VertexArr.end(); ++it) {
         if ( (*it).label == label_1 ) {
-            cout << "DEBUG: vertex " << label_1 << " found" << endl;
+            //cout << "DEBUG: vertex " << label_1 << " found" << endl;
             vertex_existed = true;
 
             // update or add its neighbor
             for (list<Neighbor>::iterator it2=(*it).neighbors.begin(); it2 != (*it).neighbors.end(); ++it2) {
                 if ( (*it2).label == label_2 ) {
-                    cout << "DEBUG: neightbor " << label_2 << " found" << endl;
+                    //cout << "DEBUG: neightbor " << label_2 << " found" << endl;
                     neighbor_existed = true;
                     // update the neighbor
                     (*it2).weight = weight;
@@ -31,7 +31,7 @@ void Implement::addEdge(const int label_1, const int label_2 , const int weight)
                 // add one neighbor
                 Neighbor n (label_2, weight);
                 (*it).neighbors.push_back(n);
-                cout << "DEBUG: neightbor " << label_2 << " added" << endl;
+                //cout << "DEBUG: neightbor " << label_2 << " added" << endl;
 
                 // update degree
                 (*it).v_degree++;
@@ -47,11 +47,8 @@ void Implement::addEdge(const int label_1, const int label_2 , const int weight)
         Neighbor n (label_2, weight);
         v1.neighbors.push_back(n);
 
-        // update degree
-        v1.v_degree++;
-
         this->VertexArr.push_back(v1);
-        cout << "DEBUG: vertex " << label_1 << " added" << endl;
+        //cout << "DEBUG: vertex " << label_1 << " added" << endl;
     }
 
     // add one vertex of lable == label_2 if it does not existe
@@ -59,13 +56,13 @@ void Implement::addEdge(const int label_1, const int label_2 , const int weight)
     neighbor_existed = false;
     for (list<Vertex>::iterator it=this->VertexArr.begin(); it != this->VertexArr.end(); ++it) {
         if ( (*it).label == label_2 ) {
-            cout << "DEBUG: vertex " << label_2 << " found" << endl;
+            //cout << "DEBUG: vertex " << label_2 << " found" << endl;
             vertex_existed = true;
 
             // update or add its neighbor
             for (list<Neighbor>::iterator it2=(*it).neighbors.begin(); it2 != (*it).neighbors.end(); ++it2) {
                 if ( (*it2).label == label_1 ) {
-                    cout << "DEBUG: neightbor " << label_1 << " found" << endl;
+                    //cout << "DEBUG: neightbor " << label_1 << " found" << endl;
                     neighbor_existed = true;
                     // update the neighbor
                     (*it2).weight = weight;
@@ -76,7 +73,7 @@ void Implement::addEdge(const int label_1, const int label_2 , const int weight)
                 // add one neighbor
                 Neighbor n (label_1, weight);
                 (*it).neighbors.push_back(n);
-                cout << "DEBUG: neightbor " << label_1 << " added" << endl;
+                //cout << "DEBUG: neightbor " << label_1 << " added" << endl;
 
                 // update degree
                 (*it).v_degree++;
@@ -92,11 +89,8 @@ void Implement::addEdge(const int label_1, const int label_2 , const int weight)
         Neighbor n (label_1, weight);
         v2.neighbors.push_back(n);
 
-        // update degree
-        v2.v_degree++;
-
         this->VertexArr.push_back(v2);
-        cout << "DEBUG: vertex " << label_2 << " added" << endl;
+        //cout << "DEBUG: vertex " << label_2 << " added" << endl;
     }
 }
 
@@ -106,13 +100,13 @@ void Implement::deleteEdge(const int label_1, const int label_2) {
     bool neighbor_existed = false;
     for (list<Vertex>::iterator it=this->VertexArr.begin(); it != this->VertexArr.end(); ++it) {
         if ( (*it).label == label_1 ) {
-            cout << "DEBUG: vertex " << label_1 << " found" << endl;
+            //cout << "DEBUG: vertex " << label_1 << " found" << endl;
             vertex_existed = true;
 
             // remove its neighbor
             for (list<Neighbor>::iterator it2=(*it).neighbors.begin(); it2 != (*it).neighbors.end(); ++it2) {
                 if ( (*it2).label == label_2 ) {
-                    cout << "DEBUG: neightbor " << label_2 << " found" << endl;
+                    //cout << "DEBUG: neightbor " << label_2 << " found" << endl;
                     neighbor_existed = true;
 
                     // remove the neighbor
@@ -140,13 +134,13 @@ void Implement::deleteEdge(const int label_1, const int label_2) {
     neighbor_existed = false;
     for (list<Vertex>::iterator it=this->VertexArr.begin(); it != this->VertexArr.end(); ++it) {
         if ( (*it).label == label_2 ) {
-            cout << "DEBUG: vertex " << label_2 << " found" << endl;
+            //cout << "DEBUG: vertex " << label_2 << " found" << endl;
             vertex_existed = true;
 
             // update or add its neighbor
             for (list<Neighbor>::iterator it2=(*it).neighbors.begin(); it2 != (*it).neighbors.end(); ++it2) {
                 if ( (*it2).label == label_1 ) {
-                    cout << "DEBUG: neightbor " << label_1 << " found" << endl;
+                    //cout << "DEBUG: neightbor " << label_1 << " found" << endl;
                     neighbor_existed = true;
 
                     // remove the neighbor
@@ -176,7 +170,7 @@ void Implement::deleteVertex(const int label) {
     bool neighbor_existed = false;
     for (list<Vertex>::iterator it=this->VertexArr.begin(); it != this->VertexArr.end(); ++it) {
         if ( (*it).label == label ) {
-            cout << "DEBUG: vertex " << label << " found" << endl;
+            //cout << "DEBUG: vertex " << label << " found" << endl;
             vertex_existed = true;
 
             // remove the vertex
@@ -196,7 +190,7 @@ void Implement::deleteVertex(const int label) {
             // update or add its neighbor
             for (list<Neighbor>::iterator it2=(*it).neighbors.begin(); it2 != (*it).neighbors.end(); ++it2) {
                 if ( (*it2).label == label ) {
-                    cout << "DEBUG: neightbor " << label << " found" << endl;
+                    //cout << "DEBUG: neightbor " << label << " found" << endl;
                     neighbor_existed = true;
 
                     // remove the neighbor
@@ -222,7 +216,7 @@ int Implement::degree(const int label) {
     bool neighbor_existed = false;
     for (list<Vertex>::iterator it=this->VertexArr.begin(); it != this->VertexArr.end(); ++it) {
         if ( (*it).label == label ) {
-            cout << "DEBUG: vertex " << label << " found" << endl;
+            //cout << "DEBUG: vertex " << label << " found" << endl;
             vertex_existed = true;
 
             // return the degree
@@ -253,7 +247,7 @@ bool Implement::isExistPath(const int label_1, const int label_2) {
     for (list<Vertex>::iterator it=this->VertexArr.begin(); it != this->VertexArr.end(); ++it) {
         index++;
         if ( (*it).label == label_1 ) {
-            cout << "DEBUG: vertex " << label_1 << " found" << endl;
+            //cout << "DEBUG: vertex " << label_1 << " found" << endl;
             vertex_existed = true;
 
             visited[index] = true;
@@ -267,7 +261,7 @@ bool Implement::isExistPath(const int label_1, const int label_2) {
         while(!queue.empty()) {
             Vertex v = queue.front();
             queue.pop_front();
-            cout << "DEBUG: BFS output " << v.label << endl;
+            //cout << "DEBUG: BFS output " << v.label << endl;
 
             if (v.label == label_2) return true;
     
@@ -276,7 +270,7 @@ bool Implement::isExistPath(const int label_1, const int label_2) {
                 for (list<Vertex>::iterator it2=this->VertexArr.begin(); it2 != this->VertexArr.end(); ++it2) {
                     index++;
                     if ( (*it2).label == (*it).label ) {
-                        cout << "DEBUG: vertex found" << endl;
+                        //cout << "DEBUG: vertex found" << endl;
 
                         if(!visited[index]){
                             queue.push_back(*it2);
@@ -317,7 +311,7 @@ int Implement::number_of_component() {
         for (list<Vertex>::iterator it=this->VertexArr.begin(); it != this->VertexArr.end(); ++it) {
             index++;
             if (visited[index] == false) {
-                cout << "DEBUG: vertex found" << endl;
+                //cout << "DEBUG: vertex found" << endl;
                 vertex_existed = true;
     
                 visited[index] = true;
@@ -332,14 +326,14 @@ int Implement::number_of_component() {
             while(!queue.empty()) {
                 Vertex v = queue.front();
                 queue.pop_front();
-                cout << "DEBUG: BFS output " << v.label << endl;
+                //cout << "DEBUG: BFS output " << v.label << endl;
         
                 for (list<Neighbor>::iterator it=v.neighbors.begin(); it != v.neighbors.end(); ++it) {
                     index = -1;
                     for (list<Vertex>::iterator it2=this->VertexArr.begin(); it2 != this->VertexArr.end(); ++it2) {
                         index++;
                         if ( (*it2).label == (*it).label ) {
-                            cout << "DEBUG: vertex found" << endl;
+                            //cout << "DEBUG: vertex found" << endl;
     
                             if(!visited[index]){
                                 queue.push_back(*it2);
