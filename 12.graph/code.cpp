@@ -361,7 +361,70 @@ bool Implement::isExistCycle() {
 }
 
 void Implement::DFS(int label) {
-    // TODO
+    // Mark all the vertices as not visited
+    int n = this->VertexArr.size();
+    bool *visited = new bool[n];
+    for(int i=0; i<n; i++) visited[i] = false;
+    
+    // Create a stack for DFS
+    list<Vertex> stack;
+
+    // Mark the current node as visited and enqueue it
+    int index = -1;
+    bool vertex_existed = false;
+    for (list<Vertex>::iterator it=this->VertexArr.begin(); it != this->VertexArr.end(); ++it) {
+        index++;
+        if ( (*it).label == label ) {
+            //cout << "DEBUG: vertex " << label << " found" << endl;
+            vertex_existed = true;
+
+            stack.push_back(*it);
+
+            break;
+        }
+    }
+    if (vertex_existed) {
+
+        while(!stack.empty()) {
+            Vertex v = stack.back();
+            stack.pop_back();
+
+            index = -1;
+            for (list<Vertex>::iterator it=this->VertexArr.begin(); it != this->VertexArr.end(); ++it) {
+                index++;
+                if ( (*it).label == v.label ) {
+                    //cout << "DEBUG: vertex found" << endl;
+
+                    if(!visited[index]){
+                        cout << "DEBUG: DFS output " << v.label << endl;
+                        visited[index] = true;
+
+                        for(list<Neighbor>::iterator it2=v.neighbors.begin(); it2 != v.neighbors.end(); ++it2) {
+                            index = -1;
+                            for (list<Vertex>::iterator it3=this->VertexArr.begin(); it3 != this->VertexArr.end(); ++it3) {
+                                index++;
+                                if ((*it3).label == (*it2).label) {
+                                    //cout << "DEBUG: vertex found" << endl;
+
+                                    if (!visited[index]) {
+                                        stack.push_back(*it3);
+                                    }
+
+                                    break;
+                                }
+
+                            }
+                        }
+                    }
+
+                    break;
+                }
+            }
+          
+        }
+
+    }
+
 }
 
 void Implement::BFS(int label) {
