@@ -299,8 +299,66 @@ void Implement::deleteGraph() {
 }
 
 int Implement::number_of_component() {
-    // TODO
-    return 0;
+    int number = 0;
+
+    // Mark all the vertices as not visited
+    int n = this->VertexArr.size();
+    bool *visited = new bool[n];
+    for(int i=0; i<n; i++) visited[i] = false;
+    
+    // Create a queue for BFS
+    list<Vertex> queue;
+
+    while (true) {
+
+        // Mark the current node as visited and enqueue it
+        int index = -1;
+        bool vertex_existed = false;
+        for (list<Vertex>::iterator it=this->VertexArr.begin(); it != this->VertexArr.end(); ++it) {
+            index++;
+            if (visited[index] == false) {
+                cout << "DEBUG: vertex found" << endl;
+                vertex_existed = true;
+    
+                visited[index] = true;
+                queue.push_back(*it);
+    
+                break;
+            }
+        }
+        if (vertex_existed) {
+            number++;
+    
+            while(!queue.empty()) {
+                Vertex v = queue.front();
+                queue.pop_front();
+                cout << "DEBUG: BFS output " << v.label << endl;
+        
+                for (list<Neighbor>::iterator it=v.neighbors.begin(); it != v.neighbors.end(); ++it) {
+                    index = -1;
+                    for (list<Vertex>::iterator it2=this->VertexArr.begin(); it2 != this->VertexArr.end(); ++it2) {
+                        index++;
+                        if ( (*it2).label == (*it).label ) {
+                            cout << "DEBUG: vertex found" << endl;
+    
+                            if(!visited[index]){
+                                queue.push_back(*it2);
+                                visited[index] = true;
+                            }
+    
+                            break;
+                        }
+                    }
+                }
+            }
+        
+        }
+        else {
+            break;
+        }
+    }
+
+    return number;
 }
 
 bool Implement::isExistCycle() {
