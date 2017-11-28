@@ -7,3 +7,4 @@ REFERENCE:
 * http://blog.csdn.net/lskyne/article/details/10418823
 * http://larry850806.github.io/2016/06/06/STL1/
 * http://www.geeksforgeeks.org/breadth-first-traversal-for-a-graph/
+* http://www.geeksforgeeks.org/detect-cycle-undirected-graph/
