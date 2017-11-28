@@ -8,3 +8,4 @@ REFERENCE:
 * http://larry850806.github.io/2016/06/06/STL1/
 * http://www.geeksforgeeks.org/breadth-first-traversal-for-a-graph/
 * http://www.geeksforgeeks.org/detect-cycle-undirected-graph/
+* https://algorithmsandme.in/2014/06/12/graphs-detecting-cycle-in-undirected-graph/
