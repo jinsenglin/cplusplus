@@ -30,6 +30,16 @@ void tryTestCase(Implement &inst)
 				in >> label_1;
 				inst.deleteVertex(label_1);
 			}
+			else if( op == "BFS" )
+			{
+				in >> label_1;
+				inst.BFS(label_1);
+			}
+			else if( op == "DFS" )
+			{
+				in >> label_1;
+				inst.DFS(label_1);
+			}
 			else if( op == "degree" )
 			{
 				in >> label_1;
