@@ -366,8 +366,6 @@ bool Implement::isExistCycle() {
     // Create a stack for DFS
     list<Vertex> stack;
 
-    int parent_index = -1;
-    int current_index = -1;
     while (true) {
         // Mark the current node as visited and enqueue it
         int index = -1;
@@ -398,9 +396,6 @@ bool Implement::isExistCycle() {
                         if(!visited[index]){
                             cout << "DEBUG: DFS output " << v.label << endl;
                             visited[index] = true;
-
-                            // update current_index
-                            current_index = index;
     
                             for(list<Neighbor>::iterator it2=v.neighbors.begin(); it2 != v.neighbors.end(); ++it2) {
                                 index = -1;
@@ -413,14 +408,7 @@ bool Implement::isExistCycle() {
                                             stack.push_back(*it3);
                                         }
                                         else {
-                                            // check back edge
-                                            //cout << "DEBUG: (a) check back edge of " << (*it3).label << " when index = " << inex << " and parent_index = " << parent_index << endl;
-                                            if (index == parent_index) {
-                                                // do nothing
-                                            }
-                                            else {
-                                                return true;
-                                            }
+                                            cout << "DEBUG: (a) re-visited " << (*it3).label << endl;
                                         }
     
                                         break;
@@ -429,10 +417,9 @@ bool Implement::isExistCycle() {
                                 }
                             }
 
-                            // update parent_index
-                            parent_index = current_index;
-                            cout << "DEBUG: parent_index updated with new value = " << parent_index << endl;
-
+                        }
+                        else {
+                            cout << "DEBUG: (b) re-visited " << (*it).label << endl;
                         }
     
                         break;
