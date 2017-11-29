@@ -407,12 +407,20 @@ bool Implement::isExistCycle() {
                                         if (!visited[index]) {
                                             stack.push_back(*it3);
                                         }
+                                        else {
+                                            // TODO check back edge // TODO
+                                            cout << "DEBUG: (a) check back edge of " << (*it3).label << endl;
+                                        }
     
                                         break;
                                     }
     
                                 }
                             }
+                        }
+                        else {
+                            // TODO check back edge // remove this
+                            cout << "DEBUG: (b) check back edge of " << (*it).label << endl;
                         }
     
                         break;
