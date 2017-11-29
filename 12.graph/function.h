@@ -122,6 +122,9 @@ public:
 	bool isExistCycle();
     void DFS(int label);
     void BFS(int label);
+    bool isCyclicUtil(int v, bool visited[], int parent);
+    Vertex& getVertexByIndex(int i);
+    int indexOf(int label);
 };
 
 #endif

@@ -356,84 +356,62 @@ int Implement::number_of_component() {
 }
 
 bool Implement::isExistCycle() {
-    // TODO fix bug
+    // Mark all the vertices as not visited and not part of recursion
+    // stack
+    int V = this->VertexArr.size();
+    bool *visited = new bool[V];
+    for (int i = 0; i < V; i++)
+        visited[i] = false;
+ 
+    // Call the recursive helper function to detect cycle in different
+    // DFS trees
+    for (int u = 0; u < V; u++)
+        if (!visited[u]) // Don't recur for u if it is already visited
+          if (isCyclicUtil(u, visited, -1))
+             return true;
+ 
+    return false;
+}
 
-    // Mark all the vertices as not visited
-    int n = this->VertexArr.size();
-    bool *visited = new bool[n];
-    for(int i=0; i<n; i++) visited[i] = false;
-    
-    // Create a stack for DFS
-    list<Vertex> stack;
-
-    while (true) {
-        // Mark the current node as visited and enqueue it
-        int index = -1;
-        bool vertex_existed = false;
-        for (list<Vertex>::iterator it=this->VertexArr.begin(); it != this->VertexArr.end(); ++it) {
-            index++;
-            if ( visited[index] == false ) {
-                //cout << "DEBUG: vertex " << label << " found" << endl;
-                vertex_existed = true;
-    
-                stack.push_back(*it);
-    
-                break;
-            }
-        }
-        if (vertex_existed) {
-    
-            while(!stack.empty()) {
-                Vertex v = stack.back();
-                stack.pop_back();
-    
-                index = -1;
-                for (list<Vertex>::iterator it=this->VertexArr.begin(); it != this->VertexArr.end(); ++it) {
-                    index++;
-                    if ( (*it).label == v.label ) {
-                        //cout << "DEBUG: vertex found" << endl;
-    
-                        if(!visited[index]){
-                            cout << "DEBUG: DFS output " << v.label << endl;
-                            visited[index] = true;
-    
-                            for(list<Neighbor>::iterator it2=v.neighbors.begin(); it2 != v.neighbors.end(); ++it2) {
-                                index = -1;
-                                for (list<Vertex>::iterator it3=this->VertexArr.begin(); it3 != this->VertexArr.end(); ++it3) {
-                                    index++;
-                                    if ((*it3).label == (*it2).label) {
-                                        //cout << "DEBUG: vertex found" << endl;
-    
-                                        if (!visited[index]) {
-                                            stack.push_back(*it3);
-                                        }
-                                        else {
-                                            cout << "DEBUG: (a) re-visited " << (*it3).label << endl;
-                                        }
-    
-                                        break;
-                                    }
-    
-                                }
-                            }
-
-                        }
-                        else {
-                            cout << "DEBUG: (b) re-visited " << (*it).label << endl;
-                        }
-    
-                        break;
-                    }
-                }
-              
-            }
-    
-        }
-        else {
-            break;
-        }
+Vertex& Implement::getVertexByIndex(int i) {
+    int index = -1;
+    for (list<Vertex>::iterator it=this->VertexArr.begin(); it != this->VertexArr.end(); ++it) {
+        index++;
+        if (index == i) return *it;
     }
+}
 
+int Implement::indexOf(int label) {
+    int index = -1;
+    for (list<Vertex>::iterator it=this->VertexArr.begin(); it != this->VertexArr.end(); ++it) {
+        index++;
+        if ((*it).label == label) return index;
+    }
+}
+
+bool Implement::isCyclicUtil(int v, bool visited[], int parent) {
+    // Mark the current node as visited
+    visited[v] = true;
+ 
+    Vertex vertex = this->getVertexByIndex(v);
+
+    // Recur for all the vertices adjacent to this vertex
+    for (list<Neighbor>::iterator it=vertex.neighbors.begin(); it != vertex.neighbors.end(); ++it)
+    {
+        int i = this->indexOf((*it).label);
+
+        // If an adjacent is not visited, then recur for that adjacent
+        if (!visited[i])
+        {
+           if (isCyclicUtil(i, visited, v))
+              return true;
+        }
+ 
+        // If an adjacent is visited and not parent of current vertex,
+        // then there is a cycle.
+        else if (i != parent)
+           return true;
+    }
     return false;
 }
 
@@ -556,44 +534,4 @@ void Implement::BFS(int label) {
     }
 }
 
-    // this->VertexArr; // its type is std::list<Vertex>
-    // this->VertexArr.front() // its type is Vertex
-    // this->VertexArr.front().label // its type is int
-    // this->VertexArr.front().v_degree // its type is int
-    // this->VertexArr.front().neighbors // its type is std::list<Neighbor>
-    // this->VertexArr.front().neighbors.front() // its type is Neighbor
-    // this->VertexArr.front().neighbors.front().label // its type is int
-    // this->VertexArr.front().neighbors.front().weight // its type is int
 
-    /*cout << "DEBUG: stack" << endl;
-    stack<int> s;
-    s.push(10);
-    s.push(20);
-    for(int i=0 ; i<s.size() ; i++){
-        cout << s.top() << endl;
-        s.pop();
-    }
-
-    cout << "DEBUG: queue" << endl;
-    queue<int> q;
-    q.push(10);
-    q.push(20);
-    for(int i=0 ; i<q.size() ; i++){
-        cout << q.front() << endl;
-        cout << q.back() << endl;
-        q.pop();
-    }
-
-    // begin: Return iterator to beginning
-    // end: Return iterator to end
-    // erase/remove: Delete elements
-    // push_back: Add element at the end
-    cout << "DEBUG: list" << endl;
-    list<int> l;
-    l.push_back(10);
-    l.push_back(20);
-    for(int i=0 ; i<l.size() ; i++){
-        cout << l.front() << endl;
-        cout << l.back() << endl;
-        l.pop_back();
-    }*/
