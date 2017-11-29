@@ -356,7 +356,7 @@ int Implement::number_of_component() {
 }
 
 bool Implement::isExistCycle() {
-    bool existed = false;
+    // TODO fix bug
 
     // Mark all the vertices as not visited
     int n = this->VertexArr.size();
@@ -366,6 +366,8 @@ bool Implement::isExistCycle() {
     // Create a stack for DFS
     list<Vertex> stack;
 
+    int parent_index = -1;
+    int current_index = -1;
     while (true) {
         // Mark the current node as visited and enqueue it
         int index = -1;
@@ -396,6 +398,9 @@ bool Implement::isExistCycle() {
                         if(!visited[index]){
                             cout << "DEBUG: DFS output " << v.label << endl;
                             visited[index] = true;
+
+                            // update current_index
+                            current_index = index;
     
                             for(list<Neighbor>::iterator it2=v.neighbors.begin(); it2 != v.neighbors.end(); ++it2) {
                                 index = -1;
@@ -408,8 +413,14 @@ bool Implement::isExistCycle() {
                                             stack.push_back(*it3);
                                         }
                                         else {
-                                            // TODO check back edge // TODO
-                                            cout << "DEBUG: (a) check back edge of " << (*it3).label << endl;
+                                            // check back edge
+                                            //cout << "DEBUG: (a) check back edge of " << (*it3).label << " when index = " << inex << " and parent_index = " << parent_index << endl;
+                                            if (index == parent_index) {
+                                                // do nothing
+                                            }
+                                            else {
+                                                return true;
+                                            }
                                         }
     
                                         break;
@@ -417,10 +428,11 @@ bool Implement::isExistCycle() {
     
                                 }
                             }
-                        }
-                        else {
-                            // TODO check back edge // remove this
-                            cout << "DEBUG: (b) check back edge of " << (*it).label << endl;
+
+                            // update parent_index
+                            parent_index = current_index;
+                            cout << "DEBUG: parent_index updated with new value = " << parent_index << endl;
+
                         }
     
                         break;
@@ -435,7 +447,7 @@ bool Implement::isExistCycle() {
         }
     }
 
-    return existed;
+    return false;
 }
 
 void Implement::DFS(int label) {
