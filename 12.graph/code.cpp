@@ -355,6 +355,10 @@ int Implement::number_of_component() {
     return number;
 }
 
+Vertex& getVertexByIndex(int i);
+int indexOf(int label);
+bool isCyclicUtil(Implement& graph, int v, bool visited[], int parent);
+
 bool Implement::isExistCycle() {
     // Mark all the vertices as not visited and not part of recursion
     // stack
@@ -367,43 +371,43 @@ bool Implement::isExistCycle() {
     // DFS trees
     for (int u = 0; u < V; u++)
         if (!visited[u]) // Don't recur for u if it is already visited
-          if (isCyclicUtil(u, visited, -1))
+          if (isCyclicUtil((*this), u, visited, -1))
              return true;
  
     return false;
 }
 
-Vertex& Implement::getVertexByIndex(int i) {
+Vertex& getVertexByIndex(Implement& graph, int i) {
     int index = -1;
-    for (list<Vertex>::iterator it=this->VertexArr.begin(); it != this->VertexArr.end(); ++it) {
+    for (list<Vertex>::iterator it=graph.VertexArr.begin(); it != graph.VertexArr.end(); ++it) {
         index++;
         if (index == i) return *it;
     }
 }
 
-int Implement::indexOf(int label) {
+int indexOf(Implement& graph, int label) {
     int index = -1;
-    for (list<Vertex>::iterator it=this->VertexArr.begin(); it != this->VertexArr.end(); ++it) {
+    for (list<Vertex>::iterator it=graph.VertexArr.begin(); it != graph.VertexArr.end(); ++it) {
         index++;
         if ((*it).label == label) return index;
     }
 }
 
-bool Implement::isCyclicUtil(int v, bool visited[], int parent) {
+bool isCyclicUtil(Implement& graph, int v, bool visited[], int parent) {
     // Mark the current node as visited
     visited[v] = true;
  
-    Vertex vertex = this->getVertexByIndex(v);
+    Vertex vertex = getVertexByIndex(graph, v);
 
     // Recur for all the vertices adjacent to this vertex
     for (list<Neighbor>::iterator it=vertex.neighbors.begin(); it != vertex.neighbors.end(); ++it)
     {
-        int i = this->indexOf((*it).label);
+        int i = indexOf(graph, (*it).label);
 
         // If an adjacent is not visited, then recur for that adjacent
         if (!visited[i])
         {
-           if (isCyclicUtil(i, visited, v))
+           if (isCyclicUtil(graph, i, visited, v))
               return true;
         }
  
