@@ -27,8 +27,15 @@ Sample Output
 21
 */
 
+int recursive_method(int accum, int X) {
+    if (accum > X) return 0;
+    else if (accum == X) return 1;
+    else return recursive_method(accum+1, X) + recursive_method(accum+2, X); // i.e., accum < X
+}
+
 void fn(int X) {
-    printf("DEBUG: X = %d\n", X);
+    int ans = recursive_method(0, X);
+    printf("%d\n", ans);
 }
 
 int main() {
