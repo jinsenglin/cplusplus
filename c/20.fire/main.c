@@ -25,9 +25,9 @@ Alive!
 */
 
 char map[1000][1000];
-int y_max, x_max;
+short y_max, x_max;
 
-bool alive(int x, int y, char d) {
+bool alive(short x, short y, char d) {
     /*
         (x, y) -> (x, y-1) means that go north
         (x, y) -> (x, y+1) means that go south
@@ -61,9 +61,9 @@ void dump(char map[][1000], int m, int n) {
 }
 
 int main() {
-    scanf(" %d %d", &y_max, &x_max);
+    scanf(" %hd %hd", &y_max, &x_max);
 
-    int e_x, e_y;
+    short e_x, e_y;
     for (int i=0; i<y_max; i++) {
         for( int j=0; j<x_max; j++) {
             scanf(" %c", &map[i][j]);
