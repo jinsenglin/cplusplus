@@ -24,8 +24,28 @@ Sample Output
 Alive!
 */
 
-bool alive(char map[][1000], int m, int n, int x, int y, char d) {
-    return true;
+bool alive(char map[][1000], int y_max, int x_max, int x, int y, char d) {
+    /*
+        (x, y) -> (x, y-1) means that go north
+        (x, y) -> (x, y+1) means that go south
+        (x, y) -> (x-1, y) means that go west
+        (x, y) -> (x+1, y) means that go east
+    */
+
+    if ( x == -1 || y == -1 || x == x_max || y == y_max ) return false;
+    else { 
+        char c = map[y][x];
+
+        if ( c == 'e' ) return alive(map, y_max, x_max, x, y-1, 'n') || alive(map, y_max, x_max, x, y+1, 's') || alive(map, y_max, x_max, x-1, y, 'w') || alive(map, y_max, x_max, x+1, y, 'e');
+        else if ( c == '^' ) return false;
+        else if ( c == '~') return true;
+        else { // i.e., c == '.'
+            if ( d == 'n' ) return alive(map, y_max, x_max, x, y-1, 'n') || alive(map, y_max, x_max, x-1, y, 'w') || alive(map, y_max, x_max, x+1, y, 'e');
+            else if ( d == 's' ) return alive(map, y_max, x_max, x, y+1, 's') || alive(map, y_max, x_max, x-1, y, 'w') || alive(map, y_max, x_max, x+1, y, 'e');
+            else if ( d == 'w' ) return alive(map, y_max, x_max, x, y-1, 'n') || alive(map, y_max, x_max, x, y+1, 's') || alive(map, y_max, x_max, x-1, y, 'w');
+            else return alive(map, y_max, x_max, x, y-1, 'n') || alive(map, y_max, x_max, x, y+1, 's') || alive(map, y_max, x_max, x+1, y, 'e');
+        }
+    }
 }
 
 void dump(char map[][1000], int m, int n) {
