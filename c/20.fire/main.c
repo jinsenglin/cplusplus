@@ -25,8 +25,9 @@ Alive!
 */
 
 char map[1000][1000];
+int y_max, x_max;
 
-bool alive(int y_max, int x_max, int x, int y, char d) {
+bool alive(int x, int y, char d) {
     /*
         (x, y) -> (x, y-1) means that go north
         (x, y) -> (x, y+1) means that go south
@@ -38,14 +39,14 @@ bool alive(int y_max, int x_max, int x, int y, char d) {
     else { 
         char c = map[y][x];
 
-        if ( c == 'e' ) return alive(y_max, x_max, x, y-1, 'n') || alive(y_max, x_max, x, y+1, 's') || alive(y_max, x_max, x-1, y, 'w') || alive(y_max, x_max, x+1, y, 'e');
+        if ( c == 'e' ) return alive(x, y-1, 'n') || alive(x, y+1, 's') || alive(x-1, y, 'w') || alive(x+1, y, 'e');
         else if ( c == '^' ) return false;
         else if ( c == '~') return true;
         else { // i.e., c == '.'
-            if ( d == 'n' ) return alive(y_max, x_max, x, y-1, 'n') || alive(y_max, x_max, x-1, y, 'w') || alive(y_max, x_max, x+1, y, 'e');
-            else if ( d == 's' ) return alive(y_max, x_max, x, y+1, 's') || alive(y_max, x_max, x-1, y, 'w') || alive(y_max, x_max, x+1, y, 'e');
-            else if ( d == 'w' ) return alive(y_max, x_max, x, y-1, 'n') || alive(y_max, x_max, x, y+1, 's') || alive(y_max, x_max, x-1, y, 'w');
-            else return alive(y_max, x_max, x, y-1, 'n') || alive(y_max, x_max, x, y+1, 's') || alive(y_max, x_max, x+1, y, 'e');
+            if ( d == 'n' ) return alive(x, y-1, 'n') || alive(x-1, y, 'w') || alive(x+1, y, 'e');
+            else if ( d == 's' ) return alive(x, y+1, 's') || alive(x-1, y, 'w') || alive(x+1, y, 'e');
+            else if ( d == 'w' ) return alive(x, y-1, 'n') || alive(x, y+1, 's') || alive(x-1, y, 'w');
+            else return alive(x, y-1, 'n') || alive(x, y+1, 's') || alive(x+1, y, 'e');
         }
     }
 }
@@ -60,12 +61,11 @@ void dump(char map[][1000], int m, int n) {
 }
 
 int main() {
-    int m, n;
-    scanf(" %d %d", &m, &n);
+    scanf(" %d %d", &y_max, &x_max);
 
     int e_x, e_y;
-    for (int i=0; i<m; i++) {
-        for( int j=0; j<n; j++) {
+    for (int i=0; i<y_max; i++) {
+        for( int j=0; j<x_max; j++) {
             scanf(" %c", &map[i][j]);
             if (map[i][j] == 'e') {
                 e_y = i;
@@ -75,7 +75,7 @@ int main() {
     }
     //dump(map, m, n);
 
-    if (alive(m, n, e_x, e_y, '0')) {
+    if (alive(e_x, e_y, '0')) {
         printf("Alive!\n");
     }
     else {
