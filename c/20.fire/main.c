@@ -1,0 +1,63 @@
+#include <stdio.h>
+#include <stdbool.h>
+
+/*
+Input
+The first line contains two integer m, n, representing the size of the map eccioa gives to you.
+
+The next m lines contain n characters, either 'e', '.', '^', '~', representing the status of position aij.
+
+It is guaranteed that :
+
+1 ≤ m, n ≤ 1000
+
+Output
+If eccioa can stay alive, please print "Alive!", otherwise please print "Dead!".
+
+Sample Input
+3 4
+~~..
+^^^.
+e...
+
+Sample Output
+Alive!
+*/
+
+bool alive(char map[][1000], int m, int n, int x, int y, char d) {
+    return true;
+}
+
+void dump(char map[][1000], int m, int n) {
+    for (int i=0; i<m; i++) {
+        for (int j=0; j<n; j++) {
+            printf("%c", map[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    int m, n;
+    scanf(" %d %d", &m, &n);
+
+    int e_x, e_y;
+    char map[1000][1000];
+    for (int i=0; i<m; i++) {
+        for( int j=0; j<n; j++) {
+            scanf(" %c", &map[i][j]);
+            if (map[i][j] == 'e') {
+                e_y = i;
+                e_x = j;
+            }
+        }
+    }
+    //dump(map, m, n);
+
+    if (alive(map, m, n, e_x, e_y, '0')) {
+        printf("Alive!\n");
+    }
+    else {
+        printf("Dead!\n");
+    }
+}
