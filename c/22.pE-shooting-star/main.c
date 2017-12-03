@@ -51,5 +51,47 @@ Sample Output 2
 -------
 */
 
+char map[22][40] = {' '};
+int C, F, H;
+int S;
+int L = 40;
+char D;
+
+void display() {
+    for (int i=0; i<H+2; i++) {
+        for (int j=0; j<L; j++) {
+            printf("%c", map[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+void paint_shoot(int y, int x, char d) {
+    map[y][x] = '*';
+}
+
+void paint_map() {
+   for (int i=0; i<C; i++) map[0][i] = '-';
+   for (int i=0; i<F; i++) map[H+1][i] = '-';
+   map[S][0] = '*';
+}
+
+void load() {
+    scanf(" %d %d %d", &C, &F, &H);
+    scanf(" %d", &S);
+    scanf(" %c", &D);
+}
+
 int main() {
+
+    /*
+    ceil  starts from (0, 0)    ends to (0, C-1);
+    shoot starts from (S, 0)    ends to (?, L-1);
+    floor starts from (H+1, 0)  ends to (H+1, F-1);
+    */
+
+    load();
+    paint_map();
+    paint_shoot(S, 0, D);
+    display();
 }
