@@ -138,6 +138,16 @@ void paint_shoot(int origin_y, int origin_x, char d) {
 
     //printf("DEBUG: next paint_shoot(%d, %d, %c)\n", y, x, next_d);
     if (!stopped) paint_shoot(y, x, next_d);
+    else {
+        //printf("DEBUG: stopped y=%d x=%d d=%c\n", y, x, d);
+
+        if (d=='u') {
+            map[y-1][x+1] = '*';
+        }
+        else { // i.e., (d == 'd')
+            map[y+1][x+1] = '*';
+        }
+    }
 }
 
 void paint_map() {
