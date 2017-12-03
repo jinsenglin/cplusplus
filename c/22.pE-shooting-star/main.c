@@ -52,7 +52,7 @@ Sample Output 2
 -------
 */
 
-char map[22][40] = {' '};
+char map[22][40];
 int C, F, H;
 int S;
 int L = 40;
@@ -68,29 +68,36 @@ void display() {
 }
 
 bool out_of_bound(int y, int x) {
-    return (y == 0 && x>C) || (y == (H+1) && c>F)
+    printf("DEBUG: map[%d][%d] out_of_bound? %d\n", y, x, (y == 0 && x>=C) || (y == (H+1) && x>=F));
+    return (y == 0 && x>=C) || (y == (H+1) && x>=F);
 }
 
 bool the_ceil(int y, int x) {
+    printf("DEBUG: map[%d][%d] the_ceil? %d\n", y, x, (y == 0 && x<C));
     return (y == 0 && x<C);
 }
 
 bool the_floor(int y, int x) {
+    printf("DEBUG: map[%d][%d] the_floor? %d\n", y, x, (y == (H+1) && x<F));
     return (y == (H+1) && x<F);
 } 
 
 void paint_shoot(int origin_y, int origin_x, char d) {
+    printf("DEBUG: paint_shoot(%d, %d, %c)\n", origin_y, origin_x, d);
     int y = origin_y;
     int x = origin_x;
     char next_d;
+    bool stopped;
 
     map[y][x] = '*';
     if ( d == 'u' ) {
+        printf("DEBUG: shoot up\n");
         while (true) {
             y--;
             x++;
             if (!the_ceil(y, x) && !out_of_bound(y, x)) map[y][x] = '*';
             else {
+                stopped = out_of_bound(y, x);
                 y++;
                 x--;
                 break;
@@ -99,11 +106,13 @@ void paint_shoot(int origin_y, int origin_x, char d) {
         next_d = 'd';
     }
     else { // i.e., (d == 'd')
+        printf("DEBUG: shoot down\n");
         while (true) {
             y++;
             x++;
             if (!the_floor(y, x) && !out_of_bound(y, x)) map[y][x] = '*';
             else {
+                stopped = out_of_bound(y, x);
                 y--;
                 x--;
                 break;
@@ -112,13 +121,15 @@ void paint_shoot(int origin_y, int origin_x, char d) {
         next_d = 'u';
     }
 
-    if (!out_of_bound(y, x)) paint_shoot(y, x, next_d);
+    printf("DEBUG: next paint_shoot(%d, %d, %c)\n", y, x, next_d);
+    if (!stopped) paint_shoot(y, x, next_d);
 }
 
 void paint_map() {
-   for (int i=0; i<C; i++) map[0][i] = '-';
-   for (int i=0; i<F; i++) map[H+1][i] = '-';
-   map[S][0] = '*';
+    for (int i=0; i<H+2; i++) for(int j=0; j<L; j++) map[i][j] = ' ';
+    for (int i=0; i<C; i++) map[0][i] = '-';
+    for (int i=0; i<F; i++) map[H+1][i] = '-';
+    map[S][0] = '*';
 }
 
 void load() {
