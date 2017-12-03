@@ -68,15 +68,15 @@ void display() {
 }
 
 bool out_of_bound(int y, int x) {
-    return true;
+    return (y == 0 && x>C) || (y == (H+1) && c>F)
 }
 
 bool the_ceil(int y, int x) {
-    return true;
+    return (y == 0 && x<C);
 }
 
 bool the_floor(int y, int x) {
-    return true;
+    return (y == (H+1) && x<F);
 } 
 
 void paint_shoot(int origin_y, int origin_x, char d) {
