@@ -147,6 +147,8 @@ void paint_shoot(int origin_y, int origin_x, char d) {
         else { // i.e., (d == 'd')
             map[y+1][x+1] = '*';
         }
+        L = x+2;
+        //printf("DEBUG: L=%d\n", L);
     }
 }
 
