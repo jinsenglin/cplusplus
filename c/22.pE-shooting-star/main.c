@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdbool.h>
 
 /*
 Input
@@ -66,8 +67,52 @@ void display() {
     }
 }
 
-void paint_shoot(int y, int x, char d) {
+bool out_of_bound(int y, int x) {
+    return true;
+}
+
+bool the_ceil(int y, int x) {
+    return true;
+}
+
+bool the_floor(int y, int x) {
+    return true;
+} 
+
+void paint_shoot(int origin_y, int origin_x, char d) {
+    int y = origin_y;
+    int x = origin_x;
+    char next_d;
+
     map[y][x] = '*';
+    if ( d == 'u' ) {
+        while (true) {
+            y--;
+            x++;
+            if (!the_ceil(y, x) && !out_of_bound(y, x)) map[y][x] = '*';
+            else {
+                y++;
+                x--;
+                break;
+            }
+        }
+        next_d = 'd';
+    }
+    else { // i.e., (d == 'd')
+        while (true) {
+            y++;
+            x++;
+            if (!the_floor(y, x) && !out_of_bound(y, x)) map[y][x] = '*';
+            else {
+                y--;
+                x--;
+                break;
+            }
+        }
+        next_d = 'u';
+    }
+
+    if (!out_of_bound(y, x)) paint_shoot(y, x, next_d);
 }
 
 void paint_map() {
