@@ -58,6 +58,28 @@ int S;
 int L = 40;
 char D;
 
+int maxOfCFL() {
+    if (C >= F) {
+        if (C >= L) {
+            return C;
+        }
+        else {
+            // i.e. C < L
+            return L;
+        }
+    }
+    else {
+        // i.e. C < F
+        if (F >= L) {
+            return F;
+        }
+        else {
+            // i.e. F < L
+            return L;
+        }
+    }
+}
+
 void display() {
     for (int i=0; i<H+2; i++) {
         for (int j=0; j<L; j++) {
