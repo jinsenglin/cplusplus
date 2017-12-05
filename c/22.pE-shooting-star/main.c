@@ -81,8 +81,10 @@ int maxOfCFL() {
 }
 
 void display() {
+    int max = maxOfCFL();
+
     for (int i=0; i<H+2; i++) {
-        for (int j=0; j<L; j++) {
+        for (int j=0; j<max; j++) {
             printf("%c", map[i][j]);
         }
         printf("\n");
