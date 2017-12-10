@@ -25,5 +25,14 @@ int main() {
     // aseert: false i.e. 0
     cout << "40 vs. 3 assert false: " << current_smaller_than_next(40, 3, 0) << endl;
 
+    // test case: 35 vs. 351
+    // aseert: false i.e. 0
+    cout << "35 vs. 351 assert false: " << current_smaller_than_next(35, 351, 0) << endl;
+
+    // test case: 35 vs. 354
+    // aseert: true i.e. 0
+    cout << "35 vs. 354 assert true: " << current_smaller_than_next(35, 354, 0) << endl;
+
+
     return 0; 
 }
