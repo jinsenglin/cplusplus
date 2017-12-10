@@ -48,7 +48,7 @@ int main() {
     cout << "35 vs. 351 assert false: " << current_smaller_than_next(35, 351) << endl;
 
     // test case: 35 vs. 354
-    // aseert: true i.e. 0
+    // aseert: true i.e. 1
     cout << "35 vs. 354 assert true: " << current_smaller_than_next(35, 354) << endl;
 
     // test case: 35 vs. 35351
@@ -56,7 +56,7 @@ int main() {
     cout << "35 vs. 35351 assert false: " << current_smaller_than_next(35, 35351) << endl;
 
     // test case: 35 vs. 35354
-    // aseert: true i.e. 0
+    // aseert: true i.e. 1
     cout << "35 vs. 35354 assert true: " << current_smaller_than_next(35, 35354) << endl;
 
     // test case: 35 vs. 35353
