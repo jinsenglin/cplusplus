@@ -138,59 +138,15 @@ int rule_switch_two(char *b, char *c) {
 }
 
 void compare(char *b, char *c) {
-    // one_more + 
-    int rule_one = rule_one_more(b, c);
-    int rule_two = rule_one_less(b, c);
-    int rule_three = rule_one_wrong(b, c);
-    int rule_four = rule_switch_two(b, c);
-    // printf("%d\n", rule_one);
-    // printf("%d\n", rule_two);
-    // printf("%d\n", rule_three);
-    // printf("%d\n", rule_four);
-    if ( rule_one + rule_two + rule_three + rule_four == 1) printf("Yes\n");    
+    // case: 1232 232 --> typo (failed)
+    int rule1 = rule_one_more(b, c);
+    int rule2 = rule_one_less(b, c);
+    int rule3 = rule_one_wrong(b, c);
+    int rule4 = rule_switch_two(b, c);
+    printf("DEBUG: one_more=%d, one_less=%d, one_wrong=%d, two_swtich=%d\n", rule1, rule2, rule3, rule4);
+    if ( rule1 + rule2 + rule3 + rule4 == 1) printf("Yes\n");    
     else printf("No\n");
-  
-    /*
-    int same_lenth = 0;
-    // (1) Niflheimr accidentally types one more character.
-    // (2) Niflheimr accidentally forgets to type one character.
-    if(strlen(b) != strlen(c)) {
-      printf("Yes\n");
-      same_lenth = 1;
-    }
-    // if lenth is the same
-    // (3) Niflheimr accidentally types one wrong character.
-    if(same_lenth == 0) {
-      int count = 0;
-      
-      for(int j=0; j<strlen(b); j++){
-        if(b[j] != c[j]) count++;
-      }
-
-      // printf("%d\n", count);
-      if (count == 1) {
-        printf("Yes\n");
-      } else if(count == 2){
-        int flag = 0;
-        // (4) Niflheimr accidentally switches two different adjacent characters.
-        for(int j=0; j<strlen(b); j++){
-          if(b[j] == c[j+1] && b[j+1] == c[j]) {
-            // printf("Yes\n");
-            flag = 1;
-          }
-        }
-
-        if(flag == 1 ) {
-          printf("Yes\n");
-        } else {
-          printf("No\n");
-        }
-
-      } else if (count == 0){
-        printf("No\n");
-      } else printf("No\n");
-    }*/
-}
+  }
 
 void analysis(char *a) {
     //dump(a);
@@ -217,7 +173,6 @@ void analysis(char *a) {
 }
 
 int main(){
-// case: nthu nhtuu 
   int tcnum;
   scanf("%d\n", &tcnum);
   for(int i=0; i<tcnum; i++) {
