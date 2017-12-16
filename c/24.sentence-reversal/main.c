@@ -131,20 +131,6 @@ int main(void)
   for(int i=0; i<10; i++){
     if(fgets(a, 99, stdin) != NULL) {
       if(strlen(a) > 1){
-        // update aa
-        //
-        // e.g.,
-        //
-        // if a = ' xx y zz '
-        // then aa = 'xx y zz'
-        //
-        // if a = 'xx y  zz'
-        // then aa = 'xx y zz'
-        //
-        // if a = 'xx  y  zz'
-        // then aa = 'xx y zz'
-        //
-
         a[strlen(a)-1] = 32;
         a[strlen(a)] = 0;
         sentence_reversal(a);
@@ -155,48 +141,6 @@ int main(void)
         printf("\n");
       }
     }
-
-    
-    /*
-    if(fgets(a, 99, stdin) != NULL) {
-      // Also, whitespaces may appear in the front or in the back of the sentence.
-      // After modification, each word is separated by only one whitespace.  
-      if(strlen(a) > 1){
-        // _this is => is this__
-        if(a[0] == ' '){
-          for(int i=0; i<strlen(a); i++){
-            a[i] = a[i+1];
-          }
-        }
-        
-        a[strlen(a)-1] = ' ';
-        sentence_reversal(a);
-  
-
-        // this is_ => _is this_
-        if(a[0] == ' '){
-          for(int i=0; i<strlen(a); i++){
-            a[i] = a[i+1];
-          }
-        }
-        
-        // check_if_two_blank(a, 0);
-
-        for(int i=0; i<strlen(a)-1; i++){
-          printf("%c", a[i]);
-        }
-        printf("\n");
-
-      }
-      //if word == '\n'
-      else {
-        printf("\n");
-      }     
-    }
-    //if no word
-    else {
-      printf("\n");
-    }*/
   }
 
   return 0;
