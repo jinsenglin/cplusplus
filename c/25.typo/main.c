@@ -132,13 +132,17 @@ int rule_switch_two(char *b, char *c) {
         for(int i=0; i<strlen(b); i++){
           if (b[i] == c[i]) continue;
           else {
-              if (!found) {
+              if (!found && i != strlen(b)-1) {
                   if (b[i] == c[i+1] && b[i+1] == c[i]) {
-                      result = true; found = true;
+//                      printf("DEBUG: found\n");
+                      result = true; found = true; i++;
                   }
                   else break;
               }
-              else {result = false; break;}
+              else {
+//                  printf("DEBUG: false\n");
+                  result = false; break;
+              }
           }
         }
     }
@@ -153,7 +157,9 @@ void compare(char *b, char *c) {
     int rule3 = rule_one_wrong(b, c);
     int rule4 = rule_switch_two(b, c);
     //printf("DEBUG: one_more=%d, one_less=%d, one_wrong=%d, two_swtich=%d\n", rule1, rule2, rule3, rule4);
-    if ( rule1 + rule2 + rule3 + rule4 == 1) printf("Yes\n");    
+    
+    //if ( rule1 + rule2 + rule3 + rule4 == 1) printf("Yes\n");    
+    if ( rule1 || rule2 || rule3 || rule4) printf("Yes\n");    
     else printf("No\n");
   }
 
