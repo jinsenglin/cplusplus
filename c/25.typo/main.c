@@ -108,38 +108,42 @@ int rule_one_less(char *b, char *c) {
 }
 // (3) Niflheimr accidentally types one wrong character.
 int rule_one_wrong(char *b, char *c) {
-    bool result = true;
+    bool result = false;
 
     if(strlen(b) == strlen(c)){
         int count = 0;
         for(int i=0; i<strlen(b); i++){
             if(b[i] != c[i]) {
-                if (count == 0) count = 1;
+                if (count == 0) {count = 1; result = true;}
                 else {result = false; break;}
             }
       }
     }
-    else result = false;
 
     return result;
 }
 // (4) Niflheimr accidentally switches two different adjacent characters.
 int rule_switch_two(char *b, char *c) {
-  // (4) Niflheimr accidentally switches two different adjacent characters.
+    bool result = false;
+
     if (strlen(b) == strlen(c)) {
-      for(int j=0; j<strlen(b); j++){
-        if(b[j] == c[j+1] && b[j+1] == c[j]) {
-          return 1;
+
+        bool found = false;
+        for(int i=0; i<strlen(b); i++){
+          if (b[i] == c[i]) continue;
+          else {
+              if (!found) {
+                  if (b[i] == c[i+1] && b[i+1] == c[i]) {
+                      result = true; found = true;
+                  }
+                  else break;
+              }
+              else {result = false; break;}
+          }
         }
-      }
-    
-      for(int j=0; j<strlen(c); j++){
-        if(b[j] == c[j+1] && b[j+1] == c[j]) {
-          return 1;
-        }
-      }
     }
-  return 0;
+
+    return result;
 }
 
 void compare(char *b, char *c) {
@@ -148,7 +152,7 @@ void compare(char *b, char *c) {
     int rule2 = rule_one_less(b, c);
     int rule3 = rule_one_wrong(b, c);
     int rule4 = rule_switch_two(b, c);
-    printf("DEBUG: one_more=%d, one_less=%d, one_wrong=%d, two_swtich=%d\n", rule1, rule2, rule3, rule4);
+    //printf("DEBUG: one_more=%d, one_less=%d, one_wrong=%d, two_swtich=%d\n", rule1, rule2, rule3, rule4);
     if ( rule1 + rule2 + rule3 + rule4 == 1) printf("Yes\n");    
     else printf("No\n");
   }
