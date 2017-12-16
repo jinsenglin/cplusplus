@@ -108,17 +108,20 @@ int rule_one_less(char *b, char *c) {
 }
 // (3) Niflheimr accidentally types one wrong character.
 int rule_one_wrong(char *b, char *c) {
-  int count = 0;
-  if(strlen(b) == strlen(c)){
-    for(int j=0; j<strlen(b); j++){
-        if(b[j] != c[j]) count++;
+    bool result = true;
+
+    if(strlen(b) == strlen(c)){
+        int count = 0;
+        for(int i=0; i<strlen(b); i++){
+            if(b[i] != c[i]) {
+                if (count == 0) count = 1;
+                else {result = false; break;}
+            }
+      }
     }
-    if (count == 1) {
-      return 1;
-    }
-    else return 0; 
-  }
-  else return 0;
+    else result = false;
+
+    return result;
 }
 // (4) Niflheimr accidentally switches two different adjacent characters.
 int rule_switch_two(char *b, char *c) {
