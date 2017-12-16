@@ -83,6 +83,48 @@ void check_if_two_blank(char *a, int start)
     }
 }
 
+void dump(char *a) {
+    // method 1
+    /*
+    for(int i=0; i<strlen(a); i++){
+        printf("%c", a[i]);
+    }
+    printf("\n");*/
+
+    // method 2
+    /*
+    for(int i=0; i<strlen(a); i++){
+        printf("%d ", a[i]);
+    }
+    printf("\n");*/
+
+    // method 3
+    bool first_word = true;
+    bool wording = false;
+    int sentence_length = strlen(a);
+    for (int j=0; j<sentence_length; j++) {
+      if (a[j] == ' ') {
+        wording = false;
+      }
+      else {
+        // i.e. a[i] != ' '
+
+        if (!wording) {
+          if (first_word) {
+            first_word = false;
+          }
+          else {
+            printf(" ");
+          }
+        }
+
+        printf("%c", a[j]);
+        wording = true;
+      }
+    }
+    printf("\n");
+}
+
 int main(void)
 {  
   char a[111];
@@ -103,42 +145,10 @@ int main(void)
         // then aa = 'xx y zz'
         //
 
-        bool first_word = true;
-        bool wording = false;
-        int next = 0;
-        int sentence_length = strlen(a);
-        for (int j=0; j<sentence_length; j++) {
-          if (a[j] == ' ') {
-            wording = false;
-          }
-          else {
-            // i.e. a[i] != ' '
-
-            if (!wording) {
-              if (first_word) {
-                first_word = false;
-              }
-              else {
-                a[next++] = ' ';
-              }
-            }
-
-            a[next++] = a[j];
-
-            wording = true;
-          }
-        }
-        a[next++] = '\n';
-
-        // debug by dumping aa
-        for (int j=0; j<next; j++) {
-          printf("%c", a[j]);
-        }
-        
+        a[strlen(a)-1] = 32;
+        a[strlen(a)] = 0;
         sentence_reversal(a);
-        for (int j=1; j<next; j++) {
-          printf("%c", a[j]);
-        }
+        dump(a);
       }
       else {
         // i.e. a == '\n'
