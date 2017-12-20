@@ -6,10 +6,25 @@ int main() {
     Node *head_a = NULL, *head_b = NULL;
     int data;
 
+    // DEBUG
+    /*
+    Node n;
+    n.data = 100;
+    head_a = &n;
+    Node** pptr = &head_a;
+    printf("%d\n", n.data);
+    printf("%d\n", (*head_a).data);
+    printf("%d\n", (*(*pptr)).data);
+    if ( (*(*pptr)) == NULL ) printf("NULL\n"); // error: invalid operands to binary expression
+    return 0;
+    */
+    // end of DEBUG
+
     while(1) { // read List a
         scanf("%d", &data);
         if (data >= 0) {
           Create_List(&head_a, data);
+          //printf("DEBUG: main.c :: %d\n", (*head_a).data);
         } else break;
     }
     while(1) { // read List b
