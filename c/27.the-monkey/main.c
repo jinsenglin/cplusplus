@@ -17,9 +17,12 @@ void insert_node(Node** head, Node** cursor, char data) {
         *cursor = *head;
     }
     else {
-        // new node and update cursor
+        // new node and spdate cursor
+        Node* next = (*(*cursor)).next;
         (*(*cursor)).next = malloc(sizeof(Node));
+        (*(*(*cursor)).next).next = next;
         (*(*(*cursor)).next).data = data;
+        (*(*(*cursor)).next).prev = *cursor;
         *cursor = (*(*cursor)).next;
     }
 }
@@ -28,9 +31,24 @@ void delete_node(Node** head, Node** cursor) {
 }
 
 void go_backward(Node** cursor) {
+    if ((*(*cursor)).prev == NULL) {
+        // do nothing
+    }
+    else {
+        // update cursor
+        *cursor = (*(*cursor)).prev;
+    }
+    //printf("DEBUG: %c\n", (*(*cursor)).data);
 }
 
 void go_forward(Node** cursor) {
+    if ((*(*cursor)).next == NULL) {
+        // do nothing
+    }
+    else {
+        // update cursor
+        *cursor = (*(*cursor)).next;
+    }
 }
 
 void print_list(Node** head) {
