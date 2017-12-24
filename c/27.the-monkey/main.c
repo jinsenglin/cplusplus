@@ -9,20 +9,18 @@ typedef struct _Node {
 
 void insert_node(Node** head, Node** cursor, char data) {
     if (*head == NULL) {
+        // new node and update head
         *head = malloc(sizeof(Node));
         (*(*head)).data = data;
+
+        // update cursor
+        *cursor = *head;
     }
     else {
-        Node *prev;
-        Node *current = *head;
-
-        while (current != NULL) {
-            prev = current;
-            current = (*current).next;
-        }
-       
-        (*prev).next = malloc(sizeof(Node));
-        (*((*prev).next)).data = data; 
+        // new node and update cursor
+        (*(*cursor)).next = malloc(sizeof(Node));
+        (*(*(*cursor)).next).data = data;
+        *cursor = (*(*cursor)).next;
     }
 }
 
