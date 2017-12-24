@@ -17,13 +17,25 @@ void insert_node(Node** head, Node** cursor, char data) {
         *cursor = *head;
     }
     else {
-        // new node and spdate cursor
-        Node* next = (*(*cursor)).next;
-        (*(*cursor)).next = malloc(sizeof(Node));
-        (*(*(*cursor)).next).next = next;
-        (*(*(*cursor)).next).data = data;
-        (*(*(*cursor)).next).prev = *cursor;
-        *cursor = (*(*cursor)).next;
+        if (*cursor == NULL) {
+            // new node and update cursor
+            *cursor = malloc(sizeof(Node));
+            (*(*cursor)).data = data;
+            (*(*cursor)).next = *head;
+
+            // update head
+            (*(*head)).prev = *cursor;
+            *head = *cursor;
+        }
+        else {
+            // new node and update cursor
+            Node* next = (*(*cursor)).next;
+            (*(*cursor)).next = malloc(sizeof(Node));
+            (*(*(*cursor)).next).next = next;
+            (*(*(*cursor)).next).data = data;
+            (*(*(*cursor)).next).prev = *cursor;
+            *cursor = (*(*cursor)).next;
+        }
     }
 }
 
