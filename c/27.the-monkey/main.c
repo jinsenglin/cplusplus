@@ -27,6 +27,15 @@ void Create_List(Node** head, char data) {
     }
 }
 
+void delete_node() {
+}
+
+void insert_node() {
+}
+
+void print_list() {
+}
+
 int main() {
     Node *head = NULL;
     char data = 'c';
