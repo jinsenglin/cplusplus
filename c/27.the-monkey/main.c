@@ -13,13 +13,11 @@ void insert_node(Node** head, Node** cursor, char data) {
         (*(*head)).data = data;
     }
     else {
-        //printf("DEBUG: function.h :: %d\n", (*(*head)).data);
         Node *prev;
         Node *current = *head;
 
         while (current != NULL) {
             prev = current;
-            //printf("DEBUG: function.h :: %d\n", (*current).data);
             current = (*current).next;
         }
        
@@ -51,8 +49,6 @@ int main() {
     Node *head = NULL;
     Node *cursor = NULL;
     char data;
-    //Create_List(&head, data);
-
 
     // read one character at one time
     while ((data = getchar()) != '\n') {
