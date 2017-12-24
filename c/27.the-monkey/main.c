@@ -30,24 +30,43 @@ void insert_node(Node** head, Node** cursor, char data) {
 void delete_node(Node** head, Node** cursor) {
 }
 
-void go_backward(Node** cursor) {
-    if ((*(*cursor)).prev == NULL) {
+void go_backward(Node** head, Node** cursor) {
+    if (*head == NULL) {
         // do nothing
     }
     else {
-        // update cursor
-        *cursor = (*(*cursor)).prev;
+        if (*cursor == NULL) {
+            // do nothing
+        }
+        else {
+            if ((*(*cursor)).prev == NULL) {
+                *cursor = NULL;
+            }
+            else {
+                // update cursor
+                *cursor = (*(*cursor)).prev;
+            }
+        }
     }
-    //printf("DEBUG: %c\n", (*(*cursor)).data);
 }
 
-void go_forward(Node** cursor) {
-    if ((*(*cursor)).next == NULL) {
+void go_forward(Node** head, Node** cursor) {
+    if (*head == NULL) {
         // do nothing
     }
     else {
-        // update cursor
-        *cursor = (*(*cursor)).next;
+        if (*cursor == NULL) {
+            *cursor = *head;
+        }
+        else {
+            if ((*(*cursor)).next == NULL) {
+                // do nothing
+            }
+            else {
+                // update cursor
+                *cursor = (*(*cursor)).next;
+            }
+        }
     }
 }
 
@@ -74,11 +93,11 @@ int main() {
         }
         else if (data == '<') {
             // Character ‘<’ represents that Evan left shifts the cursor. If the cursor is located at the front of the sentence, it does nothing.
-            go_backward(&cursor);
+            go_backward(&head, &cursor);
         }
         else if (data == '>') {
             // Character ‘>’ represents that Evan right shifts the cursor. If the cursor is located at the back of the sentence, it does nothing.
-            go_forward(&cursor);
+            go_forward(&head, &cursor);
         }
         else {
             // The lowercase letter from ‘a’ to ‘z’ represents that Evan types a lowercase character (same as your record).
