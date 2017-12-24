@@ -40,6 +40,22 @@ void insert_node(Node** head, Node** cursor, char data) {
 }
 
 void delete_node(Node** head, Node** cursor) {
+    if (*head == NULL) {
+        // do nothing
+    }
+    else {
+        if (*cursor == NULL) {
+            // TODO
+        }
+        else {
+            if ((*(*cursor)).next == NULL) {
+                // do nothing
+            }
+            else {
+                // TODO
+            }
+        }
+    }
 }
 
 void go_backward(Node** head, Node** cursor) {
