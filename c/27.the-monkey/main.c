@@ -7,7 +7,7 @@ typedef struct _Node {
     struct _Node *next;
 } Node;
 
-void Create_List(Node** head, char data) {
+void insert_node(Node** head, Node** cursor, char data) {
     if (*head == NULL) {
         *head = malloc(sizeof(Node));
         (*(*head)).data = data;
@@ -31,9 +31,6 @@ void Create_List(Node** head, char data) {
 void delete_node(Node** head, Node** cursor) {
 }
 
-void insert_node(Node** head, Node** cursor, char data) {
-}
-
 void go_backward(Node** cursor) {
 }
 
@@ -41,6 +38,13 @@ void go_forward(Node** cursor) {
 }
 
 void print_list(Node** head) {
+    Node *current = *head;
+
+    while (current != NULL) {
+        printf("%c", (*current).data);
+        current = (*current).next;
+    }
+    printf("\n");
 }
 
 int main() {
