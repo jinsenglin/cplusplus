@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdbool.h>
 
 typedef struct _Factory {
     char name[21];  // factory name
@@ -37,11 +38,17 @@ int main() {
     // sort factories by name
     for (int i=0; i<x-1; i++) {
         for (int j=0; j<x-1; j++) {
-            if (factories[j].name[0] > factories[j+1].name[0]) {
-                // swap
-                Factory tmp = factories[j];
-                factories[j] = factories[j+1];
-                factories[j+1] = tmp;
+            int k = 0;
+            while (true) {
+                if (factories[j].name[k] > factories[j+1].name[k]) {
+                    // swap
+                    Factory tmp = factories[j];
+                    factories[j] = factories[j+1];
+                    factories[j+1] = tmp;
+                    break;
+                }
+                else if (factories[j].name[k] == factories[j+1].name[k]) k++;
+                else break;
             }
         }
     }
