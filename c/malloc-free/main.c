@@ -91,8 +91,8 @@ void add_node(BiNodeList** list, char data) {
 
         // update alias
         l->head = n;
-        l->cursor = n->next;
         l->tail = n;
+        l->cursor = n->next;
 
         // update list
         *list = l;
@@ -111,19 +111,26 @@ void add_node(BiNodeList** list, char data) {
             l->tail->next = n;
 
             // update alias
-            l->cursor = n->next;
             l->tail = n;
+            l->cursor = n->next;
         }
         else {
             printf("DEBUG: add_node :: cursor position is not NULL\n");
 
             // new node
             BiNode* n = new_node(data);
+            n->prev = l->cursor->prev;
+            n->next = l->cursor;
 
-            // update prev node if exists TODO
-            // update current node TODO
-            // update alias TODO
-            // update list TODO
+            // update prev node if exists
+            if ( l->cursor->prev != NULL ) l->cursor->prev->next = n;
+
+            // update current node
+            l->cursor->prev = n;
+
+            // update alias
+            if ( l->cursor == l->head ) l->head = n;
+            l->cursor = n->next;
         }
     }
 }
@@ -202,12 +209,12 @@ int main() {
     BiNodeList* list = NULL;
     init_list(&list);
     add_node(&list, 'a');
+    add_node(&list, 'd');
+    backward(&list);
     add_node(&list, 'b');
     add_node(&list, 'c');
-    backward(&list);
-    backward(&list);
     forward(&list);
-    forward(&list);
+    add_node(&list, 'e');
     dump_list(&list);
 
     // Case 1
