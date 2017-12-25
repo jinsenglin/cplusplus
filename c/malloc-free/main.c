@@ -59,6 +59,18 @@ void init_list(BiNodeList** list) {
     *list = l;
 }
 
+void dump_list(BiNodeList** list) {
+    // create a local alias
+    BiNodeList* l = *list;
+
+    BiNode* n = l->head;
+    while ( n != NULL ) {
+        printf("%c", n->data);
+        n = n->next;
+    }
+    printf("\n");
+}
+
 void add_node(BiNodeList** list, char data) {
     // create a local alias
     BiNodeList* l = *list;
@@ -83,22 +95,22 @@ void add_node(BiNodeList** list, char data) {
     else {
         printf("DEBUG: non-empty list\n");
 
-        if (l->cursor == NULL) {
+        if ( l->cursor == NULL ) {
             printf("DEBUG: cursor position is NULL i.e. after tail\n");
 
-            // new node
-            // update prev node
-            // update alias
-            // update list
+            // new node TODO
+            // update prev node TODO
+            // update alias TODO
+            // update list TODO
         }
         else {
             printf("DEBUG: cursor position is not NULL\n");
 
-            // new node
-            // update prev node if exists
-            // update current node
-            // update alias
-            // update list
+            // new node TODO
+            // update prev node if exists TODO
+            // update current node TODO
+            // update alias TODO
+            // update list TODO
         }
     }
 }
@@ -109,6 +121,7 @@ int main() {
     init_list(&list);
     add_node(&list, 'a');
     add_node(&list, 'b');
+    dump_list(&list);
 
     // Case 1
 /*
