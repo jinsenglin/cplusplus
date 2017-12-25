@@ -121,8 +121,6 @@ void del_node(BiNodeList** list) {
 
     if ( l->head == NULL ) {
         printf("DEBUG: empty list\n");
-
-        // TODO
     }
     else {
         printf("DEBUG: non-empty list\n");
