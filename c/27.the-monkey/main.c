@@ -1,155 +1,226 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-typedef struct _Node {
+typedef struct _BiNode {
     char data;
-    struct _Node *prev;
-    struct _Node *next;
-} Node;
+    struct _BiNode* prev;
+    struct _BiNode* next;
+} BiNode;
 
-void insert_node(Node** head, Node** cursor, char data) {
-    if (*head == NULL) {
-        // new node and update head
-        *head = malloc(sizeof(Node));
-        (*(*head)).data = data;
+typedef struct _BiNodeList {
+    BiNode* head;
+    BiNode* cursor;
+    BiNode* tail;
+} BiNodeList;
 
-        // update cursor
-        *cursor = *head;
-    }
-    else {
-        if (*cursor == NULL) {
-            // new node and update cursor
-            *cursor = malloc(sizeof(Node));
-            (*(*cursor)).data = data;
-            (*(*cursor)).next = *head;
+void init_list(BiNodeList** list) {
+    // create a local alias
+    BiNodeList* l = *list;
 
-            // update head
-            (*(*head)).prev = *cursor;
-            *head = *cursor;
-        }
-        else {
-            // new node and update cursor
-            Node* next = (*(*cursor)).next;
-            (*(*cursor)).next = malloc(sizeof(Node));
-            (*(*(*cursor)).next).next = next;
-            (*(*(*cursor)).next).data = data;
-            (*(*(*cursor)).next).prev = *cursor;
-            *cursor = (*(*cursor)).next;
-        }
-    }
+    l = malloc(sizeof(BiNodeList));
+    l->head = NULL;
+    l->cursor = NULL;
+    l->tail = NULL;
+
+    // update list
+    *list = l;
 }
 
-void delete_node(Node** head, Node** cursor) {
-    if (*head == NULL) {
-        // do nothing
-    }
-    else {
-        if (*cursor == NULL) {
-            if ((*(*head)).next == NULL) {
-                free(*head);
-                *head = NULL;
-            }
-            else {
-                *head = (*(*head)).next;
-                free((*(*head)).prev);
-                (*(*head)).prev = NULL;
-            }
-        }
-        else {
-            if ((*(*cursor)).next == NULL) {
-                // do nothing
-            }
-            else {
-                if ((*(*(*cursor)).next).next == NULL) {
-                    free((*(*cursor)).next);
-                    (*(*cursor)).next = NULL;
-                }
-                else {
-                    (*(*(*(*cursor)).next).next).prev = *cursor;
-                    (*(*cursor)).next = (*(*(*cursor)).next).next;
-                    // TODO free memory
-                }
-            }
-        }
-    }
-}
+void dump_list(BiNodeList** list) {
+    // create a local alias
+    BiNodeList* l = *list;
 
-void go_backward(Node** head, Node** cursor) {
-    if (*head == NULL) {
-        // do nothing
-    }
-    else {
-        if (*cursor == NULL) {
-            // do nothing
-        }
-        else {
-            if ((*(*cursor)).prev == NULL) {
-                *cursor = NULL;
-            }
-            else {
-                // update cursor
-                *cursor = (*(*cursor)).prev;
-            }
-        }
-    }
-}
-
-void go_forward(Node** head, Node** cursor) {
-    if (*head == NULL) {
-        // do nothing
-    }
-    else {
-        if (*cursor == NULL) {
-            *cursor = *head;
-        }
-        else {
-            if ((*(*cursor)).next == NULL) {
-                // do nothing
-            }
-            else {
-                // update cursor
-                *cursor = (*(*cursor)).next;
-            }
-        }
-    }
-}
-
-void print_list(Node** head) {
-    Node *current = *head;
-
-    while (current != NULL) {
-        printf("%c", (*current).data);
-        current = (*current).next;
+    BiNode* n = l->head;
+    while ( n != NULL ) {
+        printf("%c", n->data);
+        n = n->next;
     }
     printf("\n");
 }
 
+BiNode* new_node(char data) {
+    BiNode* n = malloc(sizeof(BiNode));
+    n->data = data;
+    n->prev = NULL;
+    n->next = NULL;
+    return n;
+}
+
+void add_node(BiNodeList** list, char data) {
+    // create a local alias
+    BiNodeList* l = *list;
+
+    if ( l->head == NULL ) {
+        //printf("DEBUG: add_node :: empty list\n");
+
+        // new node
+        BiNode* n = new_node(data);
+
+        // update alias
+        l->head = n;
+        l->tail = n;
+        l->cursor = n->next;
+
+        // update list
+        *list = l;
+    }
+    else {
+        //printf("DEBUG: add_node :: non-empty list\n");
+
+        if ( l->cursor == NULL ) {
+            //printf("DEBUG: add_node :: cursor position is NULL i.e. after tail\n");
+
+            // new node
+            BiNode* n = new_node(data);
+            n->prev = l->tail;
+
+            // update prev node
+            l->tail->next = n;
+
+            // update alias
+            l->tail = n;
+            l->cursor = n->next;
+        }
+        else {
+            //printf("DEBUG: add_node :: cursor position is not NULL\n");
+
+            // new node
+            BiNode* n = new_node(data);
+            n->prev = l->cursor->prev;
+            n->next = l->cursor;
+
+            // update prev node if exists
+            if ( l->cursor->prev != NULL ) l->cursor->prev->next = n;
+
+            // update current node
+            l->cursor->prev = n;
+
+            // update alias
+            if ( l->cursor == l->head ) l->head = n;
+            l->cursor = n->next;
+        }
+    }
+}
+
+void backward(BiNodeList** list) {
+    // create a local alias
+    BiNodeList* l = *list;
+
+    if ( l->head == NULL ) {
+        //printf("DEBUG: backward :: empty list\n");
+    }
+    else {
+        //printf("DEBUG: backward :: non-empty list\n");
+
+        if ( l->cursor == NULL ) {
+            //printf("DEBUG: backward :: cursor position is NULL i.e. after tail\n");
+
+            l->cursor = l->tail;
+        }
+        else {
+            //printf("DEBUG: backward :: cursor position is not NULL\n");
+
+            if ( l->cursor == l->head ) {
+                //printf("DEBUG: backward :: cursor position is at head\n");
+            }
+            else {
+                //printf("DEBUG: backward :: cursor position is not at head\n");
+
+                l->cursor = l->cursor->prev;
+            }
+        }
+    }
+
+    //printf("DEBUG: backward :: l->cursor = %p\n", l->cursor);
+}
+
+void forward(BiNodeList** list) {
+    // create a local alias
+    BiNodeList* l = *list;
+
+    if ( l->head == NULL ) {
+        //printf("DEBUG: forward :: empty list\n");
+    }
+    else {
+        //printf("DEBUG: forward :: non-empty list\n");
+
+        if ( l->cursor == NULL ) {
+            //printf("DEBUG: forward :: cursor position is NULL i.e. after tail\n");
+        }
+        else {
+            //printf("DEBUG: forward :: cursor position is not NULL\n");
+
+            l->cursor = l->cursor->next;
+        }
+    }
+
+    //printf("DEBUG: forward :: l->cursor = %p\n", l->cursor);
+}
+
+void del_node(BiNodeList** list) {
+    // create a local alias
+    BiNodeList* l = *list;
+
+    if ( l->head == NULL ) {
+        //printf("DEBUG: del_node :: empty list\n");
+    }
+    else {
+        //printf("DEBUG: del_node :: non-empty list\n");
+
+        if ( l->cursor == NULL ) {
+            //printf("DEBUG: del_node :: cursor position is NULL i.e. after tail\n");
+        }
+        else {
+            //printf("DEBUG: del_node :: cursor position is not NULL\n");
+
+            // update prev node if exists
+            if ( l->cursor->prev != NULL ) l->cursor->prev->next = l->cursor->next;
+
+            // update next node if exists
+            if ( l->cursor->next != NULL ) l->cursor->next->prev = l->cursor->prev;
+
+            // update alias
+            if ( l->cursor == l->head ) l->head = l->cursor->next;
+            if ( l->cursor == l->tail ) l->tail = l->cursor->prev;
+
+            BiNode* to_be_freed = l->cursor;
+            l->cursor = l->cursor->next;
+            free(to_be_freed);
+            to_be_freed = NULL;
+        }
+    }
+}
+
 int main() {
-    Node *head = NULL;
-    Node *cursor = NULL;
+    BiNodeList* list = NULL;
+    init_list(&list);
     char data;
 
     // read one character at one time
     while ((data = getchar()) != '\n') {
         if (data == 'D') {
             // The capital letter ‘D’ represents that Evan deletes a character. If there is no character after the cursor, it does nothing.
-            delete_node(&head, &cursor);
+            del_node(&list);
         }
         else if (data == '<') {
             // Character ‘<’ represents that Evan left shifts the cursor. If the cursor is located at the front of the sentence, it does nothing.
-            go_backward(&head, &cursor);
+            backward(&list);
         }
         else if (data == '>') {
             // Character ‘>’ represents that Evan right shifts the cursor. If the cursor is located at the back of the sentence, it does nothing.
-            go_forward(&head, &cursor);
+            forward(&list);
         }
         else {
             // The lowercase letter from ‘a’ to ‘z’ represents that Evan types a lowercase character (same as your record).
             // The underline symbol ‘_' represents that Evan types ‘_’.
-            insert_node(&head, &cursor, data);
+            add_node(&list, data);
         }
     }
 
     // print the result
-    print_list(&head);
+    dump_list(&list);
+
+    // free memory
+    free(list);
+    list = NULL;
 }
