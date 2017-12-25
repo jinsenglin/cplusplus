@@ -71,42 +71,55 @@ void dump_list(BiNodeList** list) {
     printf("\n");
 }
 
+BiNode* new_node(char data) {
+    BiNode* n = malloc(sizeof(BiNode));
+    n->data = data;
+    n->prev = NULL;
+    n->next = NULL;
+    return n;
+}
+
 void add_node(BiNodeList** list, char data) {
     // create a local alias
     BiNodeList* l = *list;
 
     if ( l->head == NULL ) {
-        printf("DEBUG: empty list\n");
+        printf("DEBUG: add_node :: empty list\n");
 
         // new node
-        BiNode* n = malloc(sizeof(BiNode));
-        n->data = data;
-        n->prev = NULL;
-        n->next = NULL;
+        BiNode* n = new_node(data);
 
         // update alias
         l->head = n;
-        l->cursor = NULL;
+        l->cursor = n->next;
         l->tail = n;
 
         // update list
         *list = l;
     }
     else {
-        printf("DEBUG: non-empty list\n");
+        printf("DEBUG: add_node :: non-empty list\n");
 
         if ( l->cursor == NULL ) {
-            printf("DEBUG: cursor position is NULL i.e. after tail\n");
+            printf("DEBUG: add_node :: cursor position is NULL i.e. after tail\n");
 
-            // new node TODO
-            // update prev node TODO
-            // update alias TODO
-            // update list TODO
+            // new node
+            BiNode* n = new_node(data);
+            n->prev = l->tail;
+
+            // update prev node
+            l->tail->next = n;
+
+            // update alias
+            l->cursor = n->next;
+            l->tail = n;
         }
         else {
-            printf("DEBUG: cursor position is not NULL\n");
+            printf("DEBUG: add_node :: cursor position is not NULL\n");
 
-            // new node TODO
+            // new node
+            BiNode* n = new_node(data);
+
             // update prev node if exists TODO
             // update current node TODO
             // update alias TODO
@@ -115,15 +128,70 @@ void add_node(BiNodeList** list, char data) {
     }
 }
 
+void backward(BiNodeList** list) {
+    // create a local alias
+    BiNodeList* l = *list;
+
+    if ( l->head == NULL ) {
+        printf("DEBUG: backward :: empty list\n");
+    }
+    else {
+        printf("DEBUG: backward :: non-empty list\n");
+
+        if ( l->cursor == NULL ) {
+            printf("DEBUG: backward :: cursor position is NULL i.e. after tail\n");
+
+            l->cursor = l->tail;
+        }
+        else {
+            printf("DEBUG: backward :: cursor position is not NULL\n");
+
+            if ( l->cursor == l->head ) {
+                printf("DEBUG: backward :: cursor position is at head\n");
+            }
+            else {
+                printf("DEBUG: backward :: cursor position is not at head\n");
+
+                l->cursor = l->cursor->prev;
+            }
+        }
+    }
+
+    printf("DEBUG: backward :: l->cursor = %p\n", l->cursor);
+}
+
+void forward(BiNodeList** list) {
+    // create a local alias
+    BiNodeList* l = *list;
+
+    if ( l->head == NULL ) {
+        printf("DEBUG: forward :: empty list\n");
+    }
+    else {
+        printf("DEBUG: forward :: non-empty list\n");
+
+        if ( l->cursor == NULL ) {
+            printf("DEBUG: forward :: cursor position is NULL i.e. after tail\n");
+        }
+        else {
+            printf("DEBUG: forward :: cursor position is not NULL\n");
+
+            l->cursor = l->cursor->next;
+        }
+    }
+
+    printf("DEBUG: forward :: l->cursor = %p\n", l->cursor);
+}
+
 void del_node(BiNodeList** list) {
     // create a local alias
     BiNodeList* l = *list;
 
     if ( l->head == NULL ) {
-        printf("DEBUG: empty list\n");
+        printf("DEBUG: del_node :: empty list\n");
     }
     else {
-        printf("DEBUG: non-empty list\n");
+        printf("DEBUG: del_node :: non-empty list\n");
 
         // TODO
     }
@@ -135,6 +203,11 @@ int main() {
     init_list(&list);
     add_node(&list, 'a');
     add_node(&list, 'b');
+    add_node(&list, 'c');
+    backward(&list);
+    backward(&list);
+    forward(&list);
+    forward(&list);
     dump_list(&list);
 
     // Case 1
