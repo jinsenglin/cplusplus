@@ -200,7 +200,27 @@ void del_node(BiNodeList** list) {
     else {
         printf("DEBUG: del_node :: non-empty list\n");
 
-        // TODO
+        if ( l->cursor == NULL ) {
+            printf("DEBUG: del_node :: cursor position is NULL i.e. after tail\n");
+        }
+        else {
+            printf("DEBUG: del_node :: cursor position is not NULL\n");
+
+            // update prev node if exists
+            if ( l->cursor->prev != NULL ) l->cursor->prev->next = l->cursor->next;
+
+            // update next node if exists
+            if ( l->cursor->next != NULL ) l->cursor->next->prev = l->cursor->prev;
+
+            // update alias
+            if ( l->cursor == l->head ) l->head = l->cursor->next;
+            if ( l->cursor == l->tail ) l->tail = l->cursor->prev;
+
+            BiNode* to_be_freed = l->cursor;
+            l->cursor = l->cursor->next;
+            free(to_be_freed);
+            to_be_freed = NULL;
+        }
     }
 }
 
@@ -215,6 +235,9 @@ int main() {
     add_node(&list, 'c');
     forward(&list);
     add_node(&list, 'e');
+    del_node(&list);
+    backward(&list);
+    del_node(&list);
     dump_list(&list);
 
     // Case 1
