@@ -9,14 +9,17 @@ typedef struct _Node {
 int main() {
     Node* head = malloc(sizeof(Node));
     head->c = 'c';
+    head->next = head;
     printf("&head = %p\n", &head);
     printf("head = %p\n", head);
     printf("head->c = %c\n", head->c);
+    printf("head->next = %p\n", head->next);
 
     Node* cursor = head;
     printf("&cursor = %p\n", &cursor);
     printf("cursor = %p\n", cursor);
     printf("cursor->c = %c\n", cursor->c);
+    printf("cursor->next = %p\n", cursor->next);
 
     printf("going to free(head)\n");
     free(head);
