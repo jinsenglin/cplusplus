@@ -20,8 +20,8 @@ int main() {
 
     printf("going to free(head)\n");
     free(head);
-    printf("head->c = %c\n", head->c);
-    printf("cursor->c = %c\n", cursor->c);
+    head = NULL;
 
-    printf("done");
+    printf("note: can not double-free, which means free(cursor) is not allowed after free(head). so just make it NULL\n");
+    cursor = NULL;
 }
