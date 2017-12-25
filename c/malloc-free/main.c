@@ -34,7 +34,84 @@ void fn(Node** list) {
     printf("END fn\n\n");
 }
 
+typedef struct _BiNode {
+    char data;
+    struct _BiNode* prev;
+    struct _BiNode* next;
+} BiNode;
+
+typedef struct _BiNodeList {
+    BiNode* head;
+    BiNode* cursor;
+    BiNode* tail;
+} BiNodeList;
+
+void init_list(BiNodeList** list) {
+    // create a local alias
+    BiNodeList* l = *list;
+
+    l = malloc(sizeof(BiNodeList));
+    l->head = NULL;
+    l->cursor = NULL;
+    l->tail = NULL;
+
+    // update list
+    *list = l;
+}
+
+void add_node(BiNodeList** list, char data) {
+    // create a local alias
+    BiNodeList* l = *list;
+
+    if ( l->head == NULL ) {
+        printf("DEBUG: empty list\n");
+
+        // new node
+        BiNode* n = malloc(sizeof(BiNode));
+        n->data = data;
+        n->prev = NULL;
+        n->next = NULL;
+
+        // update alias
+        l->head = n;
+        l->cursor = NULL;
+        l->tail = n;
+
+        // update list
+        *list = l;
+    }
+    else {
+        printf("DEBUG: non-empty list\n");
+
+        if (l->cursor == NULL) {
+            printf("DEBUG: cursor position is NULL i.e. after tail\n");
+
+            // new node
+            // update prev node
+            // update alias
+            // update list
+        }
+        else {
+            printf("DEBUG: cursor position is not NULL\n");
+
+            // new node
+            // update prev node if exists
+            // update current node
+            // update alias
+            // update list
+        }
+    }
+}
+
 int main() {
+    // Case 2
+    BiNodeList* list = NULL;
+    init_list(&list);
+    add_node(&list, 'a');
+    add_node(&list, 'b');
+
+    // Case 1
+/*
     Node* head = NULL;
     fn(&head);
 
@@ -59,4 +136,5 @@ int main() {
 
     printf("note: can not double-free, which means free(cursor) is not allowed after free(head). so just make it NULL\n");
     cursor = NULL;
+*/
 }
