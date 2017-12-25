@@ -45,14 +45,30 @@ void delete_node(Node** head, Node** cursor) {
     }
     else {
         if (*cursor == NULL) {
-            // TODO
+            if ((*(*head)).next == NULL) {
+                *head = NULL;
+                // TODO free memory
+            }
+            else {
+                *head = (*(*head)).next;
+                (*(*head)).prev = NULL;
+                // TODO free memory
+            }
         }
         else {
             if ((*(*cursor)).next == NULL) {
                 // do nothing
             }
             else {
-                // TODO
+                if ((*(*(*cursor)).next).next == NULL) {
+                    (*(*cursor)).next = NULL;
+                    // TODO free memory
+                }
+                else {
+                    (*(*(*(*cursor)).next).next).prev = *cursor;
+                    (*(*cursor)).next = (*(*(*cursor)).next).next;
+                    // TODO free memory
+                }
             }
         }
     }
