@@ -7,6 +7,11 @@ typedef struct _Node {
 } Node;
 
 void fn(Node** list) {
+    printf("START fn\n");
+    printf("&list = %p\n", &list);
+    printf("list = %p\n", list);
+    printf("*list = %p\n", *list);
+
     Node* head = malloc(sizeof(Node));
     head->c = 'c';
     head->next = head;
@@ -26,23 +31,13 @@ void fn(Node** list) {
     printf("cursor->next->c = %c\n", cursor->next->c);
 
     *list = head;
-/*
-    printf("going to free(head)\n");
-    free(head);
-    head = NULL;
-
-    printf("note: can not double-free, which means free(cursor) is not allowed after free(head). so just make it NULL\n");
-    cursor = NULL;
-*/
+    printf("END fn\n\n");
 }
 
 int main() {
-    Node* list = NULL;
-    fn(&list);
-/*
-    Node* head = malloc(sizeof(Node));
-    head->c = 'c';
-    head->next = head;
+    Node* head = NULL;
+    fn(&head);
+
     printf("&head = %p\n", &head);
     printf("head = %p\n", head);
     printf("(*head).c = %c\n", (*head).c);
@@ -58,11 +53,10 @@ int main() {
     printf("cursor->next = %p\n", cursor->next);
     printf("cursor->next->c = %c\n", cursor->next->c);
 
-    printf("going to free(head)\n");
+    printf("\ngoing to free(head)\n");
     free(head);
     head = NULL;
 
     printf("note: can not double-free, which means free(cursor) is not allowed after free(head). so just make it NULL\n");
     cursor = NULL;
-*/
 }
