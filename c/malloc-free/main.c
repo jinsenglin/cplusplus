@@ -115,6 +115,22 @@ void add_node(BiNodeList** list, char data) {
     }
 }
 
+void del_node(BiNodeList** list) {
+    // create a local alias
+    BiNodeList* l = *list;
+
+    if ( l->head == NULL ) {
+        printf("DEBUG: empty list\n");
+
+        // TODO
+    }
+    else {
+        printf("DEBUG: non-empty list\n");
+
+        // TODO
+    }
+}
+
 int main() {
     // Case 2
     BiNodeList* list = NULL;
