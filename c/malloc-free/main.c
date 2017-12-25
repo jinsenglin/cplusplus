@@ -1,6 +1,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+typedef struct _No {
+    char c;
+} No;
+
+typedef struct _Nod {
+    char c;
+    int i;
+} Nod;
+
 typedef struct _Node {
     char c;
     struct _Node* next;
@@ -240,6 +249,11 @@ int main() {
     del_node(&list);
     dump_list(&list);
 
+    printf("sizeof(char) = %d\n", sizeof(char));
+    printf("sizeof(No) = %d\n", sizeof(No));
+    printf("sizeof(Nod) = %d\n", sizeof(Nod));
+    printf("sizeof(Node) = %d\n", sizeof(Node));
+    printf("sizeof(BiNode) = %d\n", sizeof(BiNode));
     // Case 1
 /*
     Node* head = NULL;
