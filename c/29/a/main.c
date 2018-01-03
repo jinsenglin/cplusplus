@@ -47,12 +47,12 @@ int main() {
                 printf("%d ", X[i]);
             }*/
 
-            // exit while loop
+            // exit while loop TODO bug
             if (X[0] <= p) {
                 printf("%d\n", years);
                 break;
             }
-            else if (X[0] == last_year_x0) { // TODO bug
+            else if (X[0] == last_year_x0) {
                 printf("Never\n");
                 break;
             }
