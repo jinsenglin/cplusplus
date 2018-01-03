@@ -52,8 +52,8 @@ int main() {
                 printf("%d\n", years);
                 break;
             }
-            else if (years > n && X[0] <= last_year_x0) { // TODO bug
-                printf("never\n");
+            else if (X[0] == last_year_x0) { // TODO bug
+                printf("Never\n");
                 break;
             }
 
