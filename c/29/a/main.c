@@ -22,23 +22,43 @@ int main() {
         }
         scanf("%d", &p);
 
-        // next X
-        float MOVE[n][n];
-        for (int i=0; i<n; i++) {
-            for (int j=0; j<n; j++) {
-                MOVE[i][j] = A[i][j] * X[j];
-            }
-        }
-        for (int i=0; i<n; i++) {
-            X[i] = 0;
-            for (int j=0; j<n; j++) {
-                X[i] += MOVE[i][j];
-            }
-        }
+        int last_year_x0 = X[0];
+        int years = 0;
+        while (true) {
+            years++;
 
-        // [ DEBUG ] print X
-        for (int i=0; i<n; i++) {
-            printf("%d ", X[i]);
+            // next X
+            float MOVE[n][n];
+            for (int i=0; i<n; i++) {
+                for (int j=0; j<n; j++) {
+                    MOVE[i][j] = A[i][j] * X[j];
+                }
+            }
+            for (int i=0; i<n; i++) {
+                X[i] = 0;
+                for (int j=0; j<n; j++) {
+                    X[i] += MOVE[i][j];
+                }
+            }
+    
+            // [ DEBUG ] print X
+            /*
+            for (int i=0; i<n; i++) {
+                printf("%d ", X[i]);
+            }*/
+
+            // exit while loop
+            if (X[0] <= p) {
+                printf("%d\n", years);
+                break;
+            }
+            else if (years > n && X[0] <= last_year_x0) {
+                printf("never\n");
+                break;
+            }
+
+            // update last_year_x0
+            last_year_x0 = X[0];
         }
     }
 }
