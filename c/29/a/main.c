@@ -52,7 +52,7 @@ int main() {
                 printf("%d\n", years);
                 break;
             }
-            else if (years > n && X[0] <= last_year_x0) {
+            else if (years > n && X[0] <= last_year_x0) { // TODO bug
                 printf("never\n");
                 break;
             }
