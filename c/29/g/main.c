@@ -9,6 +9,13 @@ int last_bit(int *num) {
     return one_or_zero;
 }
 
+void update_bits(int *bits, int num) {
+    for (int pos=19; pos>-1; pos--) {
+        if (last_bit(&num) == 1) bits[pos]++;
+        else bits[pos]--;
+    } 
+}
+
 int main() {
     int n;
     scanf("%d", &n);
@@ -17,12 +24,7 @@ int main() {
     int a[100000] = { 0 };
     for (int i=0; i<n; i++) {
         scanf("%d", &a[i]);
-
-        int ai = a[i];
-        for (int pos=19; pos>-1; pos--) {
-            if (last_bit(&ai) == 1) bits[pos]++;
-            else bits[pos]--;
-        }
+        update_bits(bits, a[i]);
     }
 
     // DEBUG: dump bits
