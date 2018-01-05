@@ -28,6 +28,13 @@ int cal_k(int bits[20]) {
     return k;
 }
 
+unsigned long long cal_sum(int n, int a[100000], int k) {
+    unsigned long long sum = 0;
+
+    //printf("DEBUG: %llu\n", sum);
+    return sum;
+}
+
 int main() {
     int n;
     scanf("%d", &n);
@@ -43,5 +50,7 @@ int main() {
     for (int pos=0; pos<20; pos++) printf("%d ", bits[pos]);
 
     int k = cal_k(bits);
-    
+
+    unsigned long long sum = cal_sum(n, a, k);
+    printf("%llu\n", sum);    
 }
