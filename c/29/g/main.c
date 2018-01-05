@@ -16,8 +16,9 @@ int main() {
     for (int i=0; i<n; i++) {
         scanf("%d", &a[i]);
 
-        while (a[i] > 0) {
-            printf("DEBUG: %d\n", last_bit(&a[i]));
+        int ai = a[i];
+        while (ai > 0) {
+            printf("DEBUG: %d\n", last_bit(&ai));
         }
     }
 }
