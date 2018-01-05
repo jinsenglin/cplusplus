@@ -19,12 +19,14 @@ int main() {
         scanf("%d", &a[i]);
 
         int ai = a[i];
-        int pos = 0;
-        while (ai > 0) {
+        for (int pos=0; pos<20; pos++) {
+//        int pos = 0;
+//        while (ai > 0) {
             if (last_bit(&ai) == 1) bits[pos]++;
             else bits[pos]--;
 
-            pos++;
+//            pos++;
+//        }
         }
 
     }
