@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdbool.h>
+#include <math.h>
 
 int last_bit(int *num) {
     int one_or_zero = *num - (*num >> 1)*2;
@@ -16,6 +17,17 @@ void update_bits(int *bits, int num) {
     } 
 }
 
+int cal_k(int bits[20]) {
+    int k = 0;
+
+    for (int pos=19; pos>-1; pos--) {
+        if (bits[pos] > 0) k += pow(2, (19-pos));
+    } 
+
+    //printf("DEBUG: %d\n", k);
+    return k;
+}
+
 int main() {
     int n;
     scanf("%d", &n);
@@ -29,4 +41,7 @@ int main() {
 
     // DEBUG: dump bits
     for (int pos=0; pos<20; pos++) printf("%d ", bits[pos]);
+
+    int k = cal_k(bits);
+    
 }
