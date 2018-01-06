@@ -1,10 +1,5 @@
 #include <stdio.h>
 #include <stdbool.h>
-/*
-struct Edge {
-    int from;
-    int to;
-};*/
 
 int main() {
     int T;
@@ -14,16 +9,14 @@ int main() {
         int n, m;
         scanf("%d %d", &n, &m);
 
-        int pool1[1000] = { 0 };
-        int pool2[1000] = { 0 };
-//        struct Edge edges[1000000];
+        int matrix[1000][1000] = { 0 };
         for (int j=0; j<m; j++) {
-            int from, to;
-            scanf("%d %d", &from, &to);
-//            scanf("%d %d", &edges[j].from, &edges[j].to);
+            int u, v;
+            scanf("%d %d", &u, &v);
 
-            // analyze TODO
+            // update matrix TODO
         }
 
+        // analyze matrix TODO
     }
 }
