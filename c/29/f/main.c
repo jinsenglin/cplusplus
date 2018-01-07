@@ -31,7 +31,7 @@ int main() {
         int n, m;
         scanf("%d %d", &n, &m);
 
-        int a[1000][1000] = { 0 };
+        int a[1001][1001] = { 0 };
         int points[1000] = { 0 };
         while (m--) {
             int u, v;
