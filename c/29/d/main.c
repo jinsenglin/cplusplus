@@ -26,6 +26,7 @@ long long int cal_determinant(int a[8][8], int n) {
             int A[8][8] = { 0 };
             update_A(a, n, i, A);
             ans += a[0][i]*(sign)*(-1)*cal_determinant(A, n-1);
+            sign *= -1;
         }
     }
 
