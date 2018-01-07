@@ -38,6 +38,10 @@ void update_matrix(int matrix[1000][1000], int u, int v) {
     }
 }
 
+bool is_bipartite_graph(int matrix[1000][1000]) {
+    return false;
+}
+
 int main() {
     int T;
     scanf("%d", &T);
@@ -68,6 +72,8 @@ int main() {
             }
         }*/
 
-        // analyze matrix TODO
+        // analyze matrix
+        if (is_bipartite_graph(matrix)) printf("Yes\n");
+        else printf("No\n");
     }
 }
