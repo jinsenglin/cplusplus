@@ -1,14 +1,26 @@
 #include <stdio.h>
 #include <stdbool.h>
 
+void update_A(int a[8][8], int n, int i, int A[8][8]) {
+    // TODO
+}
+
 long long int cal_determinant(int a[8][8], int n) {
+    long long int ans = 0;
+
     if (n == 2) {
-        return a[0][0]*a[1][1] - a[0][1]*a[1][0];
+        ans = a[0][0]*a[1][1] - a[0][1]*a[1][0];
     }
     else {
-        // recursive TODO
-        return 0;
+        int sign = -1;
+        for (int i=0; i<n; i++) {
+            int A[8][8] = { 0 };
+            update_A(a, n, i, A);
+            ans += a[0][i]*(sign)*(-1)*cal_determinant(A, n-1);
+        }
     }
+
+    return ans;
 }
 
 int main() {
