@@ -15,4 +15,7 @@ int main() {
     for (int i=0; i<n; i++) {
         scanf("%s %d %d", factories[0].name, &factories[0].a, &factories[0].b);
     }
+
+    // TODO analyze factories
+    
 }
