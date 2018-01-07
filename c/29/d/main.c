@@ -2,7 +2,16 @@
 #include <stdbool.h>
 
 void update_A(int a[8][8], int n, int i, int A[8][8]) {
-    // TODO
+    for (int x=0; x<n-1; x++) {
+        for (int y=0; y<n-1; y++) {
+            if (y < i) {
+                A[x][y] = a[x+1][y];
+            }
+            else {
+                A[x][y] = a[x+1][y+1];
+            }
+        }
+    }
 }
 
 long long int cal_determinant(int a[8][8], int n) {
