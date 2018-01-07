@@ -1,106 +1,62 @@
 #include <stdio.h>
 #include <stdbool.h>
 
-void update_matrix(int matrix[1000][1000], int u, int v) {
-    bool u_flag = false;
-    bool v_flag = false;
+bool coloring(int *color, int vertice, int mark) {
+//    printf("DEBUG: v2 = %d, mark = %x, ~mark=%x \n", vertice, color[vertice], ~color[vertice]);
 
-    int i = 0;
-    for (; i<1000; i++) {
-        if (matrix[i][0] == 0) break;
-        else if (!u_flag && matrix[i][0] == u) {
-            u_flag = true;
-            for (int j=1; j<1000; j++) {
-                if (matrix[i][j] == 0) {
-                    matrix[i][j] = v;
-                    break;
-                }
-            }
-        }
-        else if (!u_flag && matrix[i][0] == v) {
-            v_flag = true;
-            for (int j=1; j<1000; j++) {
-                if (matrix[i][j] == 0) {
-                    matrix[i][j] = u;
-                    break;
-                }
-            }
-        }
+    if (color[vertice] == 0) {
+        color[vertice] = mark;
+        return true;
     }
-    if (!u_flag) {
-        matrix[i][0] = u;
-        matrix[i][1] = v;
-        i++;
-    }
-    if (!v_flag) {
-        matrix[i][0] = v;
-        matrix[i][1] = u;
-    }
+
+    if (color[vertice] != mark) return false;
+    else return true;
 }
 
-bool is_bipartite_graph(int matrix[1000][1000]) {
+void update_points(int *points, int point) {
     for (int i=0; i<1000; i++) {
-        if (matrix[i][0] == 0) break;
-        else {
-            for (int j=i+1; j<1000; j++) {
-                if (matrix[j][0] == 0) break;
-                else {
-                    // compare matrix[i] against matrix[j]
-                    int count = 0;
-                    for (int k=0; k<1000; k++) {
-                        if (matrix[i][k] == 0) break;
-                        else {
-                            // count++ if matrix[i][k] exists in matrix[j] list
-                            for (int l=0; l<1000; l++) {
-                                if (matrix[j][l] == 0) break;
-                                else if (matrix[j][l] == matrix[i][k]) {
-                                    count++;
-                                    break;
-                                }
-                            }
-                        }
-                    }
-                    // printf("DEBUG: count = %d\n", count);
-                    if (count > 2) return false;
-                }
-            }
+        if (points[i] == point) break;
+        else if (points[i] == 0) {
+            points[i] = point;
+            break;
         }
     }
-    return true;
 }
 
 int main() {
     int T;
     scanf("%d", &T);
 
-    for (int i=0; i<T; i++) {
+    while (T--) {
         int n, m;
         scanf("%d %d", &n, &m);
 
-        int matrix[1000][1000] = { 0 };
-        for (int j=0; j<m; j++) {
+        int a[1000][1000] = { 0 };
+        int points[1000] = { 0 };
+        while (m--) {
             int u, v;
             scanf("%d %d", &u, &v);
+            a[u][v] = 1;
+            a[v][u] = 1;
 
-            // update matrix
-            update_matrix(matrix, u, v);
+            update_points(points, u);
+            update_points(points, v);
         }
 
-        // DEBUG: dump matrix
-        /*
-        for (int j=0; j<1000; j++) {
-            if (matrix[j][0] == 0) break;
-            else {
-                for (int k=0; k<1000; k++) {
-                    if (matrix[j][k] == 0) break;
-                    else printf("%d ", matrix[j][k]);
-                }
-                printf("\n");
+        bool ans = true;
+        int color[1000] = { 0 };
+        color[points[0]] = 0xff000000;
+        for (int i=0; i<n; i++) {
+            int v1 = points[i];
+            int mark = color[v1];
+//            printf("DEBUG: v1 = %d, mark = %x, ~mark=%x \n", v1, mark, ~mark);
+            for (int j=0; j<n; j++) {
+                int v2 = points[j];
+                if (a[v1][v2] == 1) ans &= coloring(color, v2, ~mark);
             }
-        }*/
+        }
 
-        // analyze matrix
-        if (is_bipartite_graph(matrix)) printf("Yes\n");
+        if (ans) printf("Yes\n");
         else printf("No\n");
     }
 }
