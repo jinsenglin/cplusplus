@@ -39,7 +39,34 @@ void update_matrix(int matrix[1000][1000], int u, int v) {
 }
 
 bool is_bipartite_graph(int matrix[1000][1000]) {
-    return false;
+    for (int i=0; i<1000; i++) {
+        if (matrix[i][0] == 0) break;
+        else {
+            for (int j=i+1; j<1000; j++) {
+                if (matrix[j][0] == 0) break;
+                else {
+                    // compare matrix[i] against matrix[j]
+                    int count = 0;
+                    for (int k=0; k<1000; k++) {
+                        if (matrix[i][k] == 0) break;
+                        else {
+                            // count++ if matrix[i][k] exists in matrix[j] list
+                            for (int l=0; l<1000; l++) {
+                                if (matrix[j][l] == 0) break;
+                                else if (matrix[j][l] == matrix[i][k]) {
+                                    count++;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    // printf("DEBUG: count = %d\n", count);
+                    if (count > 2) return false;
+                }
+            }
+        }
+    }
+    return true;
 }
 
 int main() {
